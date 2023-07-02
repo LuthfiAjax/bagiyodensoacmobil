@@ -7,7 +7,7 @@ class Hero extends CI_Controller {
     {
         parent::__construct();
     }
-
+    
     public function index()
     {
         $data = array(
@@ -25,7 +25,7 @@ class Hero extends CI_Controller {
     public function tentang()
     {
         $data = array(
-            'title' => 'Tentang Bengkel Bagiyo Denso AC Mobil',
+            'title' => 'Bagiyo Denso - Sejarah',
             'page' => 'tentang',
             'meta_des' => '',
             'meta_key' => ''
@@ -39,7 +39,7 @@ class Hero extends CI_Controller {
     public function layanan()
     {
         $data = array(
-            'title' => 'Layanan Bengkel Bagiyo Denso AC Mobil',
+            'title' => 'Bagiyo Denso - Layanan',
             'page' => 'layanan',
             'meta_des' => '',
             'meta_key' => ''
@@ -53,7 +53,7 @@ class Hero extends CI_Controller {
     public function kontak()
     {
         $data = array(
-            'title' => 'Kontak Hubung Bagiyo Denso',
+            'title' => 'Bagiyo Denso - Kontak Hubung ',
             'page' => 'kontak',
             'meta_des' => '',
             'meta_key' => ''
@@ -61,6 +61,20 @@ class Hero extends CI_Controller {
         
         $this->load->view('hero/templates/header', $data);
         $this->load->view('hero/kontak');
+        $this->load->view('hero/templates/footer');
+    }
+
+    public function artikel()
+    {
+        $data = array(
+            'title' => 'Bagiyo Denso - Artikel',
+            'page' => 'artikel',
+            'meta_des' => '',
+            'meta_key' => ''
+        );
+        
+        $this->load->view('hero/templates/header', $data);
+        $this->load->view('hero/artikel');
         $this->load->view('hero/templates/footer');
     }
 }
