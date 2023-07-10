@@ -5,13 +5,13 @@
                 <div class="card-body">
 
                     <!-- Logo -->
-                    <div class="app-brand justify-content-center">
-                        <a href="index.html" class="app-brand-link gap-2">
-                            <img src="<?= base_url('assets/images/company/logo-r17-group.png'); ?>" alt="logo R17"
+                    <div class="app-brand justify-content-center mb-1ß">
+                        <a href="<?= base_url(''); ?>" class="app-brand-link gap-2">
+                            <img src="<?= base_url('assets/'); ?>img/logo.svg" alt="logo Bagiyo Denso"
                                 class="logo">
                             <style>
                             .logo {
-                                width: 200px;
+                                width: 150px;
                             }
                             </style>
                         </a>
@@ -19,7 +19,7 @@
                     <!-- /Logo -->
 
                     <div class="text-center">
-                        <h4 class="mb-2">Create account R17 Group </h4>
+                        <h4 class="mb-2">Create account Bagiyo Denso</h4>
                         <p class="mb-4">Please sign-up to your account</p>
                     </div>
 
@@ -27,7 +27,7 @@
                     <?= $this->session->flashdata('message'); ?>
 
                     <!-- registrasi -->
-                    <form id="formAuthentication" class="mb-3" action="<?= base_url('cms-group/registration'); ?>"
+                    <form id="formAuthentication" class="mb-3" action="<?= base_url('bagiyo-admin/registration'); ?>"
                         method="POST">
 
                         <div class="mb-3">
@@ -38,9 +38,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" value="<?= set_value('username'); ?>"
-                                name="username" autocomplete="off" placeholder="Enter your username account" />
+                            <label for="username" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" value="<?= set_value('email'); ?>"
+                                name="email" autocomplete="off" placeholder="Enter your email account" />
                             <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
 

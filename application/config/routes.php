@@ -14,3 +14,7 @@ $route['artikel/(:any)'] = 'Hero/artikel_details/$1';
 
 // Login
 $route['bagiyo-admin'] = 'Login';
+$route['bagiyo-admin/registration'] = 'Login/registration';
+
+// cms
+$route['cms/dashboard'] = 'Cms_view/dashboard';

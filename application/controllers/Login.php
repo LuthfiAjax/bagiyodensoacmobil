@@ -11,7 +11,7 @@ class Login extends CI_Controller {
 
     public function index()
     {
-        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('answer', 'Answer', 'trim|required');
 
@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 
     private function _login()
 	{
-		$username = $this->input->post('username');
+		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 
 		$firstNumber = $this->input->post('firstNumber');
@@ -36,7 +36,7 @@ class Login extends CI_Controller {
 
 		$key = $firstNumber + $secondNumber;
 
-		$user = $this->db->get_where('user', ['username' => $username])->row_array();
+		$user = $this->db->get_where('user', ['email_user' => $email])->row_array();
 
 		// jika chaptcha benar
 		if ($answer == $key) {
@@ -47,15 +47,13 @@ class Login extends CI_Controller {
 					// cek password
 					if (password_verify($password, $user['password'])) {
 						$data = [
-							'username' => $user['username'],
+							'email' => $user['email_user'],
 							'role_id' => $user['role_id'],
 							'id_user' => $user['id_user']
 						];
 						$this->session->set_userdata($data);
 						if ($user['role_id'] == 1) {
 							redirect(base_url('cms/dashboard'));
-						} elseif ($user['role_id'] == 2) {
-							redirect(base_url('hcd/dashboard'));
 						} else {
 							redirect(base_url(''));
 						}
@@ -64,11 +62,11 @@ class Login extends CI_Controller {
 						redirect(base_url(''));
 					}
 				} else {
-					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This username has not been activated!</div>');
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Email has not been activated!</div>');
 					redirect(base_url(''));
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username is not registered!</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
 				redirect(base_url(''));
 			}
 		} else {
@@ -88,33 +86,44 @@ class Login extends CI_Controller {
 	public function registration()
 	{
 		$this->form_validation->set_rules('nama', 'Name', 'trim|required');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[user.username]', [
-			'is_unique' => 'This username has already registered!'
-		]);
+		$this->form_validation->set_rules('email', 'Email', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-
+	
 		if ($this->form_validation->run() == false) {
-			$this->load->view('login/templates/header');
+			$data['title'] = 'Registration';
+			$this->load->view('login/templates/header', $data);
 			$this->load->view('login/registration');
 			$this->load->view('login/templates/footer');
 		} else {
 			$nama = $this->input->post('nama', true);
-			$username = $this->input->post('username', true);
+			$email = $this->input->post('email', true);
 			$password = $this->input->post('password', true);
-
+	
+			$cekUser = $this->db->get_where('user', ['email_user' => $email])->row();
+			if ($cekUser != null) {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email already exists.</div>');
+				redirect(base_url('bagiyo-admin/registration'));
+			}
+	
+			$domain = substr(strrchr($email, "@"), 1);
+			if ($domain != 'bagiyodensoacmobil.com') {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Invalid email domain.</div>');
+				redirect(base_url('bagiyo-admin/registration'));
+			}
+	
 			$data = [
 				'role_id' => 1,
-				'is_active' => 1,
 				'nama_user' => htmlspecialchars($nama),
-				'username' => htmlspecialchars($username),
-				'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-				'picture' => 'default.webp'
+				'email_user' => htmlspecialchars($email),
+				'password' => password_hash($password, PASSWORD_DEFAULT),
+				'is_active' => 1
 			];
-
+	
 			$this->db->insert('user', $data);
-
+	
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your account has been created.</div>');
-			redirect(base_url('cms-group'));
+			redirect(base_url('bagiyo-admin'));
 		}
 	}
+	
 }
