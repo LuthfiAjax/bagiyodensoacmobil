@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Jakarta');
     <meta name="robots" content="noindex">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/'); ?>img/logo.svg"" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/'); ?>img/logo.svg" />
 
     <!-- tiny -->
 
@@ -94,32 +94,10 @@ date_default_timezone_set('Asia/Jakarta');
                                 class="menu-icon fa fa-laptop"></i><b>Dashboard</b> </a>
                     </li>
 
-                    <li class="menu-title">News & Events & CSR</li>
+                    <li class="menu-title">Postingan</li>
                     <li class="<?= ($title=='manages news events') ? 'active' : ''; ?>">
                         <a class="mt-0" href="<?= base_url('cms/menages-news-events'); ?>"><i
                                 class="menu-icon fa fa-plus-square"></i><b>Menages Post</b></a>
-                    </li>
-
-                    <li class="menu-title">Career</li>
-                    <li class="<?= ($title=='manages careers') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/career'); ?>"><i
-                                class="menu-icon fa fa-plus-circle"></i><b>Manages Career</b></a>
-
-                    <li class="<?= ($title=='manages candidate') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/candidate'); ?>"><i
-                                class="menu-icon fa fa-user-o"></i><b>Candidate</b></a>
-                    </li>
-
-                    <li class="menu-title">About</li>
-                    <li class="<?= ($title=='manages company') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/company'); ?>"><i
-                                class="menu-icon fa fa-cog"></i><b>Manages Company</b></a>
-                    </li>
-
-                    <li class="<?= ($title=='Manages Direksi') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/menages-direksi'); ?>"><i
-                                class="menu-icon fa fa-cog"></i><b>Manages Direksi</b></a>
-                    </li>
                     </li>
                 </ul>
             </div>
@@ -159,12 +137,10 @@ date_default_timezone_set('Asia/Jakarta');
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <img class="user-avatar rounded-circle" width="200" height="40"
-                                src="<?= base_url('assets/images/'); ?>" alt="Photo Profile">
+                                src="<?= base_url('assets/img/human.png'); ?>" alt="Photo Profile">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="<?= base_url('author/profile'); ?>"><i class="fa fa-user"></i>My
-                                Profile</a>
                             <a class="nav-link text-danger" href="<?= base_url('cms-group/logout'); ?>"><i
                                     class="fa fa-power-off"></i>Logout</a>
                         </div>

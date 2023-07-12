@@ -15,45 +15,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count">12212</span></div>
-                                    <div class="stat-heading">News <?= date('F'); ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- company -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-1">
-                                <i class="pe-7s-home"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">11212</span></div>
-                                    <div class="stat-heading">Company</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- careers -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-3">
-                                <i class="pe-7s-notebook"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">1212</span></div>
-                                    <div class="stat-heading">Careers</div>
+                                    <div class="stat-heading">Total Postingan</div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +34,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count">31313</span></div>
-                                    <div class="stat-heading">Events <?= date('F'); ?></div>
+                                    <div class="stat-heading">Postingan Bulan Ini</div>
                                 </div>
                             </div>
                         </div>
@@ -91,26 +53,7 @@
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count">131313</span></div>
-                                    <div class="stat-heading">Direksi R17 Group</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- candidate -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-five">
-                            <div class="stat-icon dib flat-color-4">
-                                <i class="pe-7s-users"></i>
-                            </div>
-                            <div class="stat-content">
-                                <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">311313</span></div>
-                                    <div class="stat-heading">Candidates</div>
+                                    <div class="stat-heading">Pengunjung</div>
                                 </div>
                             </div>
                         </div>

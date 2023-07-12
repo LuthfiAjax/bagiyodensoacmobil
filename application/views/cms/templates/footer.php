@@ -4,10 +4,10 @@
     <div class="footer-inner bg-white">
         <div class="row">
             <div class="col-sm-6">
-                Copyright &copy; <?= date('Y'); ?> PT R17 Group
+                Copyright &copy; <?= date('Y'); ?> Bagiyo Denso
             </div>
             <div class="col-sm-6 text-right">
-                Designed by <a href="<?= base_url(''); ?>">R17</a>
+                Designed by <a href="<?= base_url(''); ?>">JaxID</a>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@ tinymce.init({
     automatic_uploads: true,
     image_advtab: true,
     images_upload_url: "<?= base_url("upload/images/news") ?>",
-    height: 700,
+    height: 900,
     file_picker_types: 'image',
     paste_data_images: true,
     relative_urls: false,

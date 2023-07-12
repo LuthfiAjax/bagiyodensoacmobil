@@ -77,4 +77,18 @@ class Hero extends CI_Controller {
         $this->load->view('hero/artikel');
         $this->load->view('hero/templates/footer');
     }
+
+    public function artikel_details($slug)
+    {
+        $data = array(
+            'title' => 'Bagiyo Denso - Artikel',
+            'page' => 'artikel',
+            'meta_des' => '',
+            'meta_key' => ''
+        );
+        
+        $this->load->view('hero/templates/header', $data);
+        $this->load->view('hero/artikel_detail');
+        $this->load->view('hero/templates/footer');
+    }
 }

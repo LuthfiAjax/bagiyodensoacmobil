@@ -80,7 +80,7 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('username');
 		$this->session->unset_userdata('role_id');
 
-		redirect(base_url('cms-group'));
+		redirect(base_url(''));
 	}
 
 	public function registration()

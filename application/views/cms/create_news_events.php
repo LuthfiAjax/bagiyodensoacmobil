@@ -11,27 +11,11 @@
                             <div id="pay-invoice">
                                 <div class="card-body">
                                     <div class="card-title">
-                                        <h3 class="text-center">Create News / Events / CSR</h3>
+                                        <h3 class="text-center">Membuat Postingan</h3>
                                         <?= $this->session->flashdata('message'); ?>
                                     </div>
                                     <hr>
-                                    <form action="<?= base_url('cms/save-news-event'); ?>" method="POST"
-                                        enctype="multipart/form-data">
-
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="text-input"
-                                                    class=" form-control-label">
-                                                    <h4>Type Post <span class="text-danger">*</span></h4>
-                                                </label>
-                                            </div>
-                                            <div class="col col-md-9">
-                                                <select name="type" id="type" class="form-control">
-                                                    <option disabled selected>Choose</option>
-                                                    <option value="1">Events</option>
-                                                    <option value="2">News</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                    <form action="<?= base_url('cms/save-news-event'); ?>" method="POST" enctype="multipart/form-data">
 
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="title" class=" form-control-label">
@@ -125,7 +109,7 @@
                                         <div class="row form-group">
                                             <div class="col col-md-3"><label for="text-input"
                                                     class=" form-control-label">
-                                                    <h4>Header 1 <span class="text-danger">*</span></h4>
+                                                    <h4>Cover <span class="text-danger">*</span></h4>
                                                 </label></div>
                                             <div class="col col-md-6">
                                                 <div class="input-group">
@@ -142,46 +126,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="text-input"
-                                                    class=" form-control-label">
-                                                    <h4>Header 2</h4>
-                                                </label></div>
-                                            <div class="col col-md-6">
-                                                <div class="input-group">
-                                                    <input accept="image/jpg, image/jpeg, image/png, image/gif"
-                                                        onchange="PreviewHeader2();" type="file" id="header2"
-                                                        name="header2" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-md-3">
-                                                <div class="input-group">
-                                                    <img id="priviewHeader2"
-                                                        src="https://cdn.kibrispdr.org/data/13/background-putih-polos-landscape-4.jpg" width="150"
-                                                        height="80" style="object-fit: cover;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3"><label for="text-input"
-                                                    class=" form-control-label">
-                                                    <h4>Header 3</h4>
-                                                </label></div>
-                                            <div class="col col-md-6">
-                                                <div class="input-group">
-                                                    <input accept="image/jpg, image/jpeg, image/png, image/gif"
-                                                        onchange="PreviewHeader3();" type="file" id="header3"
-                                                        name="header3" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-md-3">
-                                                <div class="input-group">
-                                                    <img id="priviewHeader3"
-                                                        src="https://cdn.kibrispdr.org/data/13/background-putih-polos-landscape-4.jpg" width="150"
-                                                        height="80" style="object-fit: cover;">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="row form-group">
                                             <div class="col col-md-3">
                                                 <label for="text-input" class=" form-control-label">

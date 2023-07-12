@@ -48,9 +48,7 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
-
-    <!-- Icon chat  whatsapp-->
+    
     <style>
         .floating-chat {
             position: fixed;
@@ -81,8 +79,6 @@
         </a>
     </div>
 
-
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('assets/'); ?>lib/wow/wow.min.js"></script>
@@ -93,9 +89,32 @@
     <script src="<?= base_url('assets/'); ?>lib/tempusdominus/js/moment.min.js"></script>
     <script src="<?= base_url('assets/'); ?>lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="<?= base_url('assets/'); ?>lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Template Javascript -->
     <script src="<?= base_url('assets/'); ?>js/main.js"></script>
+
+    <script>
+        function getLocation() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+
+                var sendData = {
+                    ip: data.ip,
+                    city: data.city,
+                    country_name: data.country_name,
+                    url: window.location.href
+                };
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', "<?= base_url('post-data-viewer'); ?>", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(sendData));
+                })
+                .catch(error => {
+                console.log("Gagal mendapatkan data lokasi: " + error);
+                });
+            }
+        window.addEventListener('load', getLocation);
+    </script>
 </body>
 
 </html>

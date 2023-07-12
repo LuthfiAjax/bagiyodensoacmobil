@@ -15,6 +15,12 @@ $route['artikel/(:any)'] = 'Hero/artikel_details/$1';
 // Login
 $route['bagiyo-admin'] = 'Login';
 $route['bagiyo-admin/registration'] = 'Login/registration';
+$route['bagiyo-admin/logout'] = 'Login/logout';
 
 // cms
 $route['cms/dashboard'] = 'Cms_view/dashboard';
+$route['cms/menages-news-events'] = 'Cms_view/menages_news_events';
+$route['cms/create-news-events'] = 'Cms_view/create_news_events';
+
+// API
+$route['post-data-viewer'] = 'Api/viewer';
