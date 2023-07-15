@@ -6,6 +6,7 @@ class Api extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('email_sender');
     }
 
     public function viewer()
@@ -107,28 +108,26 @@ class Api extends CI_Controller {
 
     public function save_kontak()
     {
-        // Load library Form Validation
         $this->load->library('form_validation');
     
-        // Atur aturan validasi
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('tlp', 'Telepon', 'required');
         $this->form_validation->set_rules('subject', 'Subjek', 'required');
         $this->form_validation->set_rules('message', 'Isi Pesan', 'required');
     
-        // Jalankan validasi
         if ($this->form_validation->run() == false) {
-            // Jika validasi gagal, tampilkan pesan error
             $this->session->set_flashdata('error', 'Silakan lengkapi semua field');
             redirect(base_url('kontak'));
         } else {
-            // Jika validasi berhasil, simpan data ke database
             $nama_pesan = htmlspecialchars($this->input->post('nama'));
             $email_pesan = htmlspecialchars($this->input->post('email'));
             $tlp_pesan = htmlspecialchars($this->input->post('tlp'));
             $subject_pesan = htmlspecialchars($this->input->post('subject'));
             $body_pesan = htmlspecialchars($this->input->post('message'));
+    
+            // Use a database transaction to ensure data consistency
+            $this->db->trans_begin();
     
             $data = array(
                 'nama_pesan' => $nama_pesan,
@@ -139,13 +138,26 @@ class Api extends CI_Controller {
                 'created' => time()
             );
     
-            $this->db->insert('tb_pesan', $data);
+            $data2 = array(
+                'nama_subscriber' => $nama_pesan,
+                'email_subscriber' => $email_pesan
+            );
     
-            $this->session->set_flashdata('success', 'Pesan Terkirim Terimakasih');
-            redirect(base_url('kontak'));            
+            $this->db->insert('tb_pesan', $data);
+            $this->db->insert('subscriber', $data2);
+    
+            if ($this->db->trans_status() === false) {
+                $this->db->trans_rollback();
+                $this->session->set_flashdata('error', 'Error occurred while saving data. Please try again.');
+            } else {
+                $this->db->trans_commit();
+                $this->session->set_flashdata('success', 'Pesan Terkirim Terimakasih');
+            }
+    
+            redirect(base_url('kontak'));
         }
     }
-
+    
     public function messageklik()
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -219,5 +231,67 @@ class Api extends CI_Controller {
         $this->session->set_flashdata('success', 'Terimakasih Telah Menjadi bagian dari Bagiyo Denso');
         redirect($_SERVER['HTTP_REFERER']);  
     }
+
+    public function catalog()
+    {
+        $file = $this->db->order_by('created', 'DESC')->limit(1)->get('tb_company_profile')->row();
+    
+        if (!$file) {
+            // Handle the case when no file is found in the database
+            $this->session->set_flashdata('error', 'Company profile file not found.');
+            redirect($_SERVER['HTTP_REFERER']);
+            return;
+        }
+    
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+    
+        $message = '
+            <h3>Halo ' . $nama . ',</h3>
+            <p>Kami ingin memberitahukan bahwa kami, Bagiyo Denso, telah mengirimkan company profile kami kepada Anda. Terlampir file company profile untuk referensi Anda.</p>
+            <p></p>
+            <p>Terima kasih atas perhatiannya.</p>
+            <p>Salam,</p>
+            <p>Bagiyo Denso AC Mobil <br>bagiyodensoacmobil.com</p>
+        ';
+        $subject = 'Company Profile Bagiyo Denso';
+        $file_path = FCPATH . 'assets/company-profile/' . $file->filename;
+    
+        // Assuming $this->email_sender->send() returns true on successful sending
+        if ($this->email_sender->send($email, $subject, $message, $file_path)) {
+            // Use a database transaction to ensure data consistency
+            $this->db->trans_start();
+    
+            $data = array(
+                'name_download' => $nama,
+                'email_download' => $email,
+                'time_download' => time()
+            );
+            $this->db->insert('tb_download', $data);
+    
+            $data2 = array(
+                'nama_subscriber' => $nama,
+                'email_subscriber' => $email
+            );
+            // Assuming you meant to insert data2 into another table (not tb_download)
+            $this->db->insert('subscriber', $data2);
+    
+            $this->db->trans_complete();
+    
+            if ($this->db->trans_status() === FALSE) {
+                // Handle database transaction failure
+                $this->session->set_flashdata('error', 'Database transaction failed.');
+            } else {
+                // Transaction succeeded
+                $this->session->set_flashdata('success', 'Terimakasih Telah Menjadi bagian dari Bagiyo Denso Company Profile Sudah Kami Kirim ke email anda');
+            }
+        } else {
+            // Handle email sending failure
+            $this->session->set_flashdata('error', 'Failed to send email.');
+        }
+    
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+    
 }
 

@@ -24,4 +24,27 @@ class Cms_delete extends CI_Controller {
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Deleted Postingan Berhasil</div>');
         redirect(base_url('cms/menages-news-events'));
     }
+
+    public function delete_company($id)
+    {
+        $post = $this->db->get_where('tb_company_profile', ['id_company_profile' => $id])->row();
+        $query = $this->db->delete('tb_company_profile', ['id_company_profile' => $id]);
+
+        if($query){
+            unlink(FCPATH . 'assets/company-profile/' . $post->filename);
+        }
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Deleted Company Profile Berhasil</div>');
+        redirect(base_url('cms/company-profile'));
+    }
+
+    public function delete_subs($id)
+    {
+        $query = $this->db->delete('subscriber', ['id_subscriber' => $id]);
+
+        if($query){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Deleted Subscriber Berhasil</div>');
+            redirect(base_url('cms/subscribe'));
+        }
+    }
 }

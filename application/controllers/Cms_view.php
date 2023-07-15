@@ -67,4 +67,43 @@ class Cms_view extends CI_Controller {
         $this->load->view('cms/update_news_events');
         $this->load->view('cms/templates/footer');
     }
+
+    public function company_profile()
+    {
+        $_id  = $this->session->userdata('id_user');
+        
+        $data['title'] = 'manages news company';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $_id])->row_array();
+        $data['companies'] = $this->db->order_by('created')->get('tb_company_profile')->result_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/company_profile');
+        $this->load->view('cms/templates/footer');
+    }
+
+    public function subscribe()
+    {
+        $_id  = $this->session->userdata('id_user');
+        
+        $data['title'] = 'manages news subscribe';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $_id])->row_array();
+        $data['subs'] = $this->db->get('subscriber')->result_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/subscribe');
+        $this->load->view('cms/templates/footer');
+    }
+
+    public function download_compro()
+    {
+        $_id  = $this->session->userdata('id_user');
+        
+        $data['title'] = 'manages news download';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $_id])->row_array();
+        $data['subs'] = $this->db->get('tb_download')->result_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/download_compro');
+        $this->load->view('cms/templates/footer');
+    }
 }

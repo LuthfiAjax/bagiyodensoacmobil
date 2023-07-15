@@ -116,8 +116,36 @@
                 <a href="<?= base_url('layanan'); ?>" class="nav-item nav-link <?= ($page == 'layanan') ? 'active' : ''; ?>">Layanan</a>
                 <a href="<?= base_url('artikel'); ?>" class="nav-item nav-link <?= ($page == 'artikel') ? 'active' : ''; ?>">Artikel</a>
                 <a href="<?= base_url('kontak'); ?>" class="nav-item nav-link <?= ($page == 'kontak') ? 'active' : ''; ?>">Kontak</a>
+                <a href="#" class="btn btn-primary btn-sm py-4 px-lg-5 rounded d-block d-lg-none" data-bs-toggle="modal" data-bs-target="#katalog">Company Profile<i class="fa fa-arrow-down ms-3"></i></a>
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Company Profile<i class="fa fa-arrow-down ms-3"></i></a>
+            <a href="#" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#katalog">Company Profile<i class="fa fa-arrow-down ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
+
+    <div class="modal fade" id="katalog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Download Company Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('send-katalog'); ?>" method="post">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama <span class="text-primary">*</span></label>
+                        <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email <span class="text-primary">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" autocomplete="off" required>
+                        <div id="emailHelp" class="form-text text->secondary">Pastikan Email Valid dan Benar</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>

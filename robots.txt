@@ -4,4 +4,4 @@ Allow: /
 User-agent: *
 Disallow: /
 
-Sitemap: 
+Sitemap: https://bagiyodensoacmobil.com/sitemap.xml

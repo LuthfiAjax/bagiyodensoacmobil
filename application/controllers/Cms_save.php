@@ -80,4 +80,41 @@ class Cms_save extends CI_Controller {
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Menambah Postingan</div>');
       redirect(base_url('cms/menages-news-events'));
     }
+
+    public function save_company()
+    {
+        $company = $_FILES['company']['name'];
+
+        $config['encrypt_name'] = TRUE;
+        $config['allowed_types'] = 'pdf';
+        $config['max_size'] = '15120';
+        $config['upload_path'] = './assets/company-profile/';
+        $config['file_ext_tolower'] = TRUE;
+        $this->load->library('upload', $config);
+
+        if (!$company) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error: No file selected.</div>');
+            redirect(base_url('cms/company-profile'));
+        } else {
+            if (!$this->upload->do_upload('company')) {
+                $error = $this->upload->display_errors('<div class="alert alert-danger" role="alert">', '</div>');
+                $this->session->set_flashdata('message', $error);
+                redirect(base_url('cms/company-profile'));
+            } else {
+                $pdf = $this->upload->data();
+                $company = $pdf['file_name'];
+
+                $data = array(
+                    'filename' => $company,
+                    'created' => time()
+                );
+
+                $this->db->insert('tb_company_profile', $data);
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Menambah Company Profile</div>');
+                redirect(base_url('cms/company-profile'));
+            }
+        }
+    }
+
 }

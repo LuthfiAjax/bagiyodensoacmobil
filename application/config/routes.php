@@ -23,12 +23,18 @@ $route['cms/dashboard'] = 'Cms_view/dashboard';
 $route['cms/menages-news-events'] = 'Cms_view/menages_news_events';
 $route['cms/create-news-events'] = 'Cms_view/create_news_events';
 $route['cms/update-post/(:num)'] = 'Cms_view/update_news_events/$1';
+$route['cms/company-profile'] = 'Cms_view/company_profile';
+$route['cms/subscribe'] = 'Cms_view/subscribe';
+$route['cms/download-compro'] = 'Cms_view/download_compro';
 
 // save
 $route['cms/save-news-event'] = 'Cms_save/save_news_event';
+$route['cms/save-company'] = 'Cms_save/save_company';
 
 // delete
 $route['cms/delete/post/(:num)'] = 'Cms_delete/delete_post/$1';
+$route['cms/delete/company/(:num)'] = 'Cms_delete/delete_company/$1';
+$route['cms/delete/subs/(:num)'] = 'Cms_delete/delete_subs/$1';
 
 // update
 $route['update/publish'] = 'Cms_update/publish';
@@ -43,4 +49,7 @@ $route['post/data-messageklik'] = 'Api/messageklik';
 $route['upload/images/body'] = 'Api/uploadImages';
 $route['get-search-article'] = 'Api/get_search_article';
 $route['post-subscribe'] = 'Api/post_subscribe';
+$route['send-katalog'] = 'Api/catalog';
 
+// sitemap
+$route['sitemap\.xml'] = 'Hero/sitemap';

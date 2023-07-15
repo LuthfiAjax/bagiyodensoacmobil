@@ -18,12 +18,10 @@ date_default_timezone_set('Asia/Jakarta');
     <!-- tiny -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -33,50 +31,49 @@ date_default_timezone_set('Asia/Jakarta');
     <link rel="stylesheet" href="<?= base_url('assets/templates/'); ?>assets/css/style.css">
     <script src="<?= base_url('assets/tinymce/js/tinymce/'); ?>tinymce.min.js" referrerpolicy="origin"></script>
 
-    <link rel="stylesheet"
-        href="<?= base_url('assets/templates/'); ?>assets/css/lib/datatable/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/templates/'); ?>assets/css/lib/datatable/dataTables.bootstrap.min.css" />
 
     <style>
-    #weatherWidget .currentDesc {
-        color: #ffffff !important;
-    }
+        #weatherWidget .currentDesc {
+            color: #ffffff !important;
+        }
 
-    .traffic-chart {
-        min-height: 335px;
-    }
+        .traffic-chart {
+            min-height: 335px;
+        }
 
-    #flotPie1 {
-        height: 150px;
-    }
+        #flotPie1 {
+            height: 150px;
+        }
 
-    #flotPie1 td {
-        padding: 3px;
-    }
+        #flotPie1 td {
+            padding: 3px;
+        }
 
-    #flotPie1 table {
-        top: 20px !important;
-        right: -10px !important;
-    }
+        #flotPie1 table {
+            top: 20px !important;
+            right: -10px !important;
+        }
 
-    .chart-container {
-        display: table;
-        min-width: 270px;
-        text-align: left;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+        .chart-container {
+            display: table;
+            min-width: 270px;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
 
-    #flotLine5 {
-        height: 105px;
-    }
+        #flotLine5 {
+            height: 105px;
+        }
 
-    #flotBarChart {
-        height: 150px;
-    }
+        #flotBarChart {
+            height: 150px;
+        }
 
-    #cellPaiChart {
-        height: 160px;
-    }
+        #cellPaiChart {
+            height: 160px;
+        }
     </style>
 </head>
 
@@ -90,14 +87,23 @@ date_default_timezone_set('Asia/Jakarta');
                     <li class="<?php if ($title == 'Dashboard') {
                                     echo 'active';
                                 } ?>">
-                        <a href="<?= base_url('cms/dashboard'); ?>"><i
-                                class="menu-icon fa fa-laptop"></i><b>Dashboard</b> </a>
+                        <a href="<?= base_url('cms/dashboard'); ?>"><i class="menu-icon fa fa-laptop"></i><b>Dashboard</b> </a>
                     </li>
 
                     <li class="menu-title">Postingan</li>
                     <li class="<?= ($title=='manages news events') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/menages-news-events'); ?>"><i
-                                class="menu-icon fa fa-plus-square"></i><b>Menages Post</b></a>
+                        <a class="mt-0" href="<?= base_url('cms/menages-news-events'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Menages Post</b></a>
+                    </li>
+
+                    <li class="menu-title">Company</li>
+                    <li class="<?= ($title=='manages news company') ? 'active' : ''; ?>">
+                        <a class="mt-0" href="<?= base_url('cms/company-profile'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Company Profile</b></a>
+                    </li>
+                    <li class="<?= ($title=='manages news subscribe') ? 'active' : ''; ?>">
+                        <a class="mt-0" href="<?= base_url('cms/subscribe'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Subscriber</b></a>
+                    </li>
+                    <li class="<?= ($title=='manages news download') ? 'active' : ''; ?>">
+                        <a class="mt-0" href="<?= base_url('cms/download-compro'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Who Download ?</b></a>
                     </li>
                 </ul>
             </div>
