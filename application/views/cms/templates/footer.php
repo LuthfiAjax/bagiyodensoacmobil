@@ -40,7 +40,7 @@ tinymce.init({
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image responsivefilemanager",
     automatic_uploads: true,
     image_advtab: true,
-    images_upload_url: "<?= base_url("upload/images/news") ?>",
+    images_upload_url: "<?= base_url("upload/images/body") ?>",
     height: 900,
     file_picker_types: 'image',
     paste_data_images: true,
@@ -55,7 +55,7 @@ tinymce.init({
             var reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function() {
-                var id = 'R17-' + (new Date()).getTime();
+                var id = 'bagiyo-' + (new Date()).getTime();
                 var blobCache = tinymce.activeEditor.editorUpload.blobCache;
                 var blobInfo = blobCache.create(id, file, reader.result);
                 blobCache.add(blobInfo);
@@ -71,41 +71,14 @@ tinymce.init({
 
 <!-- Preview Images -->
 <script type="text/javascript">
-function PreviewHeader1() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("header1").files[0]);
+    function PreviewHeader1() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("header1").files[0]);
 
-    oFReader.onload = function(oFREvent) {
-        document.getElementById("priviewHeader1").src = oFREvent.target.result;
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("priviewHeader1").src = oFREvent.target.result;
+        };
     };
-};
-
-function PreviewHeader2() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("header2").files[0]);
-
-    oFReader.onload = function(oFREvent) {
-        document.getElementById("priviewHeader2").src = oFREvent.target.result;
-    };
-};
-
-function PreviewHeader3() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("header3").files[0]);
-
-    oFReader.onload = function(oFREvent) {
-        document.getElementById("priviewHeader3").src = oFREvent.target.result;
-    };
-};
-
-function priviewProfile() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("inputProfile").files[0]);
-
-    oFReader.onload = function(oFREvent) {
-        document.getElementById("imgProfil").src = oFREvent.target.result;
-    };
-};
 </script>
 
 <!-- lenght meta -->

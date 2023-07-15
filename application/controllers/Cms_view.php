@@ -18,6 +18,12 @@ class Cms_view extends CI_Controller {
         
         $data['title'] = 'Dashboard';
         $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+
+        $data['totalpost'] = $this->db->get('tb_articles')->num_rows();
+        $data['totalmessage'] = $this->db->get('tb_klikmessage')->num_rows();
+        $data['totalpengunjung'] = $this->db->get('tb_view')->num_rows();
+
+        $data['messages'] = $this->db->get('tb_pesan')->result_array();
         
         $this->load->view('cms/templates/header', $data);
         $this->load->view('cms/dashboard');
@@ -53,9 +59,9 @@ class Cms_view extends CI_Controller {
     {
         $_id  = $this->session->userdata('id_user');
         
-        $data['title'] = 'Menages news events';
+        $data['title'] = 'manages news events';
         $data['user'] = $this->db->get_where('user', ['id_user' => $_id])->row_array();
-        $data['news'] = $this->db->get_where('article', ['id' => $id])->row();
+        $data['news'] = $this->db->get_where('tb_articles', ['id_article' => $id])->row();
 
         $this->load->view('cms/templates/header', $data);
         $this->load->view('cms/update_news_events');

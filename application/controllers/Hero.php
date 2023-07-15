@@ -66,12 +66,28 @@ class Hero extends CI_Controller {
 
     public function artikel()
     {
-        $data = array(
-            'title' => 'Bagiyo Denso - Artikel',
-            'page' => 'artikel',
-            'meta_des' => '',
-            'meta_key' => ''
-        );
+        $data['title'] = 'Bagiyo Denso - Artikel';
+        $data['page'] = 'artikel';
+        $data['meta_des'] = '';
+        $data['meta_key'] = '';
+
+        // sett pagination
+        $this->load->library('pagination');
+        $config['base_url'] = base_url('artikel/');
+		$config['total_rows'] = $this->db->get_where('tb_articles', array('status' => 1))->num_rows();
+		$config['per_page'] = 3;
+        $this->pagination->initialize($config);
+
+        $data['start'] = $this->uri->segment(2);
+		if ($data['start'] == NULL) {
+			$start = 0;
+		} else {
+			$start = $data['start'];
+		}
+
+        // $data['articles'] = $this->db->order_by('publish', 'DESC')->get_where('tb_articles', ['status' => 1])->result_array();
+        $data['articles'] = $this->db->select('*')->from('tb_articles')->where('status', 1)->where('publish <', time())->order_by('publish', 'desc')->limit($config['per_page'], $start)->get()->result_array();
+        $data['url_slider'] =  $this->config->item('url_slider');
         
         $this->load->view('hero/templates/header', $data);
         $this->load->view('hero/artikel');
@@ -80,15 +96,22 @@ class Hero extends CI_Controller {
 
     public function artikel_details($slug)
     {
-        $data = array(
-            'title' => 'Bagiyo Denso - Artikel',
-            'page' => 'artikel',
-            'meta_des' => '',
-            'meta_key' => ''
-        );
+        $query = $this->db->get_where('tb_articles', ['slug_article_id' => $slug])->row();
+
+        if (!$query) {
+            redirect(base_url('artikel'));
+        }
+
+        $data['title'] = $query->title_article_id;
+        $data['page'] = 'artikel';
+        $data['meta_des'] = $query->meta_des_id;
+        $data['meta_key'] = $query->meta_key_id;
+        $data['articles'] = $query;
+        $data['realated'] = $this->db->select('title_article_id, slug_article_id, publish')->where('slug_article_id !=', $slug)->where('status =', 1)->order_by('publish', 'DESC')->limit(10)->get('tb_articles')->result_array();
         
         $this->load->view('hero/templates/header', $data);
         $this->load->view('hero/artikel_detail');
         $this->load->view('hero/templates/footer');
     }
+    
 }

@@ -14,7 +14,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">12212</span></div>
+                                    <div class="stat-text"><span class="count"><?= $totalpost; ?></span></div>
                                     <div class="stat-heading">Total Postingan</div>
                                 </div>
                             </div>
@@ -33,8 +33,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">31313</span></div>
-                                    <div class="stat-heading">Postingan Bulan Ini</div>
+                                    <div class="stat-text"><span class="count"><?= $totalmessage; ?></span></div>
+                                    <div class="stat-heading">Total Klik Pesan</div>
                                 </div>
                             </div>
                         </div>
@@ -52,8 +52,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">131313</span></div>
-                                    <div class="stat-heading">Pengunjung</div>
+                                    <div class="stat-text"><span class="count"><?= $totalpengunjung; ?></span></div>
+                                    <div class="stat-heading">Pengunjung Bulan ini</div>
                                 </div>
                             </div>
                         </div>
@@ -69,30 +69,30 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="box-title"><?= date('F'); ?> Post</h4>
+                            <h4 class="box-title">Pesan Masuk</h4>
                             <?= $this->session->flashdata('message'); ?>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="serial">#</th>
-                                        <th>Type</th>
-                                        <th style="width:35%;">Title</th>
-                                        <th>Created</th>
-                                        <th>Published</th>
-                                        <th class="text-center">Status Article</th>
+                                        <th>Waktu</th>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Tlp</th>
+                                        <th>Message</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach ($messages as $row) : ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><?= date('Y/m/d H:i', $row['created']); ?> WIB</td>
+                                        <td><?= $row['nama_pesan']; ?></td>
+                                        <td><?= $row['email_pesan']; ?></td>
+                                        <td><?= $row['tlp_pesan']; ?></td>
+                                        <td><button class="btn btn-sm btn-info" data-toggle="modal" data-target="#details_<?= $row['id_pesan']; ?>">View</button></td>
                                     </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -102,3 +102,25 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<?php foreach ($messages as $row) : ?>
+<div class="modal fade" id="details_<?= $row['id_pesan']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <h5 class="modal-title" id="exampleModalLabel">Details Pesan</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">subject : <?= $row['subject_pesan']; ?></li>
+            <li class="list-group-item"><?= $row['body_pesan']; ?></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>

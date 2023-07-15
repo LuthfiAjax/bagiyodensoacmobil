@@ -47,35 +47,6 @@
                                                 <input type="text" id="tag" name="tag" autocomplete="off" class="form-control" required>
                                             </div>
                                         </div>
-                                       
-                                        <script>
-                                            var tagInput = document.getElementById("tag");
-
-                                            tagInput.addEventListener("input", function() {
-                                                var inputValue = tagInput.value;
-
-                                                // Remove spaces and split tags by comma
-                                                var tags = inputValue.replace(/\s/g, "").split(",");
-
-                                                var isValid = true;
-
-                                                for (var i = 0; i < tags.length; i++) {
-                                                    var tag = tags[i];
-
-                                                    // Check if tag contains spaces
-                                                    if (tag.indexOf(" ") !== -1) {
-                                                        isValid = false;
-                                                        break;
-                                                    }
-                                                }
-
-                                                // Set the modified value back to the input field with comma and space
-                                                tagInput.value = tags.join(", ");
-
-                                                // Set the caret position to the end of the input field
-                                                tagInput.setSelectionRange(tagInput.value.length, tagInput.value.length);
-                                            });
-                                        </script>
 
                                         <div class="row form-group">
                                             <div class="col col-md-3">

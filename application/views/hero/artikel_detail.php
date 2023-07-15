@@ -12,8 +12,9 @@
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url(<?= base_url('assets/img/about.jpg'); ?>);">
     <div class="container-fluid page-header-inner py-5">
         <div class="container text-center">
-            <h1 class="display-3 fs-2 text-white mb-3 animated slideInDown">Cara Melakukan Huha Huha</h1>
-            <span class="p-date fs-5 text-white"><i class="fa fa-calendar-check-o"></i> Rabu, 28 Juni 2023</span>
+            <h1 class="display-3 fs-2 text-white mb-3 animated slideInDown"><?= $articles->title_article_id; ?></h1>
+            <?php $this->load->library('indonesian_date'); ?>
+            <span class="p-date fs-5 text-white"><i class="fa fa-calendar-check-o"></i> <?= $this->indonesian_date->format_date($articles->publish); ?></span>
         </div>
     </div>
 </div>
@@ -26,21 +27,21 @@
                 <div class="widget-area">
                     <div class="search-widget mb-5">
                         <div class="search-wrap">
-                            <a href="https://api.whatsapp.com/send?text="
+                            <a href="https://api.whatsapp.com/send?text= <?= $articles->title_article_id . ' ' . base_url('artikel/'. $articles->slug_article_id); ?>"
                                 target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp fa-2x"></i>
+                                <i class="fab fa-whatsapp fa-3x mx-3"></i>
                             </a>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://dimensy.id/article/apa-itu-loi-letter-of-intent-fungsi-jenis-dan-cara-membuatnya"
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?= base_url('artikel/'. $articles->slug_article_id); ?>"
                                 target="_blank" rel="noopener noreferrer">
-                                <i class="fa fa-facebook fa-2x"></i>
+                                <i class="fab fa-facebook fa-3x mx-3"></i>
                             </a>
-                            <a href="https://twitter.com/intent/tweet?url=https://dimensy.id/article/apa-itu-loi-letter-of-intent-fungsi-jenis-dan-cara-membuatnya&text=Apa itu LOI (Letter of intent)? Fungsi, Jenis dan Cara Membuatnya"
+                            <a href="https://twitter.com/intent/tweet?url=<?= base_url('artikel/'. $articles->slug_article_id); ?>&text=Apa itu LOI (Letter of intent)? Fungsi, Jenis dan Cara Membuatnya"
                                 target="_blank" rel="noopener noreferrer">
-                                <i class="fa fa-twitter fa-2x"></i>
+                                <i class="fab fa-twitter fa-3x mx-3"></i>
                             </a>
-                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dimensy.id/article/apa-itu-loi-letter-of-intent-fungsi-jenis-dan-cara-membuatnya"
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= base_url('artikel/'. $articles->slug_article_id); ?>"
                                 target="_blank" rel="noopener noreferrer">
-                                <i class="fa fa-linkedin fa-2x"></i>
+                                <i class="fab fa-linkedin fa-3x mx-3"></i>
                             </a>
                         </div>
                     </div>
@@ -48,14 +49,16 @@
                         <div class="widget-title">
                             <h3 class="title">Artikel Terkait</h3>
                         </div>
+                        <?php foreach ($realated as $row) : ?>
                         <div class="recent-post-widget">
                             <div class="post-desc">
-                                <a href="https://dimensy.id/article/mengapa-literasi-digital-adalah-keterampilan-wajib-di-era-digital">Mengapa Literasi Digital Adalah Keterampilan Wajib di Era Digital</a>
+                                <a href="<?= base_url('artikel/'. $row['slug_article_id']); ?>"><?= $row['title_article_id']; ?></a>
                                 <span class="date"> <i class="fa fa-calendar"></i>
-                                    Jumat, 30 Juni 2023
+                                    <?= $this->indonesian_date->format_date($row['publish']); ?>
                                 </span>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -64,11 +67,11 @@
                     <div class="col-lg-12">
                         <div class="blog-details">
                             <div class="bs-img mb-35">
-                                <a href="#"><img class="bs-img" src="https://staging.dimensy.id/assets/img/articles/slider/4def7d0f91e48fc2c61119fb7b7ccbaf.jpg" alt=""></a>
+                                <img class="bs-img" src="<?= base_url('assets/img/events/'.$articles->thumbnail); ?>" alt="Cover Blog Bagiyo Denso <?= $articles->title_article_id; ?>">
                             </div>
                             <div class="blog-full">
-                                <article>
-
+                                <article class="mt-5">
+                                    <?= $articles->body_id; ?>
                                 </article>
                             </div>
                         </div>

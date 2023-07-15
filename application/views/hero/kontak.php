@@ -41,36 +41,36 @@
             <div class="col-md-6">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
                     <p class="mb-4">Hubungi Bagiyo Denso AC Mobil untuk solusi AC mobil terbaik. Layanan profesional kami meliputi perbaikan, perawatan, pemasangan AC baru, dan penggantian suku cadang.</p>
-                    <form>
+                    <form action="<?= base_url('post/message_kotak'); ?>" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" required autocomplete="off" placeholder="Nama">
+                                    <input type="text" class="form-control" name="nama" id="nama" required autocomplete="off" placeholder="Nama">
                                     <label for="name">Nama</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" required autocomplete="off" placeholder="Subject">
+                                    <input type="text" class="form-control" name="subject" id="subject" required autocomplete="off" placeholder="Subject">
                                     <label for="subject">Subject</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" required autocomplete="off" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" id="email" required autocomplete="off" placeholder="Email">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="tellphone" required autocomplete="off" placeholder="Telepone">
+                                    <input type="number" class="form-control" name="tlp" id="tlp" required autocomplete="off" placeholder="Telepone">
                                     <label for="tellphone">Telepone</label>
                                 </div>
                             </div>
                             
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" required autocomplete="off" placeholder="Tulis Pesan anda disini" id="message" style="height: 100px"></textarea>
+                                    <textarea class="form-control" required autocomplete="off" placeholder="Tulis Pesan anda disini" name="message" id="message" style="height: 100px"></textarea>
                                     <label for="message">Pesan</label>
                                 </div>
                             </div>

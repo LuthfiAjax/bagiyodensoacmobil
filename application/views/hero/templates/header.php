@@ -8,15 +8,17 @@
 
     <?php $currentLink = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];?>
 
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta name="description" content="<?= $meta_des; ?>" >
+    <meta name="keywords" content="<?= $meta_key; ?>" >
+
     <link rel="canonical" href="<?= $currentLink; ?>" />
+
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?= $title; ?>" />
-    <meta property="og:description" content="" />
+    <meta property="og:description" content="<?= $meta_des; ?>" />
     <meta property="og:url" content="<?= $currentLink; ?>" />
-    <meta property="og:site_name" content="bagiyodensoacmobil.com" />
+    <meta property="og:site_name" content="bagiyodensoacmobil" />
 
     <meta itemprop="name" content="<?= $title; ?>">
     <meta itemprop="description" content="<?= $meta_des; ?>">
@@ -37,6 +39,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.6.15/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link href="<?= base_url('assets/'); ?>lib/animate/animate.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
