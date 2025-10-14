@@ -32,3 +32,8 @@ backup/
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+# Ignore uploaded images
+assets/img/body/
+assets/img/events/
+
