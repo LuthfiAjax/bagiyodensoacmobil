@@ -1,87 +1,369 @@
 <!-- Page Header Start -->
 <style>
-    .rounded-search-input {
-        border-radius: 20px;
-        padding: 10px 15px; 
-        border: none; 
-        outline: none; 
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-        width: 300px; 
+    /* Hero */
+    .page-header {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 320px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+    }
+
+    .page-header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, .45), rgba(0, 0, 0, .35));
+        z-index: 1;
+    }
+
+    .page-header-inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-title {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        letter-spacing: .3px;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, .35);
+    }
+
+    /* Search */
+    .search-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+        margin: 14px auto 0;
+    }
+
+    .search-input {
+        height: 48px;
+        border-radius: 999px;
+        padding-left: 46px;
+        /* for icon */
+        padding-right: 16px;
+        border: 1px solid rgba(255, 255, 255, .2);
+        background: rgba(255, 255, 255, .12);
+        color: #fff;
+        backdrop-filter: blur(6px);
+    }
+
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, .85);
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #fff;
+        opacity: .9;
+    }
+
+    .search-results {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 58px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .search-results .result-item a {
+        display: block;
+        padding: 10px 14px;
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    .search-results .result-item a:hover {
+        background: #f2f6ff;
+        color: var(--primary);
+    }
+
+    /* Article Grid */
+    .articles-section {
+        padding: 60px 0;
+    }
+
+    .article-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: none;
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .article-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 32px rgba(0, 101, 255, 0.15);
+    }
+
+    /* Stagger animation delay */
+    .col-lg-4:nth-child(1) .article-card {
+        animation-delay: 0.1s;
+    }
+
+    .col-lg-4:nth-child(2) .article-card {
+        animation-delay: 0.2s;
+    }
+
+    .col-lg-4:nth-child(3) .article-card {
+        animation-delay: 0.3s;
+    }
+
+    .col-lg-4:nth-child(4) .article-card {
+        animation-delay: 0.4s;
+    }
+
+    .col-lg-4:nth-child(5) .article-card {
+        animation-delay: 0.5s;
+    }
+
+    .col-lg-4:nth-child(6) .article-card {
+        animation-delay: 0.6s;
+    }
+
+    .article-image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        /* 16:9 Aspect Ratio */
+        overflow: hidden;
+        background: #e9ecef;
+    }
+
+    .article-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .article-card:hover img {
+        transform: scale(1.08);
+    }
+
+    .article-card .card-body {
+        padding: 24px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-title {
+        font-size: 19px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #212529;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .article-title:hover {
+        color: #0065FF;
+    }
+
+    .article-date {
+        color: #6c757d;
+        font-size: 13px;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .article-date i {
+        color: #0065FF;
+    }
+
+    .article-description {
+        font-size: 14px;
+        color: #6c757d;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    .btn-read-more {
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        border: 2px solid #0065FF;
+        color: #0065FF;
+        background: transparent;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        align-self: flex-start;
+    }
+
+    .btn-read-more:hover {
+        background: #0065FF;
+        color: white;
+        transform: translateX(4px);
+    }
+
+    /* Pagination */
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 0px 0 60px;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pagination a,
+    .pagination strong {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        background: white;
+        color: #212529;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .pagination a:hover {
+        background: #0065FF;
+        color: white;
+        border-color: #0065FF;
+    }
+
+    .pagination strong {
+        background: #0065FF;
+        color: white;
+        border-color: #0065FF;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .page-header h1 {
+            font-size: 2.5rem !important;
+        }
+
+        .article-card {
+            margin-bottom: 24px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .page-header {
+            min-height: 320px;
+        }
+
+        .page-header h1 {
+            font-size: 2rem !important;
+        }
+
+        .rounded-search-input {
+            padding: 12px 45px 12px 20px;
+            font-size: 14px;
+        }
+
+        .search-icon {
+            right: 16px;
+        }
+
+        .articles-section {
+            padding: 40px 0;
+        }
+
+        .article-card .card-body {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 17px;
+        }
     }
 </style>
 
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url(<?= base_url('assets/img/about.jpg'); ?>);">
     <div class="container-fluid page-header-inner py-5">
         <div class="container text-center">
-            <h1 class="display-3 fs-1 text-white mb-3 animated slideInDown">Artikel BAGIYO DENSO</h1>
-            <div class="d-flex justify-content-center">
-                <input type="search" class="form-control rounded-search-input" id="search_input" placeholder="Cari Artikel Disini . . . ">
-            </div>
-            <style>
-                    #search_results {
-                        position: absolute;
-                        z-index: 999;
-                        background-color: transparent;
-                        margin-top: 5px;
-                        padding: 0;
-                        list-style: none;
-                    }
+            <h1 class="page-title display-3 fs-1 text-white mb-3">Artikel BAGIYO DENSO</h1>
 
-                    #search_results .result-item a {
-                        color: #000;
-                        text-decoration: none;
-                        text-align: left;
-                    }
-
-                    #search_results .result-item a:hover {
-                        color: #12A5E8;
-                    }
-            </style>
-            <div class="d-flex justify-content-center">
+            <!-- Search with icon -->
+            <div class="search-wrap">
+                <i class="search-icon fas fa-search"></i>
+                <input type="search" class="form-control search-input" id="search_input" placeholder="Cari artikel, topik, atau kata kunci...">
                 <div id="search_results" class="search-results"></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container articles-section">
     <div class="row">
-        <style>
-            #deskripsi {
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            #title{
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        </style>
         <?php $this->load->library('indonesian_date'); ?>
         <?php foreach ($articles as $row) : ?>
-            <div class="col-lg-4 my-3">
-                <div class="card" style="border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
-                    <a href="<?= base_url('artikel/'.$row['slug_article_id']); ?>">
-                        <img src="<?= base_url('assets/img/events/'.$row['thumbnail']); ?>" class="card-img-top" alt="Article Image">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card article-card">
+                    <a href="<?= base_url('artikel/' . $row['slug_article_id']); ?>" class="article-image-wrapper">
+                        <img src="<?= base_url('assets/img/events/' . $row['thumbnail']); ?>" alt="<?= htmlspecialchars($row['title_article_id']); ?>">
                     </a>
                     <div class="card-body">
-                        <a href="<?= base_url('artikel/'.$row['slug_article_id']); ?>" id="title">
-                            <h5 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;"><?= $row['title_article_id']; ?></h5>
+                        <a href="<?= base_url('artikel/' . $row['slug_article_id']); ?>" class="article-title">
+                            <?= $row['title_article_id']; ?>
                         </a>
-                        <small class="my-3"><i class="fas fa-calendar-alt"></i> 
+                        <div class="article-date">
+                            <i class="fas fa-calendar-alt"></i>
                             <?= $this->indonesian_date->format_date($row['publish']); ?>
-                        </small>
-                        <div class="my-3" id="deskripsi">
-                            <p class="card-text" style="font-size: 14px;"><?= $row['deskripsi_id']; ?></p>
                         </div>
-                        <div class="text-end">
-                            <a href="<?= base_url('artikel/'.$row['slug_article_id']); ?>" class="btn btn-sm btn-secondary">Selengkapnya</a>
-                        </div>
+                        <p class="article-description">
+                            <?= $row['deskripsi_id']; ?>
+                        </p>
+                        <a href="<?= base_url('artikel/' . $row['slug_article_id']); ?>" class="btn-read-more">
+                            Selengkapnya
+                        </a>
                     </div>
                 </div>
             </div>
@@ -89,7 +371,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container pagination-wrapper">
     <?= $this->pagination->create_links(); ?>
 </div>
 
