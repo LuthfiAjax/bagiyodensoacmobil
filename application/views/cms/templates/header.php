@@ -84,27 +84,56 @@ date_default_timezone_set('Asia/Jakarta');
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menu-title">Main</li>
-                    <li class="<?php if ($title == 'Dashboard') {
-                                    echo 'active';
-                                } ?>">
-                        <a href="<?= base_url('cms/dashboard'); ?>"><i class="menu-icon fa fa-laptop"></i><b>Dashboard</b> </a>
+                    <li class="<?= ($title == 'Dashboard') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/dashboard'); ?>">
+                            <i class="menu-icon fa fa-dashboard"></i> <b>Dashboard</b>
+                        </a>
                     </li>
 
                     <li class="menu-title">Postingan</li>
-                    <li class="<?= ($title=='manages news events') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/menages-news-events'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Menages Post</b></a>
+                    <li class="<?= ($title == 'manages news events') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/menages-news-events'); ?>">
+                            <i class="menu-icon fa fa-newspaper-o"></i> <b>Manage Post</b>
+                        </a>
+                    </li>
+                    <li class="<?= ($title == 'manages slider') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/menages-slider'); ?>">
+                            <i class="menu-icon fa fa-picture-o"></i> <b>Manage Slider</b>
+                        </a>
+                    </li>
+                    <li class="<?= ($title == 'manages promo') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/menages-promo'); ?>">
+                            <i class="menu-icon fa fa-bullhorn"></i> <b>Manage Promo</b>
+                        </a>
+                    </li>
+                    <li class="<?= ($title == 'manages cabang') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/menages-cabang'); ?>">
+                            <i class="menu-icon fa fa-building-o"></i> <b>Manage Cabang</b>
+                        </a>
                     </li>
 
-                    <li class="menu-title">Company</li>
-                    <li class="<?= ($title=='manages news company') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/company-profile'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Company Profile</b></a>
+                    <li class="menu-title">Pelanggan</li>
+
+                    <li class="<?= ($title == 'klik whatsapp') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/whatsapp'); ?>">
+                            <i class="menu-icon fa fa-industry"></i> <b>Klik Whatsapp</b>
+                        </a>
                     </li>
-                    <li class="<?= ($title=='manages news subscribe') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/subscribe'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Subscriber</b></a>
+                    <!-- <li class="<?= ($title == 'manages news company') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/company-profile'); ?>">
+                            <i class="menu-icon fa fa-industry"></i> <b>Company Profile</b>
+                        </a>
                     </li>
-                    <li class="<?= ($title=='manages news download') ? 'active' : ''; ?>">
-                        <a class="mt-0" href="<?= base_url('cms/download-compro'); ?>"><i class="menu-icon fa fa-plus-square"></i><b>Who Download ?</b></a>
+                    <li class="<?= ($title == 'manages news subscribe') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/subscribe'); ?>">
+                            <i class="menu-icon fa fa-envelope"></i> <b>Subscriber</b>
+                        </a>
                     </li>
+                    <li class="<?= ($title == 'manages news download') ? 'active' : ''; ?>">
+                        <a href="<?= base_url('cms/download-compro'); ?>">
+                            <i class="menu-icon fa fa-download"></i> <b>Who Download?</b>
+                        </a>
+                    </li> -->
                 </ul>
             </div>
         </nav>

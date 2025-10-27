@@ -72,132 +72,86 @@
 
 <!-- ===================== Carousel Start ===================== -->
 <div class="container-fluid p-0 mb-5">
-    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel" style="max-height: 600px; overflow: hidden;">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel" style="max-height:600px;overflow:hidden;">
+        <!-- Indicators -->
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <?php foreach ($sliders as $i => $s): ?>
+                <button type="button" data-bs-target="#header-carousel"
+                    data-bs-slide-to="<?= $i; ?>"
+                    class="<?= $i === 0 ? 'active' : ''; ?>"
+                    aria-label="Slide <?= $i + 1; ?>"></button>
+            <?php endforeach; ?>
         </div>
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <img class="w-100" src="<?= base_url('assets/img/slide/1.jpg'); ?>" alt="Image" style="height: 600px; object-fit: cover; filter: brightness(0.8);">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between">
 
-                            <!-- Konten untuk Desktop -->
-                            <div class="col-lg-6 text-white text-start d-none d-lg-block">
-                                <h3 class="fs-4 fw-light text-warning mb-2 animate__animated animate__fadeInUp">BAGIYO DENSO AC MOBIL</h3>
-                                <h1 class="display-5 text-light fw-bold mb-4 animate__animated animate__fadeInUp">SPESIALIS AC MOBIL TERPERCAYA DI PURWODADI</h1>
-                                <p class="fs-5 mb-4 animate__animated animate__fadeInUp">Layanan perawatan dan perbaikan AC mobil terbaik di Purwodadi, Solusi tepat untuk setiap permasalahan AC Mobilmu. </p>
-                                <div class="animate__animated animate__fadeInUp">
-                                    <div class="d-flex flex-wrap">
-                                        <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary rounded-pill me-2 mb-0 py-md-3 px-md-4 py-2 px-2 fs-md-6 fs-6">
-                                            <i class="fas fa-calendar-check me-1"></i> Booking Sekarang
-                                        </a>
-                                        <a href="https://maps.app.goo.gl/K8wGoELM1fTzSvdJ8" target="_blank" class="btn btn-outline-light rounded-pill py-md-3 px-md-4 py-2 px-2 fs-md-6 fs-6">
-                                            <i class="fas fa-map-marker-alt me-1"></i> Cek Rute Purwodadi
-                                        </a>
+        <div class="carousel-inner">
+            <?php foreach ($sliders as $i => $s): ?>
+                <div class="carousel-item <?= $i === 0 ? 'active' : ''; ?>">
+                    <img class="w-100"
+                        src="<?= base_url($s['image_background']); ?>"
+                        alt="<?= htmlspecialchars($s['title']); ?>"
+                        style="height:600px;object-fit:cover;filter:brightness(0.8);">
+
+                    <div class="carousel-caption d-flex align-items-center">
+                        <div class="container">
+                            <?php if ($s['tipe'] === 'medsos' || $s['tipe'] === 'promo'): ?>
+                                <!-- MEDSOS / PROMO -->
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-lg-8 text-white animate__animated animate__fadeInUp">
+                                        <h3 class="fw-light text-warning mb-2"><?= $s['subtitle']; ?></h3>
+                                        <h1 class="display-5 text-light fw-bold mb-4"><?= $s['title']; ?></h1>
+
+                                        <?php if ($s['tipe'] === 'promo' && !empty($s['image_side'])): ?>
+                                            <div class="mb-4">
+                                                <img src="<?= base_url($s['image_side']); ?>" alt="Promo Image" class="img-fluid rounded shadow">
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                                            <?php foreach ($s['links'] as $lnk): ?>
+                                                <a href="<?= $lnk['url']; ?>" target="_blank"
+                                                    class="btn <?= $lnk['btn_style']; ?> py-2 px-4 rounded-pill">
+                                                    <i class="<?= $lnk['icon_class']; ?> me-2"></i> <?= $lnk['label']; ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Konten untuk Mobile -->
-                            <div class="col-12 text-white text-start d-block d-lg-none">
-                                <h3 class="fs-5 fw-light text-warning mb-2">BAGIYO DENSO AC MOBIL</h3>
-                                <h2 class="fs-3 fw-bold text-light mb-3">SPESIALIS AC MOBIL TERPERCAYA DI PURWODADI</h2>
-                                <p class="fs-6 mb-3">Layanan perawatan dan perbaikan AC mobil terbaik di Purwodadi, Solusi tepat untuk setiap permasalahan AC Mobilmu. </p>
-                                <div>
-                                    <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary rounded-pill py-2 px-3">
-                                        <i class="fas fa-calendar-check me-1"></i> Booking
-                                    </a>
-                                    <a href="https://maps.app.goo.gl/K8wGoELM1fTzSvdJ8" class="btn btn-outline-light rounded-pill py-2 px-3">
-                                        <i class="fas fa-map-marker-alt me-1"></i> Rute
-                                    </a>
+                            <?php elseif ($s['tipe'] === 'left' || $s['tipe'] === 'right'): ?>
+                                <!-- LEFT / RIGHT -->
+                                <div class="row align-items-center justify-content-between">
+                                    <?php if ($s['tipe'] === 'left' && !empty($s['image_side'])): ?>
+                                        <div class="col-lg-5 d-none d-lg-block text-start animate__animated animate__fadeInLeft">
+                                            <img src="<?= base_url($s['image_side']); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width:100%;">
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="col-lg-6 text-white text-<?= $s['tipe'] === 'left' ? 'end' : 'start'; ?> d-none d-lg-block">
+                                        <h3 class="fw-light text-warning mb-2 animate__animated animate__fadeInUp"><?= $s['subtitle']; ?></h3>
+                                        <h1 class="display-5 text-light fw-bold mb-4 animate__animated animate__fadeInUp"><?= $s['title']; ?></h1>
+                                        <p class="fs-5 mb-4 animate__animated animate__fadeInUp"><?= $s['description']; ?></p>
+                                        <div class="animate__animated animate__fadeInUp d-flex flex-wrap justify-content-<?= $s['tipe'] === 'left' ? 'end' : 'start'; ?>">
+                                            <?php foreach ($s['links'] as $lnk): ?>
+                                                <a href="<?= $lnk['url']; ?>" target="_blank"
+                                                    class="btn <?= $lnk['btn_style']; ?> rounded-pill me-2 mb-2 py-2 px-3">
+                                                    <i class="<?= $lnk['icon_class']; ?> me-1"></i> <?= $lnk['label']; ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+
+                                    <?php if ($s['tipe'] === 'right' && !empty($s['image_side'])): ?>
+                                        <div class="col-lg-5 d-none d-lg-block text-end animate__animated animate__fadeInRight">
+                                            <img src="<?= base_url($s['image_side']); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width:100%;">
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                            </div>
 
-                            <!-- Gambar Kanan untuk Desktop -->
-                            <div class="col-lg-5 d-none d-lg-block text-end animate__animated animate__fadeInRight">
-                                <img src="<?= base_url('assets/img/new/model-1.svg'); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width: 100%;">
-                            </div>
-
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <img class="w-100" src="<?= base_url('assets/img/slide/2.jpg'); ?>" alt="Image" style="height: 600px; object-fit: cover; filter: brightness(0.8);">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between">
-
-                            <!-- Gambar Kiri untuk Desktop -->
-                            <div class="col-lg-5 d-none d-lg-block text-start animate__animated animate__fadeInLeft">
-                                <img src="<?= base_url('assets/img/new/model-2.svg'); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width: 100%;">
-                            </div>
-
-                            <!-- Konten untuk Desktop -->
-                            <div class="col-lg-6 text-white text-end d-none d-lg-block">
-                                <h3 class="fw-light text-warning mb-2 animate__animated animate__fadeInUp">BAGIYO DENSO AC MOBIL</h3>
-                                <h1 class="display-5 text-light fw-bold mb-4 animate__animated animate__fadeInUp">SOLUSI AC MOBIL TERBAIK UNTUK WARGA KUDUS</h1>
-                                <p class="fs-5 mb-4 animate__animated animate__fadeInUp">BAGIYO AC Kini Hadir Di Kota Kudus. Siap melayani perbaikan dan perawatan AC Mobil di sekitar Kota Kudus, Pati, Jepara dan Rembang</p>
-                                <div class="animate__animated animate__fadeInUp">
-                                    <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary py-3 px-4 rounded-pill me-3">
-                                        <i class="fas fa-calendar-check me-2"></i> Booking Sekarang
-                                    </a>
-                                    <a href="https://maps.app.goo.gl/Qpp7tyVrqxwUNhz47" target="_blank" class="btn btn-outline-light py-3 px-4 rounded-pill">
-                                        <i class="fas fa-map-marker-alt me-2"></i> Cek Rute Kudus
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Konten untuk Mobile -->
-                            <div class="col-12 text-white text-end d-block d-lg-none">
-                                <h3 class="fs-5 fw-light text-warning mb-2">BAGIYO DENSO AC MOBIL</h3>
-                                <h2 class="fs-3 fw-bold text-light mb-3">SOLUSI AC MOBIL TERBAIK UNTUK WARGA KUDUS</h2>
-                                <p class="fs-6 mb-3">BAGIYO AC Kini Hadir Di Kota Kudus. Siap melayani perbaikan dan perawatan AC Mobil di sekitar Kota Kudus, Pati, Jepara dan Rembang.</p>
-                                <div>
-                                    <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" class="btn btn-primary rounded-pill py-2 px-3">
-                                        <i class="fas fa-calendar-check me-1"></i> Booking
-                                    </a>
-                                    <a href="https://maps.app.goo.gl/Qpp7tyVrqxwUNhz47" class="btn btn-outline-light rounded-pill py-2 px-3">
-                                        <i class="fas fa-map-marker-alt me-1"></i> Rute
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 - Media Sosial -->
-            <div class="carousel-item">
-                <img class="w-100" src="<?= base_url('assets/img/slide/3.jpg'); ?>" alt="Image" style="height: 600px; object-fit: cover; filter: brightness(0.8);">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row justify-content-center text-center">
-                            <div class="col-lg-8 text-white animate__animated animate__fadeInUp">
-                                <h3 class="fw-light text-warning mb-2">IKUTI KAMI DI MEDIA SOSIAL</h3>
-                                <h1 class="display-5 text-light fw-bold mb-4">Dapatkan Update dan Promo Terbaru!</h1>
-                                <div class="d-flex flex-wrap justify-content-center gap-3">
-                                    <a href="https://www.youtube.com/@bagiyodensoacmobil" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-youtube me-2"></i> YouTube</a>
-                                    <a href="https://www.facebook.com/profile.php?id=100025744723411&_rdr" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-facebook me-2"></i> Facebook</a>
-                                    <a href="https://www.tiktok.com/@bagiyo_acmobil" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-tiktok me-2"></i> Tiktok Purwodadi</a>
-                                    <a href="https://www.instagram.com/bagiyo.ac" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-instagram me-2"></i> Instagram Purwodadi</a>
-                                    <a href="https://www.tiktok.com/@bagiyoac.kudus" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-tiktok me-2"></i> Tiktok Kudus</a>
-                                    <a href="https://www.instagram.com/bagiyoac.kudus" target="_blank" class="btn btn-primary py-2 px-4 rounded-pill"><i class="fab fa-instagram me-2"></i> Instagram Kudus</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

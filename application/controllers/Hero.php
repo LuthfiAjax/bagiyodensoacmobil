@@ -19,8 +19,16 @@ class Hero extends CI_Controller
             'image' => base_url('assets/img/imglink.jpg')
         );
 
+        $this->db->order_by('position_order', 'ASC');
+        $sliders = $this->db->get_where('tb_slider', ['is_active' => 1])->result_array();
+
+        foreach ($sliders as &$slider) {
+            $slider['links'] = $this->db->get_where('tb_slider_links', ['slider_id' => $slider['id']])->result_array();
+        }
+        $data['sliders'] = $sliders;
+
         $this->load->view('hero/templates/header', $data);
-        $this->load->view('hero/home');
+        $this->load->view('hero/home', $data);
         $this->load->view('hero/templates/footer');
     }
 

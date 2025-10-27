@@ -22,12 +22,27 @@ $route['bagiyo-admin/logout'] = 'Login/logout';
 
 // cms
 $route['cms/dashboard'] = 'Cms_view/dashboard';
+
 $route['cms/menages-news-events'] = 'Cms_view/menages_news_events';
 $route['cms/create-news-events'] = 'Cms_view/create_news_events';
 $route['cms/update-post/(:num)'] = 'Cms_view/update_news_events/$1';
-$route['cms/company-profile'] = 'Cms_view/company_profile';
-$route['cms/subscribe'] = 'Cms_view/subscribe';
-$route['cms/download-compro'] = 'Cms_view/download_compro';
+
+$route['cms/menages-slider'] = 'Cms_view/menages_slider';
+$route['cms/create-slider'] = 'Cms_view/create_slider';
+$route['cms/update-slider/(:num)'] = 'Cms_view/update_slider/$1';
+
+$route['cms/menages-promo'] = 'Cms_view/menages_promo';
+$route['cms/create-promo'] = 'Cms_view/create_promo';
+$route['cms/update-promo/(:num)'] = 'Cms_view/update_promo/$1';
+
+$route['cms/menages-cabang'] = 'Cms_view/menages_cabang';
+$route['cms/create-cabang'] = 'Cms_view/create_cabang';
+$route['cms/update-cabang/(:num)'] = 'Cms_view/update_cabang/$1';
+
+$route['cms/whatsapp'] = 'Cms_view/whatsapp';
+// $route['cms/subscribe'] = 'Cms_view/subscribe';
+// $route['cms/company-profile'] = 'Cms_view/company_profile';
+// $route['cms/download-compro'] = 'Cms_view/download_compro';
 
 // save
 $route['cms/save-news-event'] = 'Cms_save/save_news_event';
@@ -53,6 +68,10 @@ $route['get-search-article'] = 'Api/get_search_article';
 $route['post-subscribe'] = 'Api/post_subscribe';
 $route['send-katalog'] = 'Api/catalog';
 $route['post-klik-whatsapp'] = 'Api/klik_whatsapp';
+
+$route['cms/api/post/slider'] = 'Api/save_slider';
+$route['cms/api/delete/slider/(:num)'] = 'Api/delete_slider/$1';
+$route['cms/api/update/slider/(:num)'] = 'Api/update_slider/$1';
 
 // sitemap
 $route['sitemap\.xml'] = 'Hero/sitemap';

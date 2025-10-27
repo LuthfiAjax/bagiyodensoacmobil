@@ -7,7 +7,7 @@
                 Copyright &copy; <?= date('Y'); ?> Bagiyo Denso
             </div>
             <div class="col-sm-6 text-right">
-                Designed by <a href="<?= base_url(''); ?>">JaxID</a>
+                Designed by <a href="<?= base_url(''); ?>">Jaxindo Digital Agency</a>
             </div>
         </div>
     </div>
@@ -29,44 +29,44 @@
 
 <!-- tinymce id -->
 <script type="text/javascript">
-tinymce.init({
-    selector: "#mytextarea_id",
-    plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime nonbreaking save table contextmenu directionality",
-        "emoticons template paste textcolor colorpicker textpattern"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image responsivefilemanager",
-    automatic_uploads: true,
-    image_advtab: true,
-    images_upload_url: "<?= base_url("upload/images/body") ?>",
-    height: 900,
-    file_picker_types: 'image',
-    paste_data_images: true,
-    relative_urls: false,
-    remove_script_host: false,
-    file_picker_callback: function(cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/jpg,image/jpeg,image/png,image/webp');
-        input.onchange = function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function() {
-                var id = 'bagiyo-' + (new Date()).getTime();
-                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                var blobInfo = blobCache.create(id, file, reader.result);
-                blobCache.add(blobInfo);
-                cb(blobInfo.blobUri(), {
-                    title: file.name
-                });
+    tinymce.init({
+        selector: "#mytextarea_id",
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image responsivefilemanager",
+        automatic_uploads: true,
+        image_advtab: true,
+        images_upload_url: "<?= base_url("upload/images/body") ?>",
+        height: 900,
+        file_picker_types: 'image',
+        paste_data_images: true,
+        relative_urls: false,
+        remove_script_host: false,
+        file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/jpg,image/jpeg,image/png,image/webp');
+            input.onchange = function() {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function() {
+                    var id = 'bagiyo-' + (new Date()).getTime();
+                    var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                    var blobInfo = blobCache.create(id, file, reader.result);
+                    blobCache.add(blobInfo);
+                    cb(blobInfo.blobUri(), {
+                        title: file.name
+                    });
+                };
             };
-        };
-        input.click();
-    }
-});
+            input.click();
+        }
+    });
 </script>
 
 <!-- Preview Images -->
@@ -83,14 +83,14 @@ tinymce.init({
 
 <!-- lenght meta -->
 <script>
-// meta descrition
-function metades(obj) {
-    document.getElementById('mdes').innerHTML = obj.value.length;
-}
-// meta keyword
-function metakey(obj) {
-    document.getElementById('mkey').innerHTML = obj.value.length;
-}
+    // meta descrition
+    function metades(obj) {
+        document.getElementById('mdes').innerHTML = obj.value.length;
+    }
+    // meta keyword
+    function metakey(obj) {
+        document.getElementById('mkey').innerHTML = obj.value.length;
+    }
 </script>
 
 
@@ -107,18 +107,18 @@ function metakey(obj) {
 
 <!-- simple table -->
 <script type="text/javascript">
-$(document).ready(function() {
-    // Cek dan inisialisasi ulang hanya jika belum
-    if ($.fn.DataTable.isDataTable('#bootstrap-data-table')) {
-        $('#bootstrap-data-table').DataTable().destroy();
-    }
-    $('#bootstrap-data-table').DataTable();
+    $(document).ready(function() {
+        // Cek dan inisialisasi ulang hanya jika belum
+        if ($.fn.DataTable.isDataTable('#bootstrap-data-table')) {
+            $('#bootstrap-data-table').DataTable().destroy();
+        }
+        $('#bootstrap-data-table').DataTable();
 
-    if ($.fn.DataTable.isDataTable('#bootstrap-data-wa')) {
-        $('#bootstrap-data-wa').DataTable().destroy();
-    }
-    $('#bootstrap-data-wa').DataTable();
-});
+        if ($.fn.DataTable.isDataTable('#bootstrap-data-wa')) {
+            $('#bootstrap-data-wa').DataTable().destroy();
+        }
+        $('#bootstrap-data-wa').DataTable();
+    });
 </script>
 
 
