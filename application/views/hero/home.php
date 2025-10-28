@@ -43,31 +43,6 @@
         padding: 36px 22px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
     }
-
-    .btn-wa {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        border-radius: 999px;
-        padding: 12px 18px;
-        font-weight: 700;
-        border: 2px solid var(--bs-primary);
-        color: var(--bs-primary);
-        background: #fff;
-        transition: all .25s ease;
-    }
-
-    .btn-wa:hover {
-        color: #fff;
-        background: var(--bs-primary);
-        border-color: var(--bs-primary);
-        transform: translateY(-1px);
-    }
-
-    /* Small utility */
-    .rounded-16 {
-        border-radius: 16px;
-    }
 </style>
 
 <!-- ===================== Carousel Start ===================== -->
@@ -101,7 +76,7 @@
                                         <h1 class="display-5 text-light fw-bold mb-4"><?= $s['title']; ?></h1>
 
                                         <?php if ($s['tipe'] === 'promo' && !empty($s['image_side'])): ?>
-                                            <div class="mb-4">
+                                            <div class="mb-4 d-none d-lg-block">
                                                 <img src="<?= base_url($s['image_side']); ?>" alt="Promo Image" class="img-fluid rounded shadow">
                                             </div>
                                         <?php endif; ?>
@@ -126,6 +101,7 @@
                                         </div>
                                     <?php endif; ?>
 
+                                    <!-- Konten Desktop -->
                                     <div class="col-lg-6 text-white text-<?= $s['tipe'] === 'left' ? 'end' : 'start'; ?> d-none d-lg-block">
                                         <h3 class="fw-light text-warning mb-2 animate__animated animate__fadeInUp"><?= $s['subtitle']; ?></h3>
                                         <h1 class="display-5 text-light fw-bold mb-4 animate__animated animate__fadeInUp"><?= $s['title']; ?></h1>
@@ -145,8 +121,22 @@
                                             <img src="<?= base_url($s['image_side']); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width:100%;">
                                         </div>
                                     <?php endif; ?>
-                                </div>
 
+                                    <!-- Konten Mobile (Tambahan Baru) -->
+                                    <div class="col-12 text-white text-center d-block d-lg-none mt-3">
+                                        <h4 class="fw-light text-warning mb-2"><?= $s['subtitle']; ?></h4>
+                                        <h2 class="fw-bold text-light mb-3"><?= $s['title']; ?></h2>
+                                        <p class="fs-6 mb-3"><?= $s['description']; ?></p>
+                                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                                            <?php foreach ($s['links'] as $lnk): ?>
+                                                <a href="<?= $lnk['url']; ?>" target="_blank"
+                                                    class="btn <?= $lnk['btn_style']; ?> rounded-pill py-2 px-3">
+                                                    <i class="<?= $lnk['icon_class']; ?> me-1"></i> <?= $lnk['label']; ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -433,32 +423,3 @@
     </div>
 </div>
 <!-- ===================== Team End ===================== -->
-
-<!-- ===================== CTA (sama gaya dengan halaman lain) ===================== -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-                <div class="cta-wrap">
-                    <div class="mb-4">
-                        <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="ic-logo" width="60" class="img-fluid">
-                    </div>
-                    <div class="cta-title">
-                        <h3 class="fs-4 fw-bold">Minat dengan Layanan Kami? <br> Hubungi Kami Sekarang</h3>
-                    </div>
-                    <div class="mb-3">
-                        <p class="cta-txt text-secondary mb-0">Nikmati kenyamanan dan kesegaran AC Mobil Anda</p>
-                    </div>
-                    <div class="mt-3">
-                        <a class="btn-wa w-50 justify-content-center"
-                            href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0"
-                            target="_blank" rel="noreferrer">
-                            <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
-                        </a>
-                    </div>
-                </div><!-- /cta-wrap -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ===================== CTA End ===================== -->

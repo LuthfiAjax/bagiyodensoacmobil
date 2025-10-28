@@ -72,10 +72,12 @@ class Hero extends CI_Controller
         $data = array(
             'title' => 'Cabang Bengkel AC Mobil Bagiyo Denso',
             'page' => 'cabang',
-            'meta_des' => 'cabang Bengkel AC Mobil Bagiyo Denso. Temukan lokasi cabang kami di Grobogan, Purwodadi, dan Kudus. Dapatkan layanan perawatan dan servis AC mobil terbaik dengan teknisi berpengalaman.',
-            'meta_key' => 'Cabang, Bengkel AC Mobil, Bagiyo Denso, Grobogan, Purwodadi, Kudus, Servis AC, Perawatan AC Mobil, Layanan Denso, Jawa Tengah',
+            'meta_des' => 'cabang Bengkel AC Mobil Bagiyo Denso. Temukan lokasi cabang kami di Grobogan, Purwodadi, Kudus, Pati, Blora, Demak, Rembang. Dapatkan layanan perawatan dan servis AC mobil terbaik dengan teknisi berpengalaman.',
+            'meta_key' => 'Cabang, Bengkel AC Mobil, Bagiyo Denso, Grobogan, Purwodadi, Kudus, Pati, Blora, Demak, Rembang, Servis AC, Perawatan AC Mobil, Layanan Denso, Jawa Tengah',
             'image' => base_url('assets/img/imglink.jpg')
         );
+
+        $data['cabang']  = $this->db->get_where('tb_cabang', ['is_active' => 1])->result_array();
 
         $this->load->view('hero/templates/header', $data);
         $this->load->view('hero/cabang');
@@ -84,12 +86,40 @@ class Hero extends CI_Controller
 
     public function cabang_detail($slug)
     {
+        $cabang = $this->db->get_where('tb_cabang', [
+            'slug' => $slug,
+            'is_active' => 1
+        ])->row_array();
+
+        if (!$cabang) {
+            redirect(base_url('cabang'));
+            return;
+        }
+
+        $cabang_id = $cabang['id'];
+
+        $cabang_links = $this->db->order_by('position_order', 'ASC')
+            ->get_where('tb_cabang_link', ['cabang_id' => $cabang_id])
+            ->result_array();
+
+        $cabang_reviews = $this->db->order_by('id', 'DESC')
+            ->get_where('tb_cabang_review', ['cabang_id' => $cabang_id, 'is_active' => 1])
+            ->result_array();
+
+        $cabang_galery = $this->db->order_by('id', 'ASC')
+            ->get_where('tb_cabang_galery', ['cabang_id' => $cabang_id, 'is_active' => 1])
+            ->result_array();
+
         $data = array(
-            'title' => 'Grobogan Bengkel AC Mobil Bagiyo Denso',
+            'title' => 'Bengkel AC Mobil ' . $cabang['name'] . ' - Bagiyo Denso ' . $cabang['name'],
             'page' => 'cabang',
-            'meta_des' => 'cabang Bengkel AC Mobil Bagiyo Denso. Temukan lokasi cabang kami di Grobogan, Purwodadi, dan Kudus. Dapatkan layanan perawatan dan servis AC mobil terbaik dengan teknisi berpengalaman.',
-            'meta_key' => 'Cabang, Bengkel AC Mobil, Bagiyo Denso, Grobogan, Purwodadi, Kudus, Servis AC, Perawatan AC Mobil, Layanan Denso, Jawa Tengah',
-            'image' => base_url('assets/img/imglink.jpg')
+            'meta_des' => 'Bengkel AC mobil terpercaya di ' . $cabang['name'] . '. Menyediakan layanan servis, perawatan, dan penggantian komponen AC mobil dengan standar profesional dari jaringan Bagiyo Denso.',
+            'meta_key' => 'Bengkel AC Mobil ' . $cabang['name'] . ', Servis AC Mobil ' . $cabang['name'] . ', Perawatan AC Mobil, Spesialis AC Mobil, Bengkel Denso, Teknisi Denso, Servis Freon Mobil, Isi Freon Mobil, Ganti Filter Kabin, Perawatan Evaporator, Bengkel Mobil ' . $cabang['name'],
+            'image' => !empty($cabang['image_background']) ? base_url($cabang['image_background']) : base_url('assets/img/imglink.jpg'),
+            'cabang' => $cabang,
+            'cabang_links' => $cabang_links,
+            'cabang_reviews' => $cabang_reviews,
+            'cabang_galery' => $cabang_galery
         );
 
         $this->load->view('hero/templates/header', $data);
@@ -152,6 +182,7 @@ class Hero extends CI_Controller
     public function sitemap()
     {
         $data['articles'] = $this->db->get_where('tb_articles', ['status' => 1])->result_array();
+        $data['cabang'] = $this->db->get_where('tb_cabang', ['is_active' => 1])->result_array();
 
         $this->load->view('hero/sitemap', $data);
     }

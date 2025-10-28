@@ -127,42 +127,6 @@
         color: #6c757d;
         display: block;
     }
-
-    /* CTA (boleh di edit) */
-    .cta-wrap {
-        background:
-            radial-gradient(110% 120% at 0% 0%, rgba(13, 110, 253, .10) 0%, rgba(13, 110, 253, .04) 50%, transparent 100%),
-            #fff;
-        border: 1px solid #e9eef5;
-        border-radius: 18px;
-        padding: 36px 22px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
-    }
-
-    .btn-wa {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        border-radius: 999px;
-        padding: 12px 18px;
-        font-weight: 700;
-        border: 2px solid var(--bs-primary);
-        color: var(--bs-primary);
-        background: #fff;
-        transition: all .25s ease;
-    }
-
-    .btn-wa:hover {
-        color: #fff;
-        background: var(--bs-primary);
-        border-color: var(--bs-primary);
-        transform: translateY(-1px);
-    }
-
-    /* Utility kecil */
-    .rounded-16 {
-        border-radius: 16px;
-    }
 </style>
 
 <!-- ===================== HERO (struktur tidak diubah) ===================== -->
@@ -177,8 +141,8 @@
 </div>
 <!-- Page Header End -->
 
-<!-- ===================== LAYANAN: Fresh Service (boleh di edit) ===================== -->
-<div class="container-xxl service-section"> <!-- // boleh di edit -->
+<!-- ===================== LAYANAN: Fresh Service ===================== -->
+<div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
@@ -222,8 +186,8 @@
     </div>
 </div>
 
-<!-- ===================== LAYANAN: Light Service (boleh di edit) ===================== -->
-<div class="container-xxl service-section"> <!-- // boleh di edit -->
+<!-- ===================== LAYANAN: Light Service ===================== -->
+<div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
@@ -267,8 +231,8 @@
     </div>
 </div>
 
-<!-- ===================== LAYANAN: Heavy Service (boleh di edit) ===================== -->
-<div class="container-xxl service-section"> <!-- // boleh di edit -->
+<!-- ===================== LAYANAN: Heavy Service ===================== -->
+<div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
@@ -312,8 +276,8 @@
     </div>
 </div>
 
-<!-- ===================== LAYANAN: Improvement Service (boleh di edit) ===================== -->
-<div class="container-xxl service-section"> <!-- // boleh di edit -->
+<!-- ===================== LAYANAN: Improvement Service ===================== -->
+<div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
@@ -351,8 +315,8 @@
 </div>
 <!-- Layanan End -->
 
-<!-- ===================== (JANGAN DI EDIT) Saran Periode Service Berkala ===================== -->
-<div class="container-xxl py-5"> <!-- // jangan di edit  -->
+<!-- ===================== Saran Periode Service Berkala ===================== -->
+<div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-12">
@@ -403,7 +367,7 @@
     </div>
 </div>
 
-<!-- ===================== (JANGAN DI EDIT) Estimasi Jarak Tempuh ===================== -->
+<!-- ===================== Estimasi Jarak Tempuh ===================== -->
 <!-- Saran -->
 <div class="container-xxl py-5"> <!-- // jangan di edit -->
     <div class="container">
@@ -433,32 +397,3 @@
     </div>
 </div>
 <!-- Saran End -->
-
-<!-- ===================== CTA (boleh di edit) ===================== -->
-<div class="container-xxl service-section"> <!-- // boleh di edit -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-                <div class="cta-wrap">
-                    <div class="mb-4">
-                        <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="ic-logo" width="60" class="img-fluid">
-                    </div>
-                    <div class="cta-title">
-                        <h3 class="fs-4 fw-bold">Minat dengan Layanan Kami? <br> Hubungi Kami Sekarang</h3>
-                    </div>
-                    <div class="mb-3">
-                        <p class="cta-txt text-secondary mb-0">Nikmati kenyamanan dan kesegaran AC Mobil Anda</p>
-                    </div>
-                    <div class="mt-3">
-                        <a class="btn-wa w-50 justify-content-center"
-                            href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0"
-                            target="_blank" rel="noreferrer">
-                            <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
-                        </a>
-                    </div>
-                </div><!-- /cta-wrap -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- CTA End -->

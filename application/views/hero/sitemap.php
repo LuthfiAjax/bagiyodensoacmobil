@@ -35,14 +35,29 @@ $datetime1 = new DateTime(date('Y-m-d H:i:s'));
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
+    <url>
+        <loc><?= base_url('cabang') ?></loc>
+        <lastmod><?= $datetime1->format(DATE_ATOM); ?></lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <?php foreach ($cabang as $cb) : ?>
+        <url>
+            <loc><?= base_url('cabang/' . $cb['slug']) ?></loc>
+            <lastmod><?= $datetime1->format(DATE_ATOM); ?></lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    <?php endforeach; ?>
 
     <?php foreach ($articles as $row) : ?>
-    <url>
-        <loc><?= base_url('artikel/'. $row['slug_article_id']) ?></loc>
-        <lastmod><?= (new DateTime(date('Y-m-d H:i:s', $row['publish'])))->format(DATE_ATOM);; ?></lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
+        <url>
+            <loc><?= base_url('artikel/' . $row['slug_article_id']) ?></loc>
+            <lastmod><?= (new DateTime(date('Y-m-d H:i:s', $row['publish'])))->format(DATE_ATOM);; ?></lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
     <?php endforeach; ?>
 
 </urlset>

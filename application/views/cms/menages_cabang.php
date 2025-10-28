@@ -11,7 +11,7 @@
                         </div>
 
                         <div class="card-body">
-                            <a class="btn btn-sm btn-primary mb-3" href="#">
+                            <a class="btn btn-sm btn-primary mb-3" href="<?= base_url('cms/create-cabang'); ?>">
                                 <i class="fa fa-plus-circle"></i> Add Cabang
                             </a>
 
@@ -27,86 +27,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Purwodadi</td>
-                                        <td>Jl. Hayam Wuruk No. 71, Purwodadi</td>
-                                        <td>0813-2554-5071</td>
-                                        <td>
-                                            <span class="btn btn-sm btn-success">Aktif</span>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown float-right">
-                                                <a class="btn btn-sm btn-primary text-light dropdown-toggle"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Action
-                                                </a>
-                                                <div class="user-menu dropdown-menu">
-                                                    <a class="nav-link" href="#">
-                                                        <i class="fa fa-pencil-square-o text-primary"></i> Edit
+                                    <?php $count = 1;
+                                    foreach ($cabang as $row) : ?>
+                                        <tr>
+                                            <td><?= $count++; ?></td>
+                                            <td><?= $row['name']; ?></td>
+                                            <td><?= $row['alamat']; ?></td>
+                                            <td><?= $row['phone']; ?></td>
+                                            <td>
+                                                <?php if ($row['is_active'] == 1): ?>
+                                                    <span class="text-light badge bg-success">Active</span>
+                                                <?php else: ?>
+                                                    <span class="text-light badge bg-warning text-dark">Inactive</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown float-right">
+                                                    <a class="btn btn-sm btn-primary text-light dropdown-toggle"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
                                                     </a>
-                                                    <a class="nav-link" href="#"
-                                                        onclick="return confirm('Konfirmasi. Cabang yang dihapus akan hilang selamanya, Anda yakin ?')">
-                                                        <i class="fa fa-minus-circle text-danger"></i> Delete
-                                                    </a>
+                                                    <div class="user-menu dropdown-menu">
+                                                        <a class="nav-link" href="<?= base_url('cms/update-cabang/' . $row['id']); ?>">
+                                                            <i class="fa fa-pencil-square-o text-primary"></i> Edit
+                                                        </a>
+                                                        <a href="javascript:void(0)" class="nav-link" onclick="deleteSlider(<?= $row['id']; ?>)">
+                                                            <i class="fa fa-minus-circle text-danger"></i> Delete
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Kudus</td>
-                                        <td>Jl. Sunan Kudus No. 12, Kudus</td>
-                                        <td>0857-1111-5678</td>
-                                        <td>
-                                            <span class="btn btn-sm btn-warning">Maintenance</span>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown float-right">
-                                                <a class="btn btn-sm btn-primary text-light dropdown-toggle"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Action
-                                                </a>
-                                                <div class="user-menu dropdown-menu">
-                                                    <a class="nav-link" href="#">
-                                                        <i class="fa fa-pencil-square-o text-primary"></i> Edit
-                                                    </a>
-                                                    <a class="nav-link" href="#"
-                                                        onclick="return confirm('Konfirmasi. Cabang yang dihapus akan hilang selamanya, Anda yakin ?')">
-                                                        <i class="fa fa-minus-circle text-danger"></i> Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Pati</td>
-                                        <td>Jl. Jendral Sudirman No. 88, Pati</td>
-                                        <td>0812-3456-7890</td>
-                                        <td>
-                                            <span class="btn btn-sm btn-secondary">Nonaktif</span>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown float-right">
-                                                <a class="btn btn-sm btn-primary text-light dropdown-toggle"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Action
-                                                </a>
-                                                <div class="user-menu dropdown-menu">
-                                                    <a class="nav-link" href="#">
-                                                        <i class="fa fa-pencil-square-o text-primary"></i> Edit
-                                                    </a>
-                                                    <a class="nav-link" href="#"
-                                                        onclick="return confirm('Konfirmasi. Cabang yang dihapus akan hilang selamanya, Anda yakin ?')">
-                                                        <i class="fa fa-minus-circle text-danger"></i> Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
 
@@ -117,3 +69,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteSlider(id) {
+        const confirmDelete = confirm('Konfirmasi. Cabang yang dihapus akan hilang selamanya, Anda yakin ?');
+        if (!confirmDelete) return;
+
+        fetch(`<?= base_url('cms/api/delete/cabang/'); ?>${id}`, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Kalau respon 200, berarti sukses
+                    alert('Berhasil dihapus!');
+                    location.reload();
+                } else {
+                    // Kalau bukan 200, tampilkan pesan gagal
+                    alert('Gagal menghapus data. Status: ' + response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat menghapus data.');
+            });
+    }
+</script>

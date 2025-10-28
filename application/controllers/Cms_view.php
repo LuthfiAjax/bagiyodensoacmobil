@@ -136,15 +136,47 @@ class Cms_view extends CI_Controller
 
         $data['title'] = 'manages cabang';
         $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+        $data['cabang'] = $this->db->get('tb_cabang')->result_array();
 
         $this->load->view('cms/templates/header', $data);
         $this->load->view('cms/menages_cabang');
         $this->load->view('cms/templates/footer');
     }
 
-    public function create_cabang() {}
+    public function create_cabang()
+    {
+        $id  = $this->session->userdata('id_user');
 
-    public function update_cabang($id) {}
+        $data['title'] = 'manages cabang';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/menages_cabang_create');
+        $this->load->view('cms/templates/footer');
+    }
+
+    public function update_cabang($id)
+    {
+        $userid  = $this->session->userdata('id_user');
+
+        $data['title'] = 'manages cabang';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $userid])->row_array();
+
+        $data['cabang'] = $this->db->get_where('tb_cabang', ['id' => $id])->row_array();
+        $data['links']  = $this->db->order_by('position_order', 'ASC')
+            ->get_where('tb_cabang_link', ['cabang_id' => $id])
+            ->result_array();
+        $data['review']  = $this->db->order_by('id', 'ASC')
+            ->get_where('tb_cabang_review', ['cabang_id' => $id])
+            ->result_array();
+        $data['galery']  = $this->db->order_by('position_order', 'ASC')
+            ->get_where('tb_cabang_galery', ['cabang_id' => $id])
+            ->result_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/menages_cabang_update');
+        $this->load->view('cms/templates/footer');
+    }
 
     public function whatsapp()
     {

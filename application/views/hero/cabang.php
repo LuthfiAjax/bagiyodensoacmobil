@@ -1,107 +1,214 @@
-<!-- Carousel Start -->
-<div class="container-fluid p-0 mb-5">
-    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel" style="max-height: 600px; overflow: hidden;">
-        <!-- Hanya 1 indikator -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+<!-- ===== Styles (komponen saja; tanpa font & tanpa :root) ===== -->
+<style>
+    /* HERO */
+    .page-header {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+    }
+
+    .page-header::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .35));
+    }
+
+    .page-header-inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    .page-header h1 {
+        text-shadow: 0 6px 28px rgba(0, 0, 0, .35);
+    }
+
+    /* SECTION LAYANAN (boleh di edit) */
+    .service-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .service-media {
+        position: relative;
+        height: 100%;
+        min-height: 380px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    }
+
+    .service-media img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .service-media .media-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(120% 100% at 70% 0%, rgba(13, 110, 253, .18) 0%, rgba(0, 0, 0, .08) 60%, rgba(0, 0, 0, .28) 100%);
+        pointer-events: none;
+    }
+
+    .service-card {
+        background: #fff;
+        border: 1px solid #e9eef5;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+        transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+    }
+
+    .service-card:hover {
+        box-shadow: 0 18px 45px rgba(0, 0, 0, .14);
+        transform: translateY(-2px);
+        border-color: rgba(13, 110, 253, .25);
+    }
+
+    .service-body {
+        padding: 26px;
+    }
+
+    .service-eyebrow {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(13, 110, 253, .12);
+        color: var(--bs-primary);
+        font-weight: 700;
+        font-size: .85rem;
+        letter-spacing: .2px;
+    }
+
+    .service-title {
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 12px 0 10px;
+    }
+
+    .feature-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 14px 0;
+        border-bottom: 1px dashed #e9eef5;
+    }
+
+    .feature-item:last-child {
+        border-bottom: 0;
+    }
+
+    .num-badge {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        background: #f2f6ff;
+        color: #2c6fff;
+        font-weight: 800;
+        border: 1px solid rgba(13, 110, 253, .25);
+    }
+
+    .feature-item h6 {
+        margin: 0 0 4px;
+        font-weight: 700;
+        color: #212529;
+    }
+
+    .feature-item span {
+        color: #6c757d;
+        display: block;
+    }
+</style>
+
+<!-- ===================== HERO (struktur tidak diubah) ===================== -->
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(<?= base_url('assets/img/new/4.jpg'); ?>);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center">
+            <h1 class="display-3 fs-1 text-white mb-3 animated slideInDown">Cabang BAGIYO DENSO</h1>
+            <span class="text-white">Hadir lebih dekat untuk memberikan layanan terbaik perawatan dan servis AC mobil Anda</span>
         </div>
+    </div>
+</div>
+<!-- Page Header End -->
 
-        <div class="carousel-inner">
-            <!-- Slide 1 Saja -->
-            <div class="carousel-item active">
-                <img class="w-100" src="<?= base_url('assets/img/slide/1.jpg'); ?>" alt="Image" style="height: 600px; object-fit: cover; filter: brightness(0.8);">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between">
+<!-- ===================== LOOP CABANG ===================== -->
+<?php foreach ($cabang as $cbg): ?>
+    <?php $isLeft = ($cbg['tipe'] === 'left'); ?>
+    <div class="container-xxl service-section">
+        <div class="container">
+            <div class="row g-5 align-items-center <?= $isLeft ? 'flex-lg-row-reverse' : ''; ?>">
+                <!-- Gambar -->
+                <div class="col-lg-6">
+                    <div class="position-relative service-media">
+                        <img src="<?= base_url($cbg['image_background']); ?>" alt="Foto Cabang <?= $cbg['name']; ?>">
+                        <span class="media-overlay"></span>
+                    </div>
+                </div>
 
-                            <!-- Teks Kiri -->
-                            <div class="col-lg-6 text-white text-start">
-                                <h3 class="fs-4 fw-light text-warning mb-2 animate__animated animate__fadeInUp">CABANG BAGIYO DENSO AC MOBIL</h3>
-                                <h1 class="display-5 text-light fw-bold mb-4 animate__animated animate__fadeInUp">KAMI HADIR DI GROBOGAN & KUDUS</h1>
-                                <p class="fs-5 mb-4 animate__animated animate__fadeInUp">Kunjungi cabang kami di Grobogan dan Kudus untuk layanan servis dan perawatan AC mobil terpercaya. Teknisi berpengalaman dan harga bersahabat.</p>
-                                <div class="animate__animated animate__fadeInUp">
-                                    <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Saya%20ingin%20mengetahui%20lebih%20lanjut%20tentang%20cabang%20Bagiyo%20Denso.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary rounded-pill me-2 mb-0 py-md-3 px-md-4 py-2 px-2 fs-md-6 fs-6">
-                                        <i class="fas fa-calendar-check me-1"></i> Booking Sekarang
-                                    </a>
-                                    <a href="https://maps.app.goo.gl/K8wGoELM1fTzSvdJ8" target="_blank" class="btn btn-outline-light rounded-pill py-md-3 px-md-4 py-2 px-2 fs-md-6 fs-6">
-                                        <i class="fas fa-map-marker-alt me-1"></i> Cek Rute Purwodadi
-                                    </a>
-                                </div>
-                            </div>
+                <!-- Konten -->
+                <div class="col-lg-6">
+                    <div class="service-card">
+                        <div class="service-body">
+                            <span class="service-eyebrow text-uppercase">Cabang <?= $cbg['name']; ?></span>
+                            <h2 class="service-title fs-2 mb-2"><?= $cbg['slide_title']; ?></h2>
+                            <p class="mb-3 text-secondary"><?= $cbg['slide_deskripsi']; ?></p>
 
-                            <!-- Gambar Kanan -->
-                            <div class="col-lg-5 d-none d-lg-block text-end animate__animated animate__fadeInRight">
-                                <img src="<?= base_url('assets/img/new/model-1.svg'); ?>" class="img-fluid rounded-lg shadow" alt="Image" style="width: 100%;">
-                            </div>
+                            <!-- Kontak -->
+                            <ul class="list-unstyled mb-4">
+                                <?php if (!empty($cbg['email'])): ?>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fa fa-envelope text-primary me-2 mt-1"></i>
+                                        <span><?= $cbg['email']; ?></span>
+                                    </li>
+                                <?php endif; ?>
 
+                                <?php if (!empty($cbg['phone'])): ?>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fa fa-phone text-primary me-2 mt-1"></i>
+                                        <span><?= $cbg['phone']; ?></span>
+                                    </li>
+                                <?php endif; ?>
+
+                                <?php if (!empty($cbg['alamat'])): ?>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fa fa-map-marker-alt text-primary me-2 mt-1"></i>
+                                        <span><?= $cbg['alamat']; ?></span>
+                                    </li>
+                                <?php endif; ?>
+
+                                <?php if (!empty($cbg['open_hours'])): ?>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fa fa-clock text-primary me-2 mt-1"></i>
+                                        <span><?= $cbg['open_hours']; ?></span>
+                                    </li>
+                                <?php endif; ?>
+
+                                <?php if (!empty($cbg['open_hours2'])): ?>
+                                    <li class="d-flex align-items-start mb-2">
+                                        <i class="fa fa-clock text-primary me-2 mt-1"></i>
+                                        <span><?= $cbg['open_hours2']; ?></span>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+
+                            <!-- Tombol -->
+                            <a href="<?= base_url('cabang/' . $cbg['slug']); ?>" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold">
+                                <i class="fa fa-arrow-right me-2"></i> Cek Cabang <?= $cbg['name']; ?>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Carousel End -->
-
-
-<!-- Contact (Cabang) Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-12">
-                <div class="row gy-4">
-                    <div class="col-md-4">
-                        <div class="bg-light d-flex flex-column justify-content-center p-4">
-                            <h5 class="text-uppercase">// Email //</h5>
-                            <p class="m-0"><i class="fas fa-envelope-open text-primary me-2"></i>official@bagiyodensoacmobil.com</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="bg-light d-flex flex-column justify-content-center p-4">
-                            <h5 class="text-uppercase">// Telepone //</h5>
-                            <p class="m-0"><i class="fas fa-phone-alt text-primary me-2"></i>+62 81325545071</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="bg-light d-flex flex-column justify-content-center p-4">
-                            <h5 class="text-uppercase">// Sosial Media //</h5>
-                            <p class="m-0"><i class="fab fa-instagram text-primary me-2"></i>@bagiyo.ac</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lokasi Cabang Grobogan -->
-            <div class="container-xxl py-5">
-                <div class="container">
-                    <div class="row justify-content-center text-center mb-4">
-                        <div class="col-lg-8">
-                            <h3 class="fw-bold text-uppercase mb-3">Lokasi Kami di Cabang Grobogan</h3>
-                            <p class="text-muted">Kunjungi bengkel kami untuk layanan perawatan dan servis AC mobil terbaik di wilayah Purwodadi, Grobogan, Jawa Tengah.</p>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
-                            <div class="map-container position-relative" style="width: 100%; height: 500px; border-radius: 10px; overflow: hidden;">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3797.963280064623!2d110.91531911850234!3d-7.097380583136126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70b013aafd861d%3A0xaffab44599a8f835!2sBengkel%20Bagiyo%20Denso%20AC%20Mobil!5e0!3m2!1sid!2sid!4v1688242510172!5m2!1sid!2sid"
-                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
-
-                            <!-- Tombol Aksi -->
-                            <div class="text-center mt-4">
-                                <a href="https://maps.app.goo.gl/K8wGoELM1fTzSvdJ8" target="_blank" class="btn btn-primary rounded-pill py-3 px-5">
-                                    <i class="fas fa-map-marker-alt me-2"></i> Kunjungi Lokasi
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Contact (Cabang) End -->
+<?php endforeach; ?>

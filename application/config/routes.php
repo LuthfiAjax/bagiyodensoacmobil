@@ -73,5 +73,9 @@ $route['cms/api/post/slider'] = 'Api/save_slider';
 $route['cms/api/delete/slider/(:num)'] = 'Api/delete_slider/$1';
 $route['cms/api/update/slider/(:num)'] = 'Api/update_slider/$1';
 
+$route['cms/api/post/cabang'] = 'Api/save_cabang';
+$route['cms/api/delete/cabang/(:num)'] = 'Api/delete_cabang/$1';
+$route['cms/api/update/cabang/(:num)'] = 'Api/update_cabang/$1';
+
 // sitemap
 $route['sitemap\.xml'] = 'Hero/sitemap';

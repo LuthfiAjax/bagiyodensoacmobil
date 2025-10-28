@@ -72,10 +72,13 @@
         left: 0;
         right: 0;
         top: 58px;
+        z-index: 1070;
         background: #fff;
         border-radius: 12px;
         box-shadow: var(--shadow);
-        overflow: hidden;
+        max-height: 320px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .search-results .result-item a {
@@ -283,45 +286,94 @@
         border-color: #0065FF;
     }
 
-    /* Responsive */
-    @media (max-width: 991px) {
-        .page-header h1 {
-            font-size: 2.5rem !important;
-        }
-
-        .article-card {
-            margin-bottom: 24px;
-        }
-    }
-
+    /* ================= MOBILE FIX ONLY ================= */
     @media (max-width: 767px) {
-        .page-header {
-            min-height: 320px;
+
+        /* Supaya seluruh konten tidak nempel ke tepi */
+        .container,
+        .articles-section .container,
+        .pagination-wrapper {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
         }
 
-        .page-header h1 {
-            font-size: 2rem !important;
+        /* Perkecil jarak antar kolom dan pastikan tidak menabrak */
+        .articles-section .row {
+            margin-left: -8px;
+            margin-right: -8px;
         }
 
-        .rounded-search-input {
-            padding: 12px 45px 12px 20px;
+        .articles-section [class*="col-"] {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        /* Perbaiki jarak antar kartu */
+        .article-card {
+            margin-bottom: 20px;
+            border-radius: 14px;
+        }
+
+        /* Supaya gambar tidak keluar dari layar */
+        .article-image-wrapper {
+            border-radius: 14px 14px 0 0;
+            overflow: hidden;
+        }
+
+        /* Judul dan teks lebih nyaman dibaca di layar kecil */
+        .article-title {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .article-description {
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        /* Tombol read more agar tidak terlalu besar */
+        .btn-read-more {
+            font-size: 13px;
+            padding: 8px 18px;
+            border-radius: 6px;
+        }
+
+        /* Pagination tengah dan tidak nempel ke bawah */
+        .pagination-wrapper {
+            padding-bottom: 40px !important;
+            margin-top: 20px;
+        }
+
+        .pagination {
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .pagination a,
+        .pagination strong {
+            padding: 8px 14px;
+            font-size: 13px;
+        }
+
+        /* Header search agar tidak terpotong */
+        .search-wrap {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 12px;
+        }
+
+        .search-input {
+            height: 44px;
             font-size: 14px;
         }
 
-        .search-icon {
-            right: 16px;
+        .page-header h1.page-title {
+            font-size: 1.8rem !important;
         }
 
-        .articles-section {
-            padding: 40px 0;
-        }
-
-        .article-card .card-body {
-            padding: 20px;
-        }
-
-        .article-title {
-            font-size: 17px;
+        /* Pastikan tidak nempel ke bawah layar */
+        body {
+            padding-bottom: 60px;
         }
     }
 </style>

@@ -653,4 +653,544 @@ class Api extends CI_Controller
                 ]
             ]));
     }
+
+    public function save_cabang()
+    {
+        // === Konfigurasi Upload ===
+        $config['encrypt_name']     = TRUE;
+        $config['allowed_types']    = 'gif|jpg|jpeg|png|heif|hevc|webp|svg';
+        $config['max_size']         = '5120'; // 5MB
+        $config['upload_path']      = './assets/img/cabang/';
+        $config['file_ext_tolower'] = TRUE;
+        $this->load->library('upload', $config);
+
+        // === Input utama ===
+        $name            = $this->input->post('name', TRUE);
+        $slug = $this->generate_slug($name);
+        $alamat = $this->input->post('alamat', TRUE);
+        $iframe_map = $this->input->post('iframe_map', TRUE);
+        $url_map    = $this->input->post('url_map', TRUE);
+        $email      = $this->input->post('email', TRUE);
+        $phone      = $this->input->post('phone', TRUE);
+        $instagram  = $this->input->post('instagram', TRUE);
+        $facebook   = $this->input->post('facebook', TRUE);
+        $tiktok     = $this->input->post('tiktok', TRUE);
+        $youtube    = $this->input->post('youtube', TRUE);
+        $open_hours = $this->input->post('open_hours', TRUE);
+        $open_hours2 = $this->input->post('open_hours2', TRUE);
+        $slide_title     = $this->input->post('slide_title', TRUE);
+        $slide_subtitle  = $this->input->post('slide_subtitle', TRUE);
+        $slide_deskripsi = $this->input->post('slide_deskripsi', TRUE);
+        $tipe            = $this->input->post('tipe', TRUE);
+        $is_active       = $this->input->post('is_active', TRUE);
+
+        if (!$name || !$tipe) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    'status' => false,
+                    'message' => 'Nama cabang dan tipe wajib diisi'
+                ]));
+        }
+
+        // === Upload background ===
+        $bg_filename = null;
+        if (!empty($_FILES['image_background']['name'])) {
+            $config['file_name'] = 'bg-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image_background')) {
+                $uploadData = $this->upload->data();
+                $bg_filename = $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode([
+                        'status' => false,
+                        'message' => 'Upload background gagal: ' . $this->upload->display_errors('', '')
+                    ]));
+            }
+        }
+
+        // === Upload side image (opsional) ===
+        $side_filename = null;
+        if (!empty($_FILES['image_side']['name'])) {
+            $config['file_name'] = 'side-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image_side')) {
+                $uploadData = $this->upload->data();
+                $side_filename = $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode([
+                        'status' => false,
+                        'message' => 'Upload gambar samping gagal: ' . $this->upload->display_errors('', '')
+                    ]));
+            }
+        }
+
+        // === Simpan ke tb_cabang ===
+        $cabang_data = [
+            'name'             => $name,
+            'slug' => $slug,
+            'alamat'            => $alamat,
+            'iframe_map' => $iframe_map,
+            'url_map'    => $url_map,
+            'email'             => $email,
+            'phone'        => $phone,
+            'instagram'    => $instagram,
+            'facebook'     => $facebook,
+            'tiktok'       => $tiktok,
+            'youtube'      => $youtube,
+            'open_hours'   => $open_hours,
+            'open_hours2' => $open_hours2,
+            'slide_title'      => $slide_title,
+            'slide_subtitle'   => $slide_subtitle,
+            'slide_deskripsi'  => $slide_deskripsi,
+            'image_background' => $bg_filename ? 'assets/img/cabang/' . $bg_filename : null,
+            'image_side'       => $side_filename ? 'assets/img/cabang/' . $side_filename : null,
+            'tipe'             => $tipe,
+            'is_active'        => $is_active ?: 1,
+            'created_at'       => date('Y-m-d H:i:s'),
+            'updated_at'       => date('Y-m-d H:i:s')
+        ];
+
+        $this->db->insert('tb_cabang', $cabang_data);
+        $cabang_id = $this->db->insert_id();
+
+        if (!$cabang_id) {
+            return $this->output
+                ->set_status_header(500)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Gagal menyimpan cabang']));
+        }
+
+        // === 1️⃣ Simpan Link Cabang ===
+        $link_label = $this->input->post('link_label');
+        $link_url   = $this->input->post('link_url');
+        $link_icon  = $this->input->post('link_icon');
+        $link_style = $this->input->post('link_style');
+
+        if (!empty($link_label) && is_array($link_label)) {
+            foreach ($link_label as $i => $label) {
+                if (trim($label) === '' || empty($link_url[$i])) continue;
+                $this->db->insert('tb_cabang_link', [
+                    'cabang_id'      => $cabang_id,
+                    'label'          => $label,
+                    'url'            => $link_url[$i],
+                    'icon_class'     => $link_icon[$i] ?? null,
+                    'btn_style'      => $link_style[$i] ?? 'btn-primary',
+                    'position_order' => $i + 1,
+                ]);
+            }
+        }
+
+        // === 2️⃣ Simpan Review Pelanggan ===
+        $review_name  = $this->input->post('review_name');
+        $review_city  = $this->input->post('review_city');
+        $review_text  = $this->input->post('review_text');
+        $review_star  = $this->input->post('review_star');
+
+        if (!empty($review_name) && is_array($review_name)) {
+            foreach ($review_name as $i => $nama) {
+                if (trim($nama) === '' || empty($review_text[$i])) continue;
+                $this->db->insert('tb_cabang_review', [
+                    'cabang_id'     => $cabang_id,
+                    'reviewer_name' => $nama,
+                    'reviewer_city' => $review_city[$i] ?? null,
+                    'rating'        => $review_star[$i] ?? 5,
+                    'review_text'   => $review_text[$i],
+                    'is_active'     => 1,
+                    'created_at'    => date('Y-m-d H:i:s')
+                ]);
+            }
+        }
+
+        // === 3️⃣ Simpan Galeri (multi upload) ===
+        if (!empty($_FILES['gallery_image']['name'][0])) {
+            $gallery_files = $_FILES['gallery_image'];
+            $count = count($gallery_files['name']);
+
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['single_gallery']['name']     = $gallery_files['name'][$i];
+                $_FILES['single_gallery']['type']     = $gallery_files['type'][$i];
+                $_FILES['single_gallery']['tmp_name'] = $gallery_files['tmp_name'][$i];
+                $_FILES['single_gallery']['error']    = $gallery_files['error'][$i];
+                $_FILES['single_gallery']['size']     = $gallery_files['size'][$i];
+
+                $config['file_name'] = 'gallery-' . time() . '-' . $i;
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('single_gallery')) {
+                    $uploadData = $this->upload->data();
+                    $this->db->insert('tb_cabang_galery', [
+                        'cabang_id'      => $cabang_id,
+                        'image_path'     => 'assets/img/cabang/' . $uploadData['file_name'],
+                        'caption'        => $this->input->post('gallery_caption')[$i] ?? null,
+                        'position_order' => $i + 1,
+                        'is_active'      => 1,
+                        'created_at'     => date('Y-m-d H:i:s')
+                    ]);
+                }
+            }
+        }
+
+        // === Response Sukses ===
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'  => true,
+                'message' => 'Cabang dan data terkait berhasil disimpan',
+                'data'    => [
+                    'cabang_id'        => $cabang_id,
+                    'image_background' => $bg_filename,
+                    'image_side'       => $side_filename
+                ]
+            ]));
+    }
+
+    private function generate_slug($text)
+    {
+        $slug = strtolower(trim($text));                    // ubah ke huruf kecil
+        $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);  // hapus karakter selain huruf, angka, spasi, strip
+        $slug = preg_replace('/\s+/', '-', $slug);          // ubah spasi jadi strip
+        $slug = preg_replace('/-+/', '-', $slug);           // hindari double strip
+        return trim($slug, '-');                            // hapus strip di depan/belakang
+    }
+
+    public function delete_cabang($id)
+    {
+        if (!$id) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'ID cabang tidak ditemukan']));
+        }
+
+        // Ambil data cabang
+        $cabang = $this->db->get_where('tb_cabang', ['id' => $id])->row();
+        if (!$cabang) {
+            return $this->output
+                ->set_status_header(404)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Data cabang tidak ditemukan']));
+        }
+
+        // Hapus file gambar background & side
+        if (!empty($cabang->image_background) && file_exists(FCPATH . $cabang->image_background)) {
+            unlink(FCPATH . $cabang->image_background);
+        }
+        if (!empty($cabang->image_side) && file_exists(FCPATH . $cabang->image_side)) {
+            unlink(FCPATH . $cabang->image_side);
+        }
+
+        // Ambil galeri untuk hapus file-nya
+        $galeri = $this->db->get_where('tb_cabang_galery', ['cabang_id' => $id])->result();
+        foreach ($galeri as $g) {
+            if (!empty($g->image_path) && file_exists(FCPATH . $g->image_path)) {
+                unlink(FCPATH . $g->image_path);
+            }
+        }
+
+        // Hapus relasi tabel
+        $this->db->delete('tb_cabang_link', ['cabang_id' => $id]);
+        $this->db->delete('tb_cabang_review', ['cabang_id' => $id]);
+        $this->db->delete('tb_cabang_galery', ['cabang_id' => $id]);
+        $this->db->delete('tb_cabang', ['id' => $id]);
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['status' => true, 'message' => 'Cabang dan seluruh data terkait berhasil dihapus']));
+    }
+
+    public function update_cabang($id)
+    {
+        if (!$id) {
+            return $this->output->set_status_header(400)->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'ID cabang tidak ditemukan']));
+        }
+
+        $cabang = $this->db->get_where('tb_cabang', ['id' => $id])->row();
+        if (!$cabang) {
+            return $this->output->set_status_header(404)->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Data cabang tidak ditemukan']));
+        }
+
+        // ==== Konfigurasi upload ====
+        $upload_dir = FCPATH . 'assets/img/cabang/';
+        if (!is_dir($upload_dir)) {
+            @mkdir($upload_dir, 0775, true);
+        }
+
+        $config = [
+            'encrypt_name'     => true,
+            'allowed_types'    => 'gif|jpg|jpeg|png|heif|hevc|webp|svg',
+            'max_size'         => 5120,
+            'upload_path'      => $upload_dir,
+            'file_ext_tolower' => true,
+        ];
+        $this->load->library('upload', $config);
+
+        // ==== Input utama ====
+        $name            = $this->input->post('name', true);
+        $slug            = $this->generate_slug($name);
+        $alamat          = $this->input->post('alamat', true);
+        $iframe_map      = $this->input->post('iframe_map', true);
+        $url_map         = $this->input->post('url_map', true);
+        $email           = $this->input->post('email', true);
+        $phone           = $this->input->post('phone', true);
+        $instagram       = $this->input->post('instagram', true);
+        $facebook        = $this->input->post('facebook', true);
+        $tiktok          = $this->input->post('tiktok', true);
+        $youtube         = $this->input->post('youtube', true);
+        $open_hours      = $this->input->post('open_hours', true);
+        $open_hours2     = $this->input->post('open_hours2', true);
+        $slide_title     = $this->input->post('slide_title', true);
+        $slide_subtitle  = $this->input->post('slide_subtitle', true);
+        $slide_deskripsi = $this->input->post('slide_deskripsi', true);
+        $tipe            = $this->input->post('tipe', true);
+        $is_active       = (string)$this->input->post('is_active', true);
+
+        if (!$name || !$tipe) {
+            return $this->output->set_status_header(400)->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Nama cabang dan tipe wajib diisi']));
+        }
+
+        // ==== Background ====
+        $bg_filename = $cabang->image_background;
+        if (!empty($_FILES['image_background']['name'])) {
+            $this->upload->initialize($config);
+            $config['file_name'] = 'bg-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image_background')) {
+                if (!empty($cabang->image_background) && file_exists(FCPATH . $cabang->image_background)) {
+                    @unlink(FCPATH . $cabang->image_background);
+                }
+                $up = $this->upload->data();
+                $bg_filename = 'assets/img/cabang/' . $up['file_name'];
+            } else {
+                return $this->output->set_status_header(400)->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload background gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // ==== Side ====
+        $side_filename = $cabang->image_side;
+        if (!empty($_FILES['image_side']['name'])) {
+            $config['file_name'] = 'side-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image_side')) {
+                if (!empty($cabang->image_side) && file_exists(FCPATH . $cabang->image_side)) {
+                    @unlink(FCPATH . $cabang->image_side);
+                }
+                $up = $this->upload->data();
+                $side_filename = 'assets/img/cabang/' . $up['file_name'];
+            } else {
+                return $this->output->set_status_header(400)->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload gambar samping gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // ==== Update tb_cabang ====
+        $this->db->update('tb_cabang', [
+            'name'             => $name,
+            'slug'             => $slug,
+            'alamat'           => $alamat,
+            'email'            => $email,
+            'iframe_map'       => $iframe_map,
+            'url_map'          => $url_map,
+            'phone'            => $phone,
+            'instagram'        => $instagram,
+            'facebook'         => $facebook,
+            'tiktok'           => $tiktok,
+            'youtube'          => $youtube,
+            'open_hours'       => $open_hours,
+            'open_hours2'      => $open_hours2,
+            'slide_title'      => $slide_title,
+            'slide_subtitle'   => $slide_subtitle,
+            'slide_deskripsi'  => $slide_deskripsi,
+            'image_background' => $bg_filename,
+            'image_side'       => $side_filename,
+            'tipe'             => $tipe,
+            'is_active'        => ($is_active === '0' ? 0 : 1),
+            'updated_at'       => date('Y-m-d H:i:s')
+        ], ['id' => $id]);
+
+        // =========================
+        // ====== LINKS (reset sesuai form)
+        // =========================
+        $link_label = $this->input->post('link_label');
+        $link_url   = $this->input->post('link_url');
+        $link_icon  = $this->input->post('link_icon');
+        $link_style = $this->input->post('link_style');
+
+        // Hapus dulu biar posisi/urutan ikut form
+        $this->db->delete('tb_cabang_link', ['cabang_id' => $id]);
+
+        if (is_array($link_label) && is_array($link_url)) {
+            foreach ($link_label as $i => $label) {
+                $label = trim((string)$label);
+                $url   = isset($link_url[$i]) ? trim((string)$link_url[$i]) : '';
+                if ($label === '' || $url === '') continue;
+
+                $this->db->insert('tb_cabang_link', [
+                    'cabang_id'      => $id,
+                    'label'          => $label,
+                    'url'            => $url,
+                    'icon_class'     => $link_icon[$i]  ?? null,
+                    'btn_style'      => $link_style[$i] ?? 'btn-primary',
+                    'position_order' => $i + 1,
+                ]);
+            }
+        }
+
+        // =========================
+        // ====== REVIEW (reset sesuai form)
+        // =========================
+        $review_name = $this->input->post('review_name');
+        $review_city = $this->input->post('review_city');
+        $review_star = $this->input->post('review_star');
+        $review_text = $this->input->post('review_text');
+
+        $this->db->delete('tb_cabang_review', ['cabang_id' => $id]);
+
+        if (is_array($review_name) && is_array($review_text)) {
+            foreach ($review_name as $i => $nama) {
+                $nama = trim((string)$nama);
+                $text = isset($review_text[$i]) ? trim((string)$review_text[$i]) : '';
+                if ($nama === '' || $text === '') continue;
+
+                $this->db->insert('tb_cabang_review', [
+                    'cabang_id'     => $id,
+                    'reviewer_name' => $nama,
+                    'reviewer_city' => $review_city[$i] ?? null,
+                    'rating'        => isset($review_star[$i]) && $review_star[$i] !== '' ? (float)$review_star[$i] : 5,
+                    'review_text'   => $text,
+                    'is_active'     => 1,
+                    'created_at'    => date('Y-m-d H:i:s')
+                ]);
+            }
+        }
+
+        // =========================
+        // ====== GALERI (diff-aware)
+        // =========================
+
+        // 1) Hapus yang diminta
+        $to_delete = $this->input->post('gallery_delete_existing');
+        if (is_array($to_delete) && count($to_delete) > 0) {
+            foreach ($to_delete as $del_id) {
+                $del_id = (int)$del_id;
+                $row = $this->db->get_where('tb_cabang_galery', ['id' => $del_id, 'cabang_id' => $id])->row_array();
+                if ($row) {
+                    if (!empty($row['image_path']) && file_exists(FCPATH . $row['image_path'])) {
+                        @unlink(FCPATH . $row['image_path']);
+                    }
+                    $this->db->delete('tb_cabang_galery', ['id' => $del_id]);
+                }
+            }
+        }
+
+        // 2) Update caption (existing yg tidak dihapus)
+        $caption_existing = $this->input->post('caption_existing'); // [id] => text
+        if (is_array($caption_existing) && count($caption_existing) > 0) {
+            foreach ($caption_existing as $gid => $cap) {
+                $gid = (int)$gid;
+                // skip yang sudah ditandai delete
+                if (is_array($to_delete) && in_array($gid, array_map('intval', $to_delete), true)) continue;
+                $this->db->update('tb_cabang_galery', [
+                    'caption' => $cap
+                ], ['id' => $gid, 'cabang_id' => $id]);
+            }
+        }
+
+        // 3) Replace file untuk existing (key by id)
+        if (!empty($_FILES['gallery_replace']['name']) && is_array($_FILES['gallery_replace']['name'])) {
+            foreach ($_FILES['gallery_replace']['name'] as $gid => $namefile) {
+                $gid = (int)$gid;
+                if (empty($namefile)) continue; // tidak pilih file baru
+                // skip jika dihapus
+                if (is_array($to_delete) && in_array($gid, array_map('intval', $to_delete), true)) continue;
+
+                // siapkan $_FILES single
+                $_FILES['__gal_tmp__'] = [
+                    'name'     => $_FILES['gallery_replace']['name'][$gid],
+                    'type'     => $_FILES['gallery_replace']['type'][$gid],
+                    'tmp_name' => $_FILES['gallery_replace']['tmp_name'][$gid],
+                    'error'    => $_FILES['gallery_replace']['error'][$gid],
+                    'size'     => $_FILES['gallery_replace']['size'][$gid],
+                ];
+
+                $config['file_name'] = 'gallery-repl-' . $gid . '-' . time();
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('__gal_tmp__')) {
+                    $up = $this->upload->data();
+                    $new_path = 'assets/img/cabang/' . $up['file_name'];
+
+                    // hapus file lama
+                    $old = $this->db->get_where('tb_cabang_galery', ['id' => $gid, 'cabang_id' => $id])->row_array();
+                    if ($old && !empty($old['image_path']) && file_exists(FCPATH . $old['image_path'])) {
+                        @unlink(FCPATH . $old['image_path']);
+                    }
+
+                    $this->db->update('tb_cabang_galery', [
+                        'image_path' => $new_path,
+                        'caption'    => $caption_existing[$gid] ?? $old['caption'] ?? null
+                    ], ['id' => $gid, 'cabang_id' => $id]);
+                }
+            }
+        }
+
+        // 4) Tambah galeri baru
+        $caption_new = $this->input->post('caption_new'); // array sejajar dengan gallery_new[]
+        if (!empty($_FILES['gallery_new']['name']) && is_array($_FILES['gallery_new']['name'])) {
+            // hitung posisi order terakhir
+            $last = $this->db->select_max('position_order')->get_where('tb_cabang_galery', ['cabang_id' => $id])->row();
+            $pos = $last && $last->position_order ? (int)$last->position_order : 0;
+
+            $n = count($_FILES['gallery_new']['name']);
+            for ($i = 0; $i < $n; $i++) {
+                if (empty($_FILES['gallery_new']['name'][$i])) continue;
+
+                $_FILES['__gal_new__'] = [
+                    'name'     => $_FILES['gallery_new']['name'][$i],
+                    'type'     => $_FILES['gallery_new']['type'][$i],
+                    'tmp_name' => $_FILES['gallery_new']['tmp_name'][$i],
+                    'error'    => $_FILES['gallery_new']['error'][$i],
+                    'size'     => $_FILES['gallery_new']['size'][$i],
+                ];
+
+                $config['file_name'] = 'gallery-new-' . time() . '-' . $i;
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('__gal_new__')) {
+                    $up = $this->upload->data();
+                    $pos++;
+
+                    $this->db->insert('tb_cabang_galery', [
+                        'cabang_id'      => $id,
+                        'image_path'     => 'assets/img/cabang/' . $up['file_name'],
+                        'caption'        => $caption_new[$i] ?? null,
+                        'position_order' => $pos,
+                        'is_active'      => 1,
+                        'created_at'     => date('Y-m-d H:i:s')
+                    ]);
+                }
+            }
+        }
+
+        return $this->output->set_content_type('application/json')->set_output(json_encode([
+            'status'  => true,
+            'message' => 'Data cabang berhasil diperbarui',
+            'data'    => [
+                'cabang_id'        => $id,
+                'image_background' => $bg_filename,
+                'image_side'       => $side_filename,
+            ]
+        ]));
+    }
 }
