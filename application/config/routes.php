@@ -68,6 +68,7 @@ $route['get-search-article'] = 'Api/get_search_article';
 $route['post-subscribe'] = 'Api/post_subscribe';
 $route['send-katalog'] = 'Api/catalog';
 $route['post-klik-whatsapp'] = 'Api/klik_whatsapp';
+$route['get-cabang'] = 'Api/get_cabang';
 
 $route['cms/api/post/slider'] = 'Api/save_slider';
 $route['cms/api/delete/slider/(:num)'] = 'Api/delete_slider/$1';

@@ -34,6 +34,7 @@
         border-radius: 16px;
     }
 </style>
+
 <!-- ===================== CTA (sama gaya dengan halaman lain) ===================== -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -50,11 +51,9 @@
                         <p class="cta-txt text-secondary mb-0">Nikmati kenyamanan dan kesegaran AC Mobil Anda</p>
                     </div>
                     <div class="mt-3">
-                        <a class="btn-wa w-100 w-lg-50 justify-content-center"
-                            href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0"
-                            target="_blank" rel="noreferrer">
+                        <button class="btn-wa w-100 w-lg-50 justify-content-center whatsapp-btn">
                             <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
-                        </a>
+                        </button>
                     </div>
                 </div><!-- /cta-wrap -->
             </div>
@@ -63,7 +62,7 @@
 </div>
 <!-- ===================== CTA End ===================== -->
 
-<!-- Modal Form WhatsApp -->
+<!-- ===================== Modal Form WhatsApp ===================== -->
 <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -78,12 +77,19 @@
                         <input type="text" class="form-control" id="namaCust" name="namaCust" required autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <label for="waNumber" class="form-label">Nomor WhatsApp</label>
+                        <label for="waNumber" class="form-label">Nomor WhatsApp Anda</label>
                         <input type="text" class="form-control" id="waNumber" name="waNumber" required autocomplete="off" placeholder="08xxxxxxxxxx">
                     </div>
+                    <div class="mb-3">
+                        <label for="cabangSelect" class="form-label">Pilih Cabang</label>
+                        <select class="form-select" id="cabangSelect" name="cabangSelect" required>
+                            <option value="">-- Pilih Cabang --</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="cabangPhone" name="cabangPhone" value="">
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Kirim WhatsApp</button>
+                    <button type="submit" class="btn btn-success" id="btnKirimWA">Kirim WhatsApp</button>
                 </div>
             </form>
         </div>
@@ -186,13 +192,14 @@
         }
     }
 </style>
-<div class="floating-chat" id="whatsapp-btn">
-    <img src="https://bagiyodensoacmobil.com/assets/img/icon-wa.svg" alt="WhatsApp">
+
+<!-- Floating WhatsApp Icon -->
+<div class="floating-chat whatsapp-btn">
+    <img src="<?= base_url('assets/img/icon-wa.svg'); ?>" alt="WhatsApp">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.6.15/sweetalert2.min.js" integrity="sha512-Z4QYNSc2DFv8LrhMEyarEP3rBkODBZT90RwUC7dYQYF29V4dfkh+8oYZHt0R6T3/KNv32/u0W6icGWUUk9V0jA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="<?= base_url('assets/'); ?>lib/wow/wow.min.js"></script>
 <script src="<?= base_url('assets/'); ?>lib/easing/easing.min.js"></script>
 <script src="<?= base_url('assets/'); ?>lib/waypoints/waypoints.min.js"></script>
@@ -204,29 +211,6 @@
 <script src="<?= base_url('assets/'); ?>js/main.js"></script>
 
 <script>
-    function getLocation() {
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-
-                var sendData = {
-                    ip: data.ip,
-                    city: data.city,
-                    country_name: data.country_name,
-                    url: window.location.href
-                };
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', "<?= base_url('post-data-viewer'); ?>", true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(sendData));
-            })
-            .catch(error => {
-                console.log("Gagal mendapatkan data lokasi: " + error);
-            });
-    }
-    window.addEventListener('load', getLocation);
-
     function getMessage() {
         fetch('https://ipapi.co/json/')
             .then(response => response.json())
@@ -249,94 +233,108 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const cabangSelect = document.getElementById('cabangSelect');
+        const cabangPhone = document.getElementById('cabangPhone');
         const whatsappForm = document.getElementById('whatsappForm');
+        const btnKirim = document.getElementById('btnKirimWA');
+        const whatsappButtons = document.querySelectorAll('.whatsapp-btn');
 
-        // Tombol trigger modal
-        if (whatsappBtn) {
-            whatsappBtn.addEventListener('click', function(event) {
+        whatsappButtons.forEach(btn => {
+            btn.addEventListener('click', function(event) {
                 event.preventDefault();
-                const modalElement = document.getElementById('whatsappModal');
-                const myModal = new bootstrap.Modal(modalElement);
-                myModal.show();
+
+                // Buka modal WhatsApp
+                const modalEl = document.getElementById('whatsappModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
             });
-        }
+        });
 
-        // Submit form WhatsApp
-        if (whatsappForm) {
-            whatsappForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                // Ambil value saat submit diklik
-                const namaInput = document.getElementById('namaCust');
-                const waInput = document.getElementById('waNumber');
-
-                console.log(namaInput);
-                console.log(waInput);
-
-                if (!namaInput || !waInput) {
-                    alert('Form input tidak ditemukan!');
-                    return;
-                }
-
-                const nama = namaInput.value.trim();
-                const wa = waInput.value.trim();
-
-
-                // Ambil data IP dan lokasi
-                fetch('https://ipapi.co/json/')
-                    .then(response => response.json())
-                    .then(data => {
-                        const ip = data.ip || 'Tidak diketahui';
-                        const kota = data.city || 'Tidak diketahui';
-
-                        const pesan = `Halo Bagiyo Denso AC Mobil! Nama saya ${nama}. Saya ingin bertanya mengenai layanan Anda `;
-                        const encodedPesan = encodeURIComponent(pesan);
-                        const linkWA = `https://api.whatsapp.com/send?phone=6281325545071&text=${encodedPesan}`;
-
-                        // Kirim data ke server
-                        $.ajax({
-                            url: "<?= base_url('post-klik-whatsapp'); ?>",
-                            method: "POST",
-                            contentType: "application/json",
-                            data: JSON.stringify({
-                                ip: ip,
-                                city: kota,
-                                name: nama,
-                                whatsapp: wa
-                            }),
-                            success: function(response) {
-                                window.open(linkWA, '_blank');
-
-                                const modalElement = document.getElementById('whatsappModal');
-                                const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                                if (modalInstance) {
-                                    modalInstance.hide();
-                                }
-
-                                document.getElementById('nama').value = '';
-                                document.getElementById('wa').value = '';
-                            },
-                            error: function(xhr, status, error) {
-                                console.warn("Gagal menyimpan data ke server:", error);
-                                window.open(linkWA, '_blank');
-
-                                const modalElement = document.getElementById('whatsappModal');
-                                const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                                if (modalInstance) {
-                                    modalInstance.hide();
-                                }
-
-                                document.getElementById('nama').value = '';
-                                document.getElementById('wa').value = '';
-                            }
-                        });
-                    })
-                    .catch(error => {
-                        console.error(error);
+        // 🔹 Load daftar cabang dari API
+        fetch("<?= base_url('get-cabang'); ?>")
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success' && Array.isArray(result.data)) {
+                    result.data.forEach(cabang => {
+                        const option = document.createElement('option');
+                        option.value = cabang.name;
+                        option.textContent = cabang.name;
+                        option.dataset.phone = cabang.phone;
+                        cabangSelect.appendChild(option);
                     });
-            });
-        }
+                }
+            })
+            .catch(err => console.error("Gagal memuat cabang:", err));
+
+        // 🔹 Update nomor WA berdasarkan cabang
+        cabangSelect.addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            cabangPhone.value = selected.dataset.phone || '';
+        });
+
+        // 🔹 Submit Form WhatsApp
+        whatsappForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btnKirim.disabled = true;
+            btnKirim.textContent = 'Mengirim...';
+
+            const nama = document.getElementById('namaCust').value.trim();
+            const wa = document.getElementById('waNumber').value.trim();
+            const cabang = cabangSelect.value.trim();
+            const phoneCabang = cabangPhone.value.trim();
+
+            if (!nama || !wa || !cabang || !phoneCabang) {
+                alert('Mohon isi semua field.');
+                btnKirim.disabled = false;
+                btnKirim.textContent = 'Kirim WhatsApp';
+                return;
+            }
+
+            fetch('https://ipapi.co/json/')
+                .then(res => res.json())
+                .then(data => {
+                    const ip = data.ip || 'Tidak diketahui';
+                    const city = data.city || 'Tidak diketahui';
+                    const pesan = `Halo Bagiyo Denso AC Mobil Cabang ${cabang}! Nama saya ${nama}. Saya ingin bertanya mengenai layanan Anda.`;
+                    const encodedPesan = encodeURIComponent(pesan);
+
+                    let cleanedPhone = phoneCabang
+                        .replace(/\s+/g, '')
+                        .replace(/[^\d+]/g, '')
+                        .replace(/^(\+62|62|0)/, '62');
+
+                    if (cleanedPhone.startsWith('+')) cleanedPhone = cleanedPhone.substring(1);
+
+                    const linkWA = `https://api.whatsapp.com/send?phone=${cleanedPhone}&text=${encodedPesan}`;
+
+                    $.ajax({
+                        url: "<?= base_url('post-klik-whatsapp'); ?>",
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            ip: ip,
+                            city: city,
+                            name: nama,
+                            whatsapp: wa,
+                            cabang: cabang,
+                            tipe: 'Klik WA',
+                        }),
+                        complete: function() {
+                            window.open(linkWA, '_blank');
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('whatsappModal'));
+                            if (modal) modal.hide();
+                            whatsappForm.reset();
+                            btnKirim.disabled = false;
+                            btnKirim.textContent = 'Kirim WhatsApp';
+                        }
+                    });
+                })
+                .catch(err => {
+                    alert('Gagal mendapatkan data lokasi.');
+                    btnKirim.disabled = false;
+                    btnKirim.textContent = 'Kirim WhatsApp';
+                });
+        });
     });
 </script>
 

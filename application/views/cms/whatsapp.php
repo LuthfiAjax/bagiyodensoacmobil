@@ -15,6 +15,8 @@
                                     <tr>
                                         <th class="serial">#</th>
                                         <th class="text-center">Tanggal</th>
+                                        <th class="text-center">tipe</th>
+                                        <th class="text-center">Cabang</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Phone</th>
                                         <th class="text-center">Kota</th>
@@ -25,7 +27,9 @@
                                     foreach ($whatsapp as $row) : ?>
                                         <tr>
                                             <td class="text-center"><?= $count++; ?></td>
-                                            <td><?= date('Y/m/d H:i', $row['time']); ?> WIB</td>
+                                            <td><?= date('Y/m/d H:i', $row['time']); ?></td>
+                                            <td class="text-center"><?= $row['tipe']; ?></td>
+                                            <td class="text-center"><?= $row['cabang']; ?></td>
                                             <td class="text-center"><?= $row['name']; ?></td>
                                             <td class="text-center"><?= $row['whatsapp']; ?></td>
                                             <td class="text-center"><?= $row['city']; ?></td>

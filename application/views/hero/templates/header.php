@@ -42,7 +42,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.6.15/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link href="<?= base_url('assets/'); ?>lib/animate/animate.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -64,6 +63,7 @@
 
         gtag('config', 'G-NBVTWL1GPM');
     </script>
+
     <style>
         .marquee {
             display: inline-flex;
@@ -156,34 +156,191 @@
                 <a href="<?= base_url('cabang'); ?>" class="nav-item nav-link <?= ($page == 'cabang') ? 'active' : ''; ?>">Cabang</a>
                 <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary btn-sm py-4 rounded-pill px-lg-2 rounded d-block d-lg-none">Booking Sekarang<i class="fa fa-paper-plane ms-3"></i></a>
             </div>
-            <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Booking Sekarang<i class="fa fa-paper-plane ms-3"></i></a>
+            <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block booking-btn">
+                Booking Sekarang <i class="fa fa-paper-plane ms-3"></i>
+            </button>
         </div>
     </nav>
     <!-- Navbar End -->
 
-    <div class="modal fade" id="katalog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Booking -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Download Company Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?= base_url('send-katalog'); ?>" method="post">
+                <form id="bookingForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bookingModalLabel">Form Booking Servis AC Mobil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+
+                    <div class="modal-body">
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama <span class="text-primary">*</span></label>
-                            <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" required>
+                            <label for="namaBooking" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="namaBooking" name="namaBooking" required autocomplete="off">
                         </div>
+
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email <span class="text-primary">*</span></label>
-                            <input type="email" class="form-control" id="email" name="email" autocomplete="off" required>
-                            <div id="emailHelp" class="form-text text->secondary">Pastikan Email Valid dan Benar</div>
+                            <label for="waBooking" class="form-label">Nomor WhatsApp</label>
+                            <input type="text" class="form-control" id="waBooking" name="waBooking" required autocomplete="off" placeholder="08xxxxxxxxxx">
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Kirim</button>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="hariBooking" class="form-label">Hari Booking</label>
+                                <select class="form-select" id="hariBooking" name="hariBooking" required>
+                                    <option value="">-- Pilih Hari --</option>
+                                    <option>Senin</option>
+                                    <option>Selasa</option>
+                                    <option>Rabu</option>
+                                    <option>Kamis</option>
+                                    <option>Jumat</option>
+                                    <option>Sabtu</option>
+                                    <option>Minggu</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="jamBooking" class="form-label">Jam Booking</label>
+                                <select class="form-select" id="jamBooking" name="jamBooking" required>
+                                    <option value="">-- Pilih Jam --</option>
+                                    <option>08:00</option>
+                                    <option>09:00</option>
+                                    <option>10:00</option>
+                                    <option>11:00</option>
+                                    <option>12:00</option>
+                                    <option>13:00</option>
+                                    <option>14:00</option>
+                                    <option>15:00</option>
+                                    <option>16:00</option>
+                                </select>
+                            </div>
                         </div>
-                    </form>
-                </div>
+
+                        <div class="mb-3">
+                            <label for="cabangBooking" class="form-label">Cabang</label>
+                            <select class="form-select" id="cabangBooking" name="cabangBooking" required>
+                                <option value="">-- Pilih Cabang --</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" id="cabangPhoneBooking" name="cabangPhoneBooking" value="">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="btnBooking">Booking Sekarang</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingButtons = document.querySelectorAll('.booking-btn');
+            const cabangSelect = document.getElementById('cabangBooking');
+            const cabangPhone = document.getElementById('cabangPhoneBooking');
+            const bookingForm = document.getElementById('bookingForm');
+            const btnBooking = document.getElementById('btnBooking');
+
+            // 🔹 Tampilkan modal ketika tombol Booking diklik
+            bookingButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalEl = document.getElementById('bookingModal');
+                    const modal = new bootstrap.Modal(modalEl);
+                    modal.show();
+                });
+            });
+
+            // 🔹 Load cabang dari API
+            fetch("<?= base_url('get-cabang'); ?>")
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success' && Array.isArray(result.data)) {
+                        result.data.forEach(cabang => {
+                            const option = document.createElement('option');
+                            option.value = cabang.name;
+                            option.textContent = cabang.name;
+                            option.dataset.phone = cabang.phone;
+                            cabangSelect.appendChild(option);
+                        });
+                    }
+                });
+
+            // 🔹 Ganti nomor WA sesuai cabang
+            cabangSelect.addEventListener('change', function() {
+                const selected = this.options[this.selectedIndex];
+                cabangPhone.value = selected.dataset.phone || '';
+            });
+
+            // 🔹 Submit Booking
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                btnBooking.disabled = true;
+                btnBooking.textContent = 'Mengirim...';
+
+                const nama = document.getElementById('namaBooking').value.trim();
+                const wa = document.getElementById('waBooking').value.trim();
+                const hari = document.getElementById('hariBooking').value.trim();
+                const jam = document.getElementById('jamBooking').value.trim();
+                const cabang = cabangSelect.value.trim();
+                let phoneCabang = cabangPhone.value.trim();
+
+                if (!nama || !wa || !hari || !jam || !cabang || !phoneCabang) {
+                    alert('Harap isi semua data booking.');
+                    btnBooking.disabled = false;
+                    btnBooking.textContent = 'Booking Sekarang';
+                    return;
+                }
+
+                // 🔹 Bersihkan nomor telepon agar standar 628...
+                phoneCabang = phoneCabang
+                    .replace(/\s+/g, '')
+                    .replace(/[^\d+]/g, '')
+                    .replace(/^(\+62|62|0)/, '62');
+                if (phoneCabang.startsWith('+')) phoneCabang = phoneCabang.substring(1);
+
+                // 🔹 Ambil lokasi user
+                fetch('https://ipapi.co/json/')
+                    .then(res => res.json())
+                    .then(data => {
+                        const ip = data.ip || 'Tidak diketahui';
+                        const city = data.city || 'Tidak diketahui';
+
+                        const pesan = `Halo Bagiyo Denso AC Mobil Cabang ${cabang}! Saya ${nama} ingin booking servis AC mobil pada ${hari} jam ${jam}.`;
+                        const encodedPesan = encodeURIComponent(pesan);
+                        const linkWA = `https://api.whatsapp.com/send?phone=${phoneCabang}&text=${encodedPesan}`;
+
+                        $.ajax({
+                            url: "<?= base_url('post-klik-whatsapp'); ?>",
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                ip: ip,
+                                city: city,
+                                name: nama,
+                                whatsapp: wa,
+                                cabang: cabang,
+                                tipe: 'Booking',
+                                hari: hari,
+                                jam: jam
+                            }),
+                            complete: function() {
+                                window.open(linkWA, '_blank');
+                                const modal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
+                                if (modal) modal.hide();
+                                bookingForm.reset();
+                                btnBooking.disabled = false;
+                                btnBooking.textContent = 'Booking Sekarang';
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Gagal mendapatkan lokasi.');
+                        btnBooking.disabled = false;
+                        btnBooking.textContent = 'Booking Sekarang';
+                    });
+            });
+        });
+    </script>

@@ -175,6 +175,16 @@ class Api extends CI_Controller
         echo json_encode($response);
     }
 
+    public function get_cabang()
+    {
+        $cabangs = $this->db->select('id, name', 'phone')->from('tb_cabang')->get()->result_array();
+
+        echo json_encode([
+            'status' => 'success',
+            'data' => $cabangs
+        ]);
+    }
+
     public function klik_whatsapp()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -196,6 +206,8 @@ class Api extends CI_Controller
             'time' => time(),
             'ip' => $data['ip'],
             'city' => $data['city'],
+            'cabang' => $data['cabang'],
+            'tipe' => $data['tipe'],
             'name' => $data['name'],
             'whatsapp' => $data['whatsapp'],
         );
@@ -250,7 +262,6 @@ class Api extends CI_Controller
 
         echo json_encode($data);
     }
-
 
     public function post_subscribe()
     {
