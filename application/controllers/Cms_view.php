@@ -119,16 +119,37 @@ class Cms_view extends CI_Controller
 
         $data['title'] = 'manages promo';
         $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
+        $data['promos'] = $this->db->get('tb_promo')->result_array();
 
         $this->load->view('cms/templates/header', $data);
         $this->load->view('cms/menages_promo');
         $this->load->view('cms/templates/footer');
     }
 
-    public function create_promo() {}
+    public function create_promo()
+    {
+        $id  = $this->session->userdata('id_user');
 
-    public function update_promo($id) {}
+        $data['title'] = 'manages promo';
+        $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
 
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/menages_promo_create');
+        $this->load->view('cms/templates/footer');
+    }
+
+    public function update_promo($id)
+    {
+        $userid = $this->session->userdata('id_user');
+
+        $data['title'] = 'manages Promo';
+        $data['user']  = $this->db->get_where('user', ['id_user' => $userid])->row_array();
+        $data['promo'] = $this->db->get_where('tb_promo', ['id' => $id])->row_array();
+
+        $this->load->view('cms/templates/header', $data);
+        $this->load->view('cms/menages_promo_update', $data);
+        $this->load->view('cms/templates/footer');
+    }
 
     public function menages_cabang()
     {

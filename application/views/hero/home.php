@@ -43,6 +43,43 @@
         padding: 36px 22px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
     }
+
+    /* === Modal Styling === */
+    .gallery-modal {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .gallery-modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        animation: zoomIn 0.4s ease;
+    }
+
+    .gallery-close {
+        position: absolute;
+        top: 25px;
+        right: 40px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .gallery-close:hover {
+        color: #ffcc00;
+    }
 </style>
 
 <!-- ===================== Carousel Start ===================== -->
@@ -423,3 +460,65 @@
     </div>
 </div>
 <!-- ===================== Team End ===================== -->
+
+<!-- ✅ Modal Promo -->
+<div id="PromoModal" class="gallery-modal">
+    <span class="gallery-close">&times;</span>
+    <img class="gallery-modal-content" id="PromoModalImg">
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const promoApiUrl = "<?= base_url('cek/promo/0'); ?>";
+
+        try {
+            const res = await fetch(promoApiUrl);
+            const result = await res.json();
+
+            // 🚫 Jika promo tidak aktif / kosong
+            if (!result.status || !result.data) return;
+
+            const promo = result.data;
+
+            // ✅ Deteksi perangkat (mobile / desktop)
+            const isMobile = window.innerWidth <= 768;
+            const promoImg = isMobile ? promo.img_mobile : promo.img_desktop;
+
+            // ✅ Ambil elemen modal
+            const modal = document.getElementById("PromoModal");
+            const modalImg = document.getElementById("PromoModalImg");
+            const closeModal = modal.querySelector(".gallery-close");
+
+            // Set gambar & alt (belum ditampilkan)
+            modalImg.src = promoImg;
+            modalImg.alt = promo.judul || "Promo Aktif";
+
+            // ✅ Klik gambar → buka link promo
+            modalImg.style.cursor = "pointer";
+            modalImg.addEventListener("click", () => {
+                if (!promo.url_promo) return;
+                if (promo.url_sifat === "newtab") {
+                    window.open(promo.url_promo, "_blank");
+                } else {
+                    window.location.href = promo.url_promo;
+                }
+            });
+
+            // ✅ Tutup modal saat klik ikon X
+            closeModal.addEventListener("click", () => modal.style.display = "none");
+
+            // ✅ Tutup modal jika klik di luar gambar
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) modal.style.display = "none";
+            });
+
+            // ⏳ TUNGGU 2 DETIK SEBELUM MUNCUL
+            setTimeout(() => {
+                modal.style.display = "flex";
+            }, 2000);
+
+        } catch (err) {
+            console.error("Gagal memuat promo:", err);
+        }
+    });
+</script>

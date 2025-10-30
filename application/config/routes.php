@@ -78,5 +78,11 @@ $route['cms/api/post/cabang'] = 'Api/save_cabang';
 $route['cms/api/delete/cabang/(:num)'] = 'Api/delete_cabang/$1';
 $route['cms/api/update/cabang/(:num)'] = 'Api/update_cabang/$1';
 
+$route['cms/api/post/promo'] = 'Api/save_promo';
+$route['cms/api/delete/promo/(:num)'] = 'Api/delete_promo/$1';
+$route['cms/api/update/promo/(:num)'] = 'Api/update_promo/$1';
+
+$route['cek/promo/(:num)'] = 'Api/cek_promo/$1';
+
 // sitemap
 $route['sitemap\.xml'] = 'Hero/sitemap';

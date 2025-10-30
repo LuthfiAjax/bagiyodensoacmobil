@@ -369,6 +369,12 @@
     <img class="gallery-modal-content" id="galleryModalImg">
 </div>
 
+<!-- ✅ Modal Promo -->
+<div id="PromoModal" class="gallery-modal">
+    <span class="gallery-close">&times;</span>
+    <img class="gallery-modal-content" id="PromoModalImg">
+</div>
+
 <script>
     // Script untuk modal preview
     const modal = document.getElementById("galleryModal");
@@ -385,5 +391,62 @@
     closeModal.addEventListener("click", () => modal.style.display = "none");
     modal.addEventListener("click", (e) => {
         if (e.target === modal) modal.style.display = "none";
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const cabangId = "<?= $cabang['id']; ?>";
+        const promoApiUrl = "<?= base_url('cek/promo/'); ?>" + cabangId;
+
+        try {
+            const res = await fetch(promoApiUrl);
+            const result = await res.json();
+
+            // 🚫 Jika promo tidak aktif / kosong
+            if (!result.status || !result.data) return;
+
+            const promo = result.data;
+
+            // ✅ Deteksi perangkat (mobile / desktop)
+            const isMobile = window.innerWidth <= 768;
+            const promoImg = isMobile ? promo.img_mobile : promo.img_desktop;
+
+            // ✅ Ambil elemen modal
+            const modal = document.getElementById("PromoModal");
+            const modalImg = document.getElementById("PromoModalImg");
+            const closeModal = modal.querySelector(".gallery-close");
+
+            // Set gambar & alt (belum ditampilkan)
+            modalImg.src = promoImg;
+            modalImg.alt = promo.judul || "Promo Aktif";
+
+            // ✅ Klik gambar → buka link promo
+            modalImg.style.cursor = "pointer";
+            modalImg.addEventListener("click", () => {
+                if (!promo.url_promo) return;
+                if (promo.url_sifat === "newtab") {
+                    window.open(promo.url_promo, "_blank");
+                } else {
+                    window.location.href = promo.url_promo;
+                }
+            });
+
+            // ✅ Tutup modal saat klik ikon X
+            closeModal.addEventListener("click", () => modal.style.display = "none");
+
+            // ✅ Tutup modal jika klik di luar gambar
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) modal.style.display = "none";
+            });
+
+            // ⏳ TUNGGU 2 DETIK SEBELUM MUNCUL
+            setTimeout(() => {
+                modal.style.display = "flex";
+            }, 2000);
+
+        } catch (err) {
+            console.error("Gagal memuat promo:", err);
+        }
     });
 </script>

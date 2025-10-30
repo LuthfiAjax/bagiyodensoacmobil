@@ -10,6 +10,7 @@ class Api extends CI_Controller
         $this->load->library('email_sender');
         $this->load->database();
         $this->load->helper(array('form', 'url'));
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function viewer()
@@ -1203,5 +1204,331 @@ class Api extends CI_Controller
                 'image_side'       => $side_filename,
             ]
         ]));
+    }
+
+    public function save_promo()
+    {
+        // === Konfigurasi upload ===
+        $config['encrypt_name']     = TRUE;
+        $config['allowed_types']    = 'gif|jpg|jpeg|png|heif|hevc|webp|svg';
+        $config['max_size']         = '5120'; // 5MB
+        $config['upload_path']      = './assets/img/promo/';
+        $config['file_ext_tolower'] = TRUE;
+        $this->load->library('upload', $config);
+
+        // === Validasi Input Wajib ===
+        $judul           = $this->input->post('judul', TRUE);
+        $periode_mulai   = $this->input->post('periode_mulai', TRUE);
+        $periode_selesai = $this->input->post('periode_selesai', TRUE);
+        $url_promo       = $this->input->post('url_promo', TRUE);
+        $url_sifat       = $this->input->post('url_sifat', TRUE);
+        $cabang_id       = $this->input->post('cabang_id', TRUE);
+        $is_active       = $this->input->post('is_active', TRUE);
+
+        if (!$judul || !$periode_mulai || !$periode_selesai || !$url_promo) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Judul, periode, dan URL wajib diisi.']));
+        }
+
+        // === Upload Gambar Desktop ===
+        $desktop_filename = null;
+        if (!empty($_FILES['img_desktop']['name'])) {
+            $config['file_name'] = 'desktop-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('img_desktop')) {
+                $uploadData = $this->upload->data();
+                $desktop_filename = $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload gambar desktop gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // === Upload Gambar Mobile ===
+        $mobile_filename = null;
+        if (!empty($_FILES['img_mobile']['name'])) {
+            $config['file_name'] = 'mobile-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('img_mobile')) {
+                $uploadData = $this->upload->data();
+                $mobile_filename = $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload gambar mobile gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // === Simpan ke tb_promo ===
+        $data = [
+            'judul'           => $judul,
+            'img_desktop'     => $desktop_filename ? 'assets/img/promo/' . $desktop_filename : null,
+            'img_mobile'      => $mobile_filename ? 'assets/img/promo/' . $mobile_filename : null,
+            'periode_mulai'   => date('Y-m-d H:i:s', strtotime($periode_mulai)),
+            'periode_selesai' => date('Y-m-d H:i:s', strtotime($periode_selesai)),
+            'url_promo'       => $url_promo,
+            'url_sifat'       => $url_sifat ?: 'direct',
+            'cabang_id'       => $cabang_id ?: 0,
+            'is_active'       => $is_active ?: 1,
+            'created_at'      => date('Y-m-d H:i:s'),
+            'updated_at'      => date('Y-m-d H:i:s')
+        ];
+
+        $this->db->insert('tb_promo', $data);
+        $insert_id = $this->db->insert_id();
+
+        if (!$insert_id) {
+            return $this->output
+                ->set_status_header(500)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Gagal menyimpan promo']));
+        }
+
+        // === Response Sukses ===
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'  => true,
+                'message' => 'Promo berhasil disimpan.',
+                'data'    => [
+                    'promo_id'     => $insert_id,
+                    'img_desktop'  => $desktop_filename,
+                    'img_mobile'   => $mobile_filename
+                ]
+            ]));
+    }
+
+    public function update_promo($id)
+    {
+        // === Validasi ID ===
+        if (empty($id) || !is_numeric($id)) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'ID promo tidak valid.']));
+        }
+
+        // === Ambil Data Lama ===
+        $promo = $this->db->get_where('tb_promo', ['id' => $id])->row_array();
+        if (!$promo) {
+            return $this->output
+                ->set_status_header(404)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Data promo tidak ditemukan.']));
+        }
+
+        // === Konfigurasi Upload ===
+        $config['encrypt_name']     = TRUE;
+        $config['allowed_types']    = 'gif|jpg|jpeg|png|heif|hevc|webp|svg';
+        $config['max_size']         = '5120';
+        $config['upload_path']      = './assets/img/promo/';
+        $config['file_ext_tolower'] = TRUE;
+        $this->load->library('upload', $config);
+
+        // === Ambil Data Input ===
+        $judul           = $this->input->post('judul', TRUE);
+        $periode_mulai   = $this->input->post('periode_mulai', TRUE);
+        $periode_selesai = $this->input->post('periode_selesai', TRUE);
+        $url_promo       = $this->input->post('url_promo', TRUE);
+        $url_sifat       = $this->input->post('url_sifat', TRUE);
+        $cabang_id       = $this->input->post('cabang_id', TRUE);
+        $is_active       = $this->input->post('is_active', TRUE);
+
+        if (!$judul || !$periode_mulai || !$periode_selesai || !$url_promo) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Judul, periode, dan URL wajib diisi.']));
+        }
+
+        // === Handle Gambar Desktop ===
+        $desktop_filename = $promo['img_desktop'];
+        if (!empty($_FILES['img_desktop']['name'])) {
+            $config['file_name'] = 'desktop-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('img_desktop')) {
+                if (!empty($promo['img_desktop']) && file_exists(FCPATH . $promo['img_desktop'])) {
+                    unlink(FCPATH . $promo['img_desktop']);
+                }
+                $uploadData = $this->upload->data();
+                $desktop_filename = 'assets/img/promo/' . $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload gambar desktop gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // === Handle Gambar Mobile ===
+        $mobile_filename = $promo['img_mobile'];
+        if (!empty($_FILES['img_mobile']['name'])) {
+            $config['file_name'] = 'mobile-' . time();
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('img_mobile')) {
+                if (!empty($promo['img_mobile']) && file_exists(FCPATH . $promo['img_mobile'])) {
+                    unlink(FCPATH . $promo['img_mobile']);
+                }
+                $uploadData = $this->upload->data();
+                $mobile_filename = 'assets/img/promo/' . $uploadData['file_name'];
+            } else {
+                return $this->output
+                    ->set_status_header(400)
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(['status' => false, 'message' => 'Upload gambar mobile gagal: ' . $this->upload->display_errors('', '')]));
+            }
+        }
+
+        // === Update ke Database ===
+        $update_data = [
+            'judul'           => $judul,
+            'img_desktop'     => $desktop_filename,
+            'img_mobile'      => $mobile_filename,
+            'periode_mulai'   => date('Y-m-d H:i:s', strtotime($periode_mulai)),
+            'periode_selesai' => date('Y-m-d H:i:s', strtotime($periode_selesai)),
+            'url_promo'       => $url_promo,
+            'url_sifat'       => $url_sifat ?: 'direct',
+            'cabang_id'       => $cabang_id,
+            'is_active'       => $is_active,
+            'updated_at'      => date('Y-m-d H:i:s')
+        ];
+
+        $this->db->where('id', $id);
+        $updated = $this->db->update('tb_promo', $update_data);
+
+        if (!$updated) {
+            return $this->output
+                ->set_status_header(500)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Gagal memperbarui promo.']));
+        }
+
+        // === Response Sukses ===
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status'  => true,
+                'message' => 'Promo berhasil diperbarui.',
+                'data'    => [
+                    'id'            => $id,
+                    'img_desktop'   => $desktop_filename,
+                    'img_mobile'    => $mobile_filename
+                ]
+            ]));
+    }
+
+
+    public function delete_promo($id)
+    {
+        // === Validasi ID ===
+        if (empty($id) || !is_numeric($id)) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'ID promo tidak valid.']));
+        }
+
+        // === Ambil Data Promo ===
+        $promo = $this->db->get_where('tb_promo', ['id' => $id])->row_array();
+        if (!$promo) {
+            return $this->output
+                ->set_status_header(404)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Data promo tidak ditemukan.']));
+        }
+
+        // === Hapus File Gambar ===
+        $deletedFiles = [];
+        if (!empty($promo['img_desktop']) && file_exists(FCPATH . $promo['img_desktop'])) {
+            unlink(FCPATH . $promo['img_desktop']);
+            $deletedFiles[] = $promo['img_desktop'];
+        }
+
+        if (!empty($promo['img_mobile']) && file_exists(FCPATH . $promo['img_mobile'])) {
+            unlink(FCPATH . $promo['img_mobile']);
+            $deletedFiles[] = $promo['img_mobile'];
+        }
+
+        // === Hapus Data Database ===
+        $this->db->where('id', $id);
+        $deleted = $this->db->delete('tb_promo');
+
+        if ($deleted) {
+            return $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    'status' => true,
+                    'message' => 'Promo berhasil dihapus.',
+                    'deleted_files' => $deletedFiles
+                ]));
+        } else {
+            return $this->output
+                ->set_status_header(500)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['status' => false, 'message' => 'Gagal menghapus promo dari database.']));
+        }
+    }
+
+    public function cek_promo($id)
+    {
+        header('Content-Type: application/json');
+
+        // Validasi ID
+        if ($id === '' || !is_numeric($id)) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'ID promo tidak valid.'
+            ]);
+            return;
+        }
+
+        // Ambil data promo
+        $promo = $this->db->get_where('tb_promo', ['cabang_id' => $id])->row_array();
+
+        if (!$promo) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Promo tidak ditemukan.'
+            ]);
+            return;
+        }
+
+        // Cek apakah aktif dan dalam periode waktu
+        $now = time(); // timestamp sekarang (detik)
+        $start = strtotime($promo['periode_mulai']);
+        $end = strtotime($promo['periode_selesai']);
+
+        $isWithinPeriod = ($now >= $start && $now <= $end);
+        $isActive = intval($promo['is_active']) === 1;
+
+        if (!$isWithinPeriod || !$isActive) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Promo tidak aktif atau sudah berakhir.',
+            ]);
+            return;
+        }
+
+        // Jika promo masih aktif dan dalam periode
+        echo json_encode([
+            'status' => true,
+            'message' => 'Promo masih berlaku.',
+            'data' => [
+                'id' => $promo['id'],
+                'judul' => $promo['judul'],
+                'periode_mulai' => $promo['periode_mulai'],
+                'periode_selesai' => $promo['periode_selesai'],
+                'url_promo' => $promo['url_promo'],
+                'url_sifat' => $promo['url_sifat'],
+                'cabang_id' => $promo['cabang_id'],
+                'img_desktop' => base_url($promo['img_desktop']),
+                'img_mobile' => base_url($promo['img_mobile'])
+            ]
+        ]);
     }
 }
