@@ -13,7 +13,7 @@ $random_number2 = mt_rand($min_number, $max_number);
 
                     <div class="app-brand justify-content-center mb-1">
                         <a href="<?= base_url(''); ?>" class="app-brand-link gap-2">
-                            <img src="<?= base_url('assets/'); ?>img/logo.svg" alt="logo Bagiyo Denso" class="logo">
+                            <img src="<?= base_url('assets/'); ?>img/logo.png" alt="logo Bagiyo Denso" class="logo">
                             <style>
                                 .logo {
                                     width: 150px;

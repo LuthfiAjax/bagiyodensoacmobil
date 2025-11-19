@@ -7,12 +7,12 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mb-1ß">
                         <a href="<?= base_url(''); ?>" class="app-brand-link gap-2">
-                            <img src="<?= base_url('assets/'); ?>img/logo.svg" alt="logo Bagiyo Denso"
+                            <img src="<?= base_url('assets/'); ?>img/logo.png" alt="logo Bagiyo Denso"
                                 class="logo">
                             <style>
-                            .logo {
-                                width: 150px;
-                            }
+                                .logo {
+                                    width: 150px;
+                                }
                             </style>
                         </a>
                     </div>

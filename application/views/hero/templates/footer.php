@@ -42,7 +42,7 @@
             <div class="col-lg-8 col-md-10 col-sm-12 text-center">
                 <div class="cta-wrap">
                     <div class="mb-4">
-                        <img src="<?= base_url('assets/img/logo.svg'); ?>" alt="ic-logo" width="200" class="img-fluid">
+                        <img src="<?= base_url('assets/img/logo.png'); ?>" alt="ic-logo" width="200" class="img-fluid">
                     </div>
                     <div class="cta-title">
                         <h3 class="fs-4 fw-bold">Minat dengan Layanan Kami? <br> Hubungi Kami Sekarang</h3>

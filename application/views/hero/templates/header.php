@@ -158,7 +158,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="<?= base_url(''); ?>" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <img src="<?= base_url('assets/'); ?>img/logo.svg" width="200" height="100" alt="CarServ" class="me-1">
+            <img src="<?= base_url('assets/'); ?>img/logo.png" width="200" alt="CarServ" class="me-1">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
