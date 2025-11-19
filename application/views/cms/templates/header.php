@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Jakarta');
     <meta name="robots" content="noindex">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/'); ?>img/logo.svg" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon/android-chrome-512x512.png'); ?>" />
 
     <!-- tiny -->
 

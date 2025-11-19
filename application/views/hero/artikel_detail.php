@@ -297,17 +297,21 @@
     }
 </style>
 
-<!-- Article Header -->
-<div class="article-header" style="background-image: url(<?= base_url('assets/img/about.jpg'); ?>);">
-    <div class="container article-header-content text-center">
-        <h1 class="article-title"><?= $articles->title_article_id; ?></h1>
-        <?php $this->load->library('indonesian_date'); ?>
-        <div class="article-meta">
-            <i class="fa fa-calendar-check-o"></i>
-            <?= $this->indonesian_date->format_date($articles->publish); ?>
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 py-4 px-0" style="background-image: url(<?= base_url('assets/img/about.jpg'); ?>);">
+    <div class="container-fluid page-header-inner py-5">
+        <div class="container text-center">
+            <h1 class="display-3 fs-1 text-white mb-3 animated slideInDown"><?= $articles->title_article_id; ?></h1>
+            <span class="text-white"><?php $this->load->library('indonesian_date'); ?></span>
+
+            <div class="article-meta">
+                <i class="fa fa-calendar-check-o"></i>
+                <?= $this->indonesian_date->format_date($articles->publish); ?>
+            </div>
         </div>
     </div>
 </div>
+<!-- Page Header End -->
 
 <!-- Main Content Section -->
 <div class="article-container pb-5">

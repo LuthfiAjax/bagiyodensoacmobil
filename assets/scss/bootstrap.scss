@@ -7,7 +7,7 @@ $dark: #111111;
 
 $font-family-base: 'Ubuntu', sans-serif;
 
-$headings-font-family: 'Barlow', sans-serif;
+$headings-font-family: 'Libertinus Sans', sans-serif;
 
 $body-color: #596277;
 
@@ -25,4 +25,5 @@ $link-decoration: none;
 
 $enable-negative-margins: true;
 
+@import "fonts";
 @import "bootstrap/scss/bootstrap";

@@ -34,7 +34,7 @@
     .about-media {
         position: relative;
         height: 100%;
-        min-height: 380px;
+        min-height: 480px;
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
@@ -147,19 +147,40 @@
 <div class="container-xxl about-section">
     <div class="container">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6 order-lg-2">
                 <div class="position-relative about-media">
                     <img src="<?= base_url('assets/'); ?>img/new/3.jpg" alt="Bengkel BAGIYO DENSO AC Mobil">
                     <span class="media-overlay"></span>
                 </div>
             </div>
-            <div class="col-lg-6">
+
+            <div class="col-lg-6 order-lg-1">
                 <div class="about-card">
                     <div class="about-body">
                         <span class="eyebrow">Sejarah</span>
-                        <h2 class="about-title fs-3 mb-2"><span class="text-primary">Subagiyo</span> Pendiri dan pemilik Bengkel BAGIYO DENSO AC Mobil</h2>
-                        <p class="about-desc mb-3">Subagiyo, pendiri dan pemilik Bengkel BAGIYO DENSO AC Mobil, telah memulai karirnya sebagai mekanik AC sejak tahun 1993 di PT. DENSO. Setelah mengumpulkan pengalaman berharga selama bertahun-tahun, pada tahun 2004 ia mengambil keputusan berani untuk membuka bengkel sendiri di daerah Purwodadi. Dengan semangat dan dedikasi, Subagiyo menjalankan bengkelnya dengan menggunakan pengalaman serta keahlian yang dimilikinya.</p>
-                        <p class="about-desc mb-0">Sebagai seorang yang berdedikasi, Subagiyo secara pribadi menangani setiap mobil yang masuk ke Bengkel BAGIYO AC Mobil, terutama mobil unit entry. Dengan keahliannya yang teruji, ia menghadirkan layanan perbaikan AC mobil yang berkualitas tinggi. Melalui perjalanan panjang dan beberapa kali perpindahan lokasi, Bengkel BAGIYO AC Mobil akhirnya menemukan tempat yang ideal di kawasan bundaran Ganesha, sekitar 1 kilometer ke timur dari simpang lima Purwodadi.</p>
+                        <h2 class="about-title fs-3 mb-2">
+                            Perjalanan <span class="text-primary">Subagiyo</span> dalam Membangun Bengkel AC Terpercaya
+                        </h2>
+
+                        <p class="about-desc mb-3">
+                            Subagiyo adalah pendiri Bengkel BAGIYO DENSO AC Mobil, seorang spesialis AC mobil berpengalaman
+                            yang telah memulai kariernya sebagai mekanik AC sejak tahun 1993 di PT DENSO Indonesia. Berbekal
+                            pengalaman teknis yang kuat dan komitmen terhadap kualitas, pada tahun 2004 beliau mendirikan
+                            Bengkel BAGIYO AC Mobil di Purwodadi.
+                        </p>
+
+                        <p class="about-desc mb-3">
+                            Dengan dedikasi tinggi, Subagiyo terlibat langsung dalam proses pengecekan dan penanganan setiap
+                            mobil yang datang, terutama unit entry dan kasus kerusakan berat. Hal inilah yang membuat Bengkel
+                            BAGIYO AC dikenal sebagai bengkel AC mobil yang teliti, rapi, dan terpercaya.
+                        </p>
+
+                        <p class="about-desc mb-0">
+                            Perjalanan panjang dan kerja keras membawa bengkel berkembang hingga akhirnya berlokasi strategis
+                            di Bundaran Ganesha Purwodadi. Dengan pengalaman lebih dari 30 tahun dan dukungan tim profesional,
+                            Bengkel BAGIYO AC Mobil terus menjadi pilihan utama pelanggan untuk perawatan dan perbaikan AC
+                            mobil terbaik di Purwodadi, Kudus, dan sekitarnya.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -171,19 +192,43 @@
 <div class="container-xxl about-section">
     <div class="container">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
+            <div class="col-lg-6 order-lg-1">
                 <div class="position-relative about-media">
                     <img src="<?= base_url('assets/'); ?>img/tim.jpg" alt="TIM BAGIYO DENSO AC Mobil">
                     <span class="media-overlay"></span>
                 </div>
             </div>
-            <div class="col-lg-6 order-lg-1">
+            <div class="col-lg-6 order-lg-2">
                 <div class="about-card">
                     <div class="about-body">
-                        <span class="eyebrow">Tim</span>
-                        <h2 class="about-title fs-3 mb-2"><span class="text-primary">Tim</span> Bengkel BAGIYO AC DENSO Mobil</h2>
-                        <p class="about-desc mb-3">Dalam perjalanannya, tim Bengkel BAGIYO AC DENSO Mobil terus berkembang dengan bertambahnya anggota tim. Saat ini, tim Bengkel BAGIYO AC DENSO terdiri dari 10 orang yang memiliki komitmen yang tinggi terhadap kepuasan pelanggan. Mereka bekerja sama untuk memberikan layanan terbaik dan solusi yang efektif dalam perbaikan AC mobil.</p>
-                        <p class="about-desc mb-0">Pada tanggal 25 Januari 2022, Bengkel BAGIYO AC dipercaya sebagai bengkel resmi DENSO. Kepercayaan tersebut didasarkan pada penilaian pihak DENSO yang menyimpulkan bahwa Bengkel BAGIYO AC telah memenuhi semua persyaratan yang ditetapkan, termasuk dalam hal peralatan, fasilitas, sumber daya, dan jumlah unit entry sesuai dengan standar operasional yang berlaku. Kepercayaan ini menjadi bukti pengakuan atas dedikasi dan kompetensi Bengkel BAGIYO AC dalam memberikan pelayanan terbaik kepada pelanggan.</p>
+
+                        <span class="eyebrow">Tim Bengkel</span>
+
+                        <h2 class="about-title fs-3 mb-2">
+                            Tim Bengkel BAGIYO AC Mobil
+                        </h2>
+
+                        <p class="about-desc mb-3">
+                            Bengkel BAGIYO AC Mobil merupakan bengkel spesialis AC mobil terpercaya di Purwodadi dan Kudus.
+                            Saat ini, kami memiliki 10 teknisi profesional yang berpengalaman dalam menangani berbagai
+                            permasalahan AC mobil, mulai dari AC kurang dingin, keluar angin saja, hingga kerusakan komponen
+                            berat. Setiap teknisi bekerja dengan standar kualitas tinggi untuk memastikan hasil pengerjaan
+                            rapi, cepat, dan bergaransi.
+                        </p>
+
+                        <p class="about-desc mb-3">
+                            Pada 25 Januari 2022, Bengkel BAGIYO AC secara resmi ditunjuk sebagai Bengkel Resmi DENSO Indonesia,
+                            setelah lolos proses penilaian ketat terkait fasilitas, peralatan standar resmi, kompetensi teknisi,
+                            kualitas pelayanan, serta jumlah unit entry sesuai standar nasional. Penunjukan ini menjadi bukti
+                            kepercayaan dan pengakuan terhadap kualitas layanan yang kami berikan.
+                        </p>
+
+                        <p class="about-desc mb-0">
+                            Dengan dukungan jaringan resmi dan ketersediaan suku cadang original DENSO, BAGIYO AC Mobil
+                            berkomitmen menghadirkan servis AC mobil terbaik, dingin maksimal, dan tahan lama untuk pelanggan
+                            di Purwodadi, Kudus, Pati, dan Jepara.
+                        </p>
+
                     </div>
                 </div>
             </div>

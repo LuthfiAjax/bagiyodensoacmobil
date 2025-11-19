@@ -189,66 +189,64 @@
     <div class="container">
         <div class="text-center mb-4">
             <h6 class="text-primary text-uppercase">// Keunggulan Kami //</h6>
-            <h2 class="mb-5">Kenapa Harus BAGIYO DENSO ?</h2>
+            <h2 class="mb-5">Kenapa Kami Dipercaya Sejak Tahun 2000?</h2>
         </div>
+
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
+
+            <!-- 1. Spesialis AC Mobil Terkemuka -->
+            <div class="col-lg-6 col-md-6">
                 <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-toolbox"></i></div>
-                    <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Mekanik Bersertifikasi DENSO</h5>
-                        <p class="mb-0">Mekanik kami telah melalui training & sertifikasi langsung dari DENSO.</p>
+                    <div class="feature-icon flex-shrink-0">
+                        <i class="fa fa-snowflake"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-certificate"></i></div>
                     <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Bergaransi Resmi</h5>
-                        <p class="mb-0">Spare part & pekerjaan bergaransi sesuai kualitas barang.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-laptop-code"></i></div>
-                    <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Alat Terkomputerisasi</h5>
-                        <p class="mb-0">Peralatan diagnosis modern untuk hasil yang presisi.</p>
+                        <h5 class="mb-2 fs-5">Spesialis AC Mobil Terkemuka</h5>
+                        <p class="mb-0">Fokus pada servis AC mobil dengan standar tinggi dan penanganan menyeluruh untuk semua tipe kendaraan.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <!-- 2. Teknisi Berpengalaman -->
+            <div class="col-lg-6 col-md-6">
                 <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-clinic-medical"></i></div>
-                    <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Fasilitas Nyaman & Bersih</h5>
-                        <p class="mb-0">Ruang tunggu perokok/non-perokok, area luas dan terawat.</p>
+                    <div class="feature-icon flex-shrink-0">
+                        <i class="fa fa-user-cog"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-tools"></i></div>
                     <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Ketersediaan Suku Cadang</h5>
-                        <p class="mb-0">Stok lengkap dari bengkel resmi DENSO.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-wrap d-flex py-4 px-3">
-                    <div class="feature-icon flex-shrink-0"><i class="fa fa-car"></i></div>
-                    <div class="ps-3">
-                        <h5 class="mb-2 fs-5">Layanan Antar Jemput</h5>
-                        <p class="mb-0">Lebih nyaman, kami sediakan antar jemput kendaraan.</p>
+                        <h5 class="mb-2 fs-5">Teknisi Berpengalaman</h5>
+                        <p class="mb-0">Dikerjakan oleh tim profesional dengan keahlian teknis dan pengalaman panjang di bidang AC mobil.</p>
                     </div>
                 </div>
             </div>
 
-        </div>
+            <!-- 3. Booking Mudah & Cepat -->
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-wrap d-flex py-4 px-3">
+                    <div class="feature-icon flex-shrink-0">
+                        <i class="fa fa-mobile-alt"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h5 class="mb-2 fs-5">Booking Mudah & Cepat</h5>
+                        <p class="mb-0">Proses reservasi mudah melalui WhatsApp dengan respons cepat, tanpa antre lama.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Garansi Servis & Sparepart -->
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-wrap d-flex py-4 px-3">
+                    <div class="feature-icon flex-shrink-0">
+                        <i class="fa fa-shield-alt"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h5 class="mb-2 fs-5">Garansi Servis & Sparepart</h5>
+                        <p class="mb-0">Setiap pekerjaan dan suku cadang dilindungi garansi resmi untuk memberikan rasa aman dan kepuasan pelanggan.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.row -->
     </div>
 </div>
 <!-- ===================== Keunggulan End ===================== -->
@@ -323,106 +321,198 @@
 </div>
 <!-- ===================== About End ===================== -->
 
-<!-- ===================== Service Tabs (tetap seperti aslinya) ===================== -->
+<!-- ===================== Service Tabs Start ===================== -->
 <div id="layanan" class="container-xxl service py-5">
     <div class="container">
         <div class="text-center">
             <h6 class="text-primary text-uppercase">// Layanan AC Mobil Terbaik! //</h6>
-            <h2 class="mb-5">Penawaran Servis Berkala AC Mobil BAGIYO DENSO</h2>
+            <h2 class="mb-5">Layanan Servis AC Mobil BAGIYO DENSO</h2>
         </div>
+
         <div class="row g-4">
+
+            <!-- ========= MENU KIRI ========= -->
             <div class="col-lg-4">
                 <div class="nav w-100 nav-pills me-4">
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active" data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
-                        <i class="fa fa-car fa-2x me-3"></i>
-                        <h4 class="m-0">Utama - Fresh Service</h4>
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active"
+                        data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
+                        <i class="fa fa-tools fa-2x me-3"></i>
+                        <h4 class="m-0">Perawatan AC Mobil</h4>
                     </button>
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
-                        <i class="fa fa-car fa-2x me-3"></i>
-                        <h4 class="m-0">Utama - Light Service</h4>
+
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4"
+                        data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
+                        <i class="fa fa-wrench fa-2x me-3"></i>
+                        <h4 class="m-0">Perbaikan AC Mobil</h4>
                     </button>
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
-                        <i class="fa fa-car fa-2x me-3"></i>
-                        <h4 class="m-0">Utama - Heavy Service</h4>
+
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4"
+                        data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
+                        <i class="fa fa-snowflake fa-2x me-3"></i>
+                        <h4 class="m-0">Pemasangan AC Baru</h4>
                     </button>
-                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-0" data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
-                        <i class="fa fa-folder-plus fa-2x me-3"></i>
-                        <h4 class="m-0">Service Tambahan</h4>
+
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4"
+                        data-bs-toggle="pill" data-bs-target="#tab-pane-4" type="button">
+                        <i class="fa fa-cogs fa-2x me-3"></i>
+                        <h4 class="m-0">Penjualan Spare Part</h4>
+                    </button>
+
+                    <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-0"
+                        data-bs-toggle="pill" data-bs-target="#tab-pane-5" type="button">
+                        <i class="fa fa-tachometer-alt fa-2x me-3"></i>
+                        <h4 class="m-0">Penggantian Air Coolant</h4>
                     </button>
                 </div>
             </div>
+
+            <!-- ========= KONTEN KANAN ========= -->
             <div class="col-lg-8">
                 <div class="tab-content w-100">
+
+                    <!-- ========= TAB 1: Perawatan ========= -->
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16" src="<?= base_url('assets/'); ?>img/service-1.jpg" style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                                        src="<?= base_url('assets/'); ?>img/service-1.jpg"
+                                        style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="mb-3">Fresh Service - Pengalaman Kesegaran AC Mobil Anda!</h3>
-                                <p class="mb-4">Nikmati AC mobil yang menghembuskan udara segar dengan Fresh Service kami. Kami memastikan kualitas udara di kabin mobil Anda tetap segar dan bersih.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Blower bersih untuk hembusan maksimal.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Filter kabin baru untuk udara lebih sehat.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Layanan cepat & berkualitas.</p>
+                                <h3 class="mb-3">Perawatan AC Mobil</h3>
+                                <p class="mb-4">Layanan perawatan rutin untuk menjaga sistem AC mobil tetap dingin,
+                                    bersih, dan awet sebelum terjadi kerusakan.</p>
+
+                                <p><i class="fa fa-check text-success me-3"></i>Cuci evaporator & blower</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Ganti filter kabin</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Isi ulang freon</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Pengecekan tekanan & suhu AC</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Pembersihan saluran udara</p>
+
+                                <h5 class="mt-3">Manfaat:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>AC tetap dingin maksimal</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Udara kabin bersih & sehat</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Menghemat biaya kerusakan besar</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- ========= TAB 2: Perbaikan ========= -->
                     <div class="tab-pane fade" id="tab-pane-2">
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16" src="<?= base_url('assets/'); ?>img/service-2.jpg" style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                                        src="<?= base_url('assets/'); ?>img/service-2.jpg"
+                                        style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="mb-3">Light Service - Perawatan Ringan untuk AC Mobil Anda!</h3>
-                                <p class="mb-4">Fresh Service + perawatan komponen ruang mesin.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Bersihkan kondensor untuk kinerja optimal.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Ganti dryer baru agar pengeringan maksimal.</p>
+                                <h3 class="mb-3">Perbaikan AC Mobil</h3>
+                                <p class="mb-4">Solusi profesional untuk mengatasi segala masalah pada sistem AC mobil.</p>
+
+                                <p><i class="fa fa-check text-success me-3"></i>Deteksi & perbaikan kebocoran freon</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Perbaikan kompresor, kondensor, evaporator</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Perbaikan pipa & selang AC</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Penggantian expansion valve & dryer</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Penanganan AC tidak dingin / keluar angin /
+                                    bau / berisik</p>
+
+                                <h5 class="mt-3">Manfaat:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>Kerusakan cepat teratasi</p>
+                                <p><i class="fa fa-check text-success me-3"></i>AC kembali normal seperti baru</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Bergaransi pekerjaan & sparepart</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- ========= TAB 3: Pemasangan ========= -->
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16" src="<?= base_url('assets/'); ?>img/service-3.jpg" style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                                        src="<?= base_url('assets/'); ?>img/service-3.jpg"
+                                        style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="mb-3">Heavy Service - Perawatan Intensif untuk AC Mobil Anda!</h3>
-                                <p class="mb-4">Light Service + perawatan mendalam di ruang kabin.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Pembersihan evaporator menyeluruh.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Ganti expansion valve untuk penyejukan optimal.</p>
+                                <h3 class="mb-3">Pemasangan AC Baru</h3>
+                                <p class="mb-4">Layanan instalasi AC baru lengkap untuk mobil penumpang maupun mobil angkutan.</p>
+
+                                <h5 class="mb-2">Jenis Pemasangan:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>Pemasangan unit AC full set</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Pemasangan AC double blower / AC tambahan</p>
+
+                                <h5 class="mt-3">Keunggulan:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>Instalasi rapi & aman</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Penyesuaian kapasitas AC sesuai kendaraan</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Sparepart original dengan garansi resmi</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- ========= TAB 4: Spare Part ========= -->
                     <div class="tab-pane fade" id="tab-pane-4">
                         <div class="row g-4">
                             <div class="col-md-6" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16" src="<?= base_url('assets/'); ?>img/service-4.jpg" style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                                        src="<?= base_url('assets/'); ?>img/service-4.jpg"
+                                        style="object-fit: cover;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="mb-3">Penyempurnaan Layanan untuk AC Mobil Anda!</h3>
-                                <p class="mb-4">Cleverin menyegarkan udara kabin & melawan virus. Flushing membersihkan sistem AC + ganti oli & dryer baru.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Cleverin: perlindungan aktif virus & bakteri.</p>
-                                <p><i class="fa fa-check text-success me-3"></i>Flushing: bersih menyeluruh, kinerja optimal.</p>
+                                <h3 class="mb-3">Penjualan Spare Part</h3>
+                                <p class="mb-4">Bagiyo AC Mobil menyediakan berbagai spare part AC mobil yang lengkap dan bergaransi.</p>
+
+                                <p><i class="fa fa-check text-success me-3"></i>Kompresor AC</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Kondensor & evaporator</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Expansion valve & dryer</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Freon, oli kompresor, kipas, relay, sensor</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Selang AC & pipa AC custom</p>
+
+                                <h5 class="mt-3">Kenapa beli di BAGIYO AC Mobil:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>Stok lengkap & ready</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Kualitas original & bergaransi</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Harga kompetitif</p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- ========= TAB 5: Coolant ========= -->
+                    <div class="tab-pane fade" id="tab-pane-5">
+                        <div class="row g-4">
+                            <div class="col-md-6" style="min-height: 350px;">
+                                <div class="position-relative h-100">
+                                    <!-- memakai foto service-4 sebagai placeholder -->
+                                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                                        src="<?= base_url('assets/'); ?>img/service-4.jpg"
+                                        style="object-fit: cover;" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="mb-3">Penggantian Air Coolant</h3>
+                                <p class="mb-4">Layanan penggantian cairan coolant radiator untuk menjaga suhu mesin tetap stabil dan mencegah overheat.</p>
+
+                                <h5 class="mb-2">Manfaat:</h5>
+                                <p><i class="fa fa-check text-success me-3"></i>Mesin tetap dingin meskipun perjalanan jauh</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Mencegah kerusakan radiator & water pump</p>
+                                <p><i class="fa fa-check text-success me-3"></i>Performa mesin lebih halus & efisien</p>
+                                <p><i class="fa fa-check text-success me-3"></i>AC lebih awet dan dingin maksimal</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div><!-- /.tab-content -->
             </div>
         </div>
+
     </div>
 </div>
-<!-- ===================== Service End ===================== -->
+<!-- ===================== Service Tabs End ===================== -->
 
 <!-- ===================== Quote Start ===================== -->
 <div class="container-fluid bg-secondary booking my-5">
@@ -430,7 +520,9 @@
         <div class="row gx-5">
             <div class="col-lg-12 py-5">
                 <div class="py-5 text-center">
-                    <h3 class="fs-4 text-white mb-4">Kesuksesan bengkel terletak pada pengerjaan yang berkualitas, <br> diiringi dengan kesadaran akan ibadah dan menjaga keselamatan kerja setiap saat.</h3>
+                    <h3 class="fs-4 text-white mb-4">
+                        Kami berkomitmen memberikan layanan AC mobil yang profesional, teliti, dan aman. Setiap pengerjaan kami lakukan dengan penuh tanggung jawab dan integritas, karena kepercayaan pelanggan adalah amanah bagi kami.
+                    </h3>
                 </div>
             </div>
         </div>
@@ -443,18 +535,30 @@
     <div class="container">
         <div class="text-center mb-4">
             <h6 class="text-primary text-uppercase">// Tim BAGIYO DENSO //</h6>
-            <h2 class="mb-5">Tim BAGIYO DENSO AC Mobil</h2>
+            <h2 class="mb-5">Tim BAGIYO AC Mobil</h2>
         </div>
         <div class="row g-5">
             <div class="col-lg-7 pt-2" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute img-fluid w-100 h-100 rounded-16" src="<?= base_url('assets/'); ?>img/tim.jpg" style="object-fit: cover;" alt="Tim">
+                    <img class="position-absolute img-fluid w-100 h-100 rounded-16"
+                        src="<?= base_url('assets/'); ?>img/tim.jpg"
+                        style="object-fit: cover;" alt="Tim">
                 </div>
             </div>
             <div class="col-lg-5">
-                <h2 class="mb-4"><span class="text-primary">BAGIYO DENSO</span> Tim Solid dan Teknisi Berpengalaman</h2>
-                <p class="mb-4">Tim solid dan teknisi berpengalaman siap membantu permasalahan AC mobil Anda dengan profesionalisme tinggi.</p>
-                <p class="mb-0">Kami berharap dapat bekerjasama menjaga kualitas & performa AC mobil Anda. Terima kasih atas kepercayaan Anda.</p>
+                <h2 class="mb-4">
+                    <span class="text-primary">Tim Profesional</span> BAGIYO DENSO AC Mobil
+                </h2>
+
+                <p class="mb-4">
+                    Didukung 10 teknisi profesional berpengalaman, tim kami siap menangani berbagai
+                    permasalahan AC mobil dengan pengerjaan rapi, cepat, dan bergaransi.
+                </p>
+
+                <p class="mb-0">
+                    Sebagai Bengkel Resmi DENSO Indonesia, kami berkomitmen memberikan layanan terbaik
+                    untuk pelanggan di Purwodadi, Kudus, Pati, dan sekitarnya.
+                </p>
             </div>
         </div>
     </div>

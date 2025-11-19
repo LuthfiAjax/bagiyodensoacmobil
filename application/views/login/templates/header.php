@@ -14,7 +14,7 @@
 
     <meta name="description" content="Portal Dashboard R17 Group" />
 
-    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/'); ?>img/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon/android-chrome-512x512.png'); ?>" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

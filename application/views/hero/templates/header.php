@@ -8,14 +8,19 @@
 
     <?php $currentLink = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
 
+    <!-- meta tag -->
     <meta name="description" content="<?= $meta_des; ?>">
     <meta name="keywords" content="<?= $meta_key; ?>">
     <meta name="author" content="Jaxindo Digital Agency">
     <meta name="publisher" content="Bagiyo Denso AC Mobil">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
 
     <link rel="canonical" href="<?= $currentLink; ?>" />
 
+    <!-- Open Graph -->
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<?= $title; ?>" />
@@ -23,10 +28,12 @@
     <meta property="og:url" content="<?= $currentLink; ?>" />
     <meta property="og:site_name" content="bagiyodensoacmobil" />
 
+    <!-- JSON-LD (Google Rich Result Basic) -->
     <meta itemprop="name" content="<?= $title; ?>">
     <meta itemprop="description" content="<?= $meta_des; ?>">
     <meta itemprop="image" content="<?= $image; ?>">
 
+    <!-- OG Image -->
     <meta property="og:image" content="<?= $image; ?>" />
     <meta property="og:image:secure_url" content="<?= $image; ?>" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -34,11 +41,24 @@
     <meta property="og:image:height" content="700" />
     <meta property="og:image:alt" content="<?= $title; ?>" />
 
-    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/'); ?>img/logo.svg" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= $title; ?>">
+    <meta name="twitter:description" content="<?= $meta_des; ?>">
+    <meta name="twitter:image" content="<?= $image; ?>">
+    <meta name="twitter:site" content="@bagiyodenso">
+    <meta name="twitter:creator" content="@bagiyodenso">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Additional SEO Meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="<?= $title; ?>">
+    <meta name="application-name" content="Bagiyo Denso AC Mobil">
+    <meta name="revisit-after" content="7 days">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- end meta tag -->
+
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon/android-chrome-512x512.png'); ?>" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -48,7 +68,6 @@
     <link href="<?= base_url('assets/'); ?>lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <link href="<?= base_url('assets/'); ?>css/bootstrap.min.css" rel="stylesheet">
-
     <link href="<?= base_url('assets/'); ?>css/style.css" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
@@ -139,10 +158,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="<?= base_url(''); ?>" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h2 class="m-0 text-primary fs-4">
-                <img src="<?= base_url('assets/'); ?>img/logo.svg" width="50" alt="CarServ" class="me-1">
-                BAGIYO DENSO
-            </h2>
+            <img src="<?= base_url('assets/'); ?>img/logo.svg" width="200" height="100" alt="CarServ" class="me-1">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -154,7 +170,7 @@
                 <a href="<?= base_url('layanan'); ?>" class="nav-item nav-link <?= ($page == 'layanan') ? 'active' : ''; ?>">Layanan</a>
                 <a href="<?= base_url('artikel'); ?>" class="nav-item nav-link <?= ($page == 'artikel') ? 'active' : ''; ?>">Artikel</a>
                 <a href="<?= base_url('cabang'); ?>" class="nav-item nav-link <?= ($page == 'cabang') ? 'active' : ''; ?>">Cabang</a>
-                <a href="https://api.whatsapp.com/send/?phone=6281325545071&text=Halo%21%20Apakah%20ini%20BAGIYO%20DENSO%20AC%20MOBIL%3F%20Saya%20memiliki%20beberapa%20pertanyaan%20mengenai%20layanan%20yang%20Anda%20tawarkan.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary btn-sm py-4 rounded-pill px-lg-2 rounded d-block d-lg-none">Booking Sekarang<i class="fa fa-paper-plane ms-3"></i></a>
+                <button target="_blank" class="btn btn-primary btn-sm booking-btn py-4 rounded-pill px-lg-2 rounded d-block d-lg-none">Booking Sekarang<i class="fa fa-paper-plane ms-3"></i></button>
             </div>
             <button class="btn btn-primary py-4 px-lg-5 d-none d-lg-block booking-btn">
                 Booking Sekarang <i class="fa fa-paper-plane ms-3"></i>

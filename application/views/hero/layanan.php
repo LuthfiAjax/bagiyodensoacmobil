@@ -87,7 +87,7 @@
     }
 
     .service-title {
-        font-weight: 800;
+        font-weight: 700;
         line-height: 1.2;
         margin: 12px 0 10px;
     }
@@ -141,44 +141,48 @@
 </div>
 <!-- Page Header End -->
 
-<!-- ===================== LAYANAN: Fresh Service ===================== -->
+<!-- ===================== Layanan Kami ===================== -->
+<!-- ===================== LAYANAN: Perawatan AC Mobil ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
                 <div class="position-relative service-media">
-                    <img src="<?= base_url('assets/'); ?>img/new/6.jpg" alt="Tentang Bagiyo Denso">
+                    <img src="<?= base_url('assets/'); ?>img/new/6.jpg" alt="Perawatan AC Mobil">
                     <span class="media-overlay"></span>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="service-card">
                     <div class="service-body">
-                        <span class="service-eyebrow">Fresh Service</span>
-                        <h2 class="service-title fs-2 mb-2">Pengalaman Kesegaran AC Mobil Anda</h2>
-                        <p class="mb-3 text-secondary">Fresh Service AC mobil: udara segar, blower bersih, dan filter AC kabin baru. Perjalanan nyaman dengan udara berkualitas terbaik untuk kenyamanan dan kesehatan Anda saat berkendara.</p>
+                        <span class="service-eyebrow">Perawatan AC Mobil</span>
+                        <h2 class="service-title fs-2 mb-2">Menjaga AC Tetap Dingin & Sehat</h2>
+                        <p class="mb-3 text-secondary">
+                            Layanan perawatan rutin untuk menjaga sistem AC mobil tetap dingin, bersih, dan awet.
+                        </p>
 
                         <div class="feature-item">
                             <div class="num-badge">01</div>
                             <div>
-                                <h6>Udara Segar dan Sejuk</h6>
-                                <span>Nikmati AC mobil yang menghasilkan udara segar dan sejuk untuk kenyamanan maksimal.</span>
+                                <h6>Cuci evaporator & blower</h6>
+                                <span>Membersihkan evaporator dan blower agar aliran udara maksimal.</span>
                             </div>
                         </div>
                         <div class="feature-item">
                             <div class="num-badge">02</div>
                             <div>
-                                <h6>Kualitas Udara Bersih</h6>
-                                <span>Pastikan udara di dalam kabin mobil bebas dari debu, polusi, dan kuman yang berbahaya</span>
+                                <h6>Ganti filter kabin</h6>
+                                <span>Filter kabin baru membuat udara lebih bersih dan higienis.</span>
                             </div>
                         </div>
                         <div class="feature-item">
                             <div class="num-badge">03</div>
                             <div>
-                                <h6>Efisiensi Energi Optimal</h6>
-                                <span>Tingkatkan efisiensi energi AC mobil Anda untuk penggunaan bahan bakar yang lebih efisien.</span>
+                                <h6>Isi ulang freon</h6>
+                                <span>Freon diukur & disesuaikan untuk hasil dingin optimal.</span>
                             </div>
                         </div>
+
                     </div><!-- /service-body -->
                 </div><!-- /service-card -->
             </div>
@@ -186,44 +190,147 @@
     </div>
 </div>
 
-<!-- ===================== LAYANAN: Light Service ===================== -->
+
+
+<!-- ===================== LAYANAN: Perbaikan AC Mobil ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
                 <div class="position-relative service-media">
-                    <img src="<?= base_url('assets/'); ?>img/service-2.jpg" alt="Tentang Bagiyo Denso">
+                    <img src="<?= base_url('assets/'); ?>img/service-2.jpg" alt="Perbaikan AC Mobil">
+                    <span class="media-overlay"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-6 order-lg-1">
+                <div class="service-card">
+                    <div class="service-body">
+                        <span class="service-eyebrow">Perbaikan AC Mobil</span>
+                        <h2 class="service-title fs-1 mb-2">Solusi untuk Semua Masalah AC Mobil</h2>
+                        <p class="mb-3 text-secondary">
+                            Layanan perbaikan komprehensif untuk menangani segala jenis kerusakan AC mobil.
+                        </p>
+
+                        <div class="feature-item">
+                            <div class="num-badge">01</div>
+                            <div>
+                                <h6>Deteksi & perbaikan kebocoran</h6>
+                                <span>Pengecekan kebocoran freon & perbaikan titik kerusakan.</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="num-badge">02</div>
+                            <div>
+                                <h6>Perbaikan komponen AC</h6>
+                                <span>Kompresor, kondensor, evaporator, hingga selang & pipa AC.</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="num-badge">03</div>
+                            <div>
+                                <h6>Penggantian valve & dryer</h6>
+                                <span>Mengoptimalkan sirkulasi freon untuk hasil dingin maksimal.</span>
+                            </div>
+                        </div>
+
+                    </div><!-- /service-body -->
+                </div><!-- /service-card -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ===================== LAYANAN: Pemasangan AC Baru ===================== -->
+<div class="container-xxl service-section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="position-relative service-media">
+                    <img src="<?= base_url('assets/'); ?>img/service-3.jpg" alt="Pemasangan AC Mobil Baru">
+                    <span class="media-overlay"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="service-card">
+                    <div class="service-body">
+                        <span class="service-eyebrow">Pemasangan AC Baru</span>
+                        <h2 class="service-title fs-1 mb-2">Instalasi AC Baru yang Rapi & Aman</h2>
+                        <p class="mb-3 text-secondary">
+                            Layanan pemasangan AC mobil baru full set maupun AC tambahan/double blower.
+                        </p>
+
+                        <div class="feature-item">
+                            <div class="num-badge">01</div>
+                            <div>
+                                <h6>Pemasangan AC full set</h6>
+                                <span>Instalasi lengkap untuk AC mobil baru.</span>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="num-badge">02</div>
+                            <div>
+                                <h6>Pemasangan double blower</h6>
+                                <span>Menambah unit blower untuk kabin lebih dingin merata.</span>
+                            </div>
+                        </div>
+
+                    </div><!-- /service-body -->
+                </div><!-- /service-card -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ===================== LAYANAN: Penjualan Spare Part ===================== -->
+<div class="container-xxl service-section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="position-relative service-media">
+                    <img src="<?= base_url('assets/'); ?>img/new/8.jpg" alt="Sparepart AC Mobil">
                     <span class="media-overlay"></span>
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="service-card">
                     <div class="service-body">
-                        <span class="service-eyebrow">Light Service</span>
-                        <h2 class="service-title fs-1 mb-2">Perawatan Ringan untuk AC Mobil Anda!</h2>
-                        <p class="mb-3 text-secondary">Light Service : Fresh Service dan Perawatan Komponen AC di ruang mesin</p>
+                        <span class="service-eyebrow">Penjualan Spare Part</span>
+                        <h2 class="service-title fs-1 mb-2">Spare Part AC Mobil Original & Bergaransi</h2>
+                        <p class="mb-3 text-secondary">
+                            Tersedia berbagai komponen AC mobil lengkap dan terjamin kualitasnya.
+                        </p>
 
                         <div class="feature-item">
                             <div class="num-badge">01</div>
                             <div>
-                                <h6>Pemeliharaan Berkala yang Efisien</h6>
-                                <span>Light Service kami menyediakan perawatan ringan yang efisien, menjaga performa AC mobil Anda tanpa memakan waktu lama.</span>
+                                <h6>Kompresor & kondensor</h6>
+                                <span>Komponen utama untuk sirkulasi AC mobil.</span>
                             </div>
                         </div>
+
                         <div class="feature-item">
                             <div class="num-badge">02</div>
                             <div>
-                                <h6>Udara Segar dan Sejuk yang Konsisten</h6>
-                                <span>Dengan perawatan rutin, AC mobil Anda akan terus menghasilkan udara segar dan sejuk, memberikan kenyamanan maksimal saat berkendara.</span>
+                                <h6>Evaporator, valve & dryer</h6>
+                                <span>Unit pendingin dan pengering untuk sirkulasi freon optimal.</span>
                             </div>
                         </div>
+
                         <div class="feature-item">
                             <div class="num-badge">03</div>
                             <div>
-                                <h6>Identifikasi Dini Masalah</h6>
-                                <span>Tim teknisi kami akan melakukan pemeriksaan menyeluruh, mengidentifikasi potensi masalah, dan memberikan solusi tepat waktu untuk mencegah kerusakan yang lebih serius.</span>
+                                <h6>Freon, oli & pipa AC</h6>
+                                <span>Kebutuhan lengkap servis dan perbaikan AC mobil.</span>
                             </div>
                         </div>
+
                     </div><!-- /service-body -->
                 </div><!-- /service-card -->
             </div>
@@ -231,82 +338,44 @@
     </div>
 </div>
 
-<!-- ===================== LAYANAN: Heavy Service ===================== -->
+
+
+<!-- ===================== LAYANAN: Penggantian Air Coolant ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
                 <div class="position-relative service-media">
-                    <img src="<?= base_url('assets/'); ?>img/service-3.jpg" alt="Tentang Bagiyo Denso">
+                    <img src="<?= base_url('assets/'); ?>img/service-4.jpg" alt="Penggantian Coolant Radiator">
                     <span class="media-overlay"></span>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="service-card">
                     <div class="service-body">
-                        <span class="service-eyebrow">Heavy Service</span>
-                        <h2 class="service-title fs-1 mb-2">Perawatan Intensif untuk AC Mobil Anda!</h2>
-                        <p class="mb-3 text-secondary">Heavy Service : Light Service dan Perawatan Komponen di ruang kabin</p>
+                        <span class="service-eyebrow">Penggantian Air Coolant</span>
+                        <h2 class="service-title fs-1 mb-2">Menjaga Suhu Mesin Tetap Stabil & Aman</h2>
+                        <p class="mb-3 text-secondary">
+                            Penggantian cairan coolant radiator untuk mencegah overheat dan menjaga performa mesin.
+                        </p>
 
                         <div class="feature-item">
                             <div class="num-badge">01</div>
                             <div>
-                                <h6>Pemeliharaan Mendalam</h6>
-                                <span>Heavy Service kami melibatkan perawatan yang komprehensif dan mendalam, termasuk pemeriksaan menyeluruh dan pemeliharaan komponen-komponen penting AC mobil Anda.</span>
+                                <h6>Flushing coolant lama</h6>
+                                <span>Pembersihan cairan radiator lama sebelum pengisian baru.</span>
                             </div>
                         </div>
+
                         <div class="feature-item">
                             <div class="num-badge">02</div>
                             <div>
-                                <h6>Perbaikan Spesialis</h6>
-                                <span>Tim ahli kami dilengkapi dengan pengetahuan dan pengalaman dalam perbaikan AC mobil. Mereka dapat mengatasi masalah kompleks dan memberikan solusi yang tepat.</span>
+                                <h6>Isi coolant baru</h6>
+                                <span>Cairan coolant berkualitas untuk menjaga suhu tetap stabil.</span>
                             </div>
                         </div>
-                        <div class="feature-item">
-                            <div class="num-badge">03</div>
-                            <div>
-                                <h6>Performa Optimal</h6>
-                                <span>Dengan Heavy Service, AC mobil Anda akan berfungsi dengan maksimal, menghasilkan udara segar, sejuk, dan bebas polusi, memberikan kenyamanan yang Anda butuhkan saat berkendara.</span>
-                            </div>
-                        </div>
-                    </div><!-- /service-body -->
-                </div><!-- /service-card -->
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- ===================== LAYANAN: Improvement Service ===================== -->
-<div class="container-xxl service-section">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="position-relative service-media">
-                    <img src="<?= base_url('assets/'); ?>img/new/8.jpg" alt="Tentang Bagiyo Denso">
-                    <span class="media-overlay"></span>
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="service-card">
-                    <div class="service-body">
-                        <span class="service-eyebrow">Improvement Service</span>
-                        <h2 class="service-title fs-1 mb-2">Penyempurnaan Layanan kami untuk AC mobil Anda!</h2>
-                        <p class="mb-3 text-secondary">Tingkatkan pengalaman berkendara dengan Penyempurnaan Layanan kami untuk AC mobil Anda! Cleverin hadir dengan layanan tambahan yang menyegarkan udara kabin dan melawan virus, sedangkan Flushing Service membersihkan sistem AC secara menyeluruh untuk kinerja optimal.</p>
-
-                        <div class="feature-item">
-                            <div class="num-badge">01</div>
-                            <div>
-                                <h6>Cleverin Service</h6>
-                                <span>Udara Segar dan Perlindungan Aktif - Layanan Cleverin kami menghasilkan udara kabin yang segar sambil memberikan perlindungan aktif melawan virus dan bakteri yang mengancam kesehatan Anda.</span>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="num-badge">02</div>
-                            <div>
-                                <h6>Flushing Service</h6>
-                                <span>Pembersihan Sistem AC yang Mendalam - Layanan Flushing Service kami membersihkan sistem AC mobil secara menyeluruh, termasuk ganti oli dan penggantian dryer baru, untuk memastikan kinerja optimal AC mobil Anda.</span>
-                            </div>
-                        </div>
                     </div><!-- /service-body -->
                 </div><!-- /service-card -->
             </div>
@@ -314,6 +383,7 @@
     </div>
 </div>
 <!-- Layanan End -->
+
 
 <!-- ===================== Saran Periode Service Berkala ===================== -->
 <div class="container-xxl py-5">
