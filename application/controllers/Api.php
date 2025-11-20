@@ -178,13 +178,17 @@ class Api extends CI_Controller
 
     public function get_cabang()
     {
-        $cabangs = $this->db->select('id, name', 'phone')->from('tb_cabang')->get()->result_array();
+        $cabangs = $this->db->select('id, name, phone')
+            ->from('tb_cabang')
+            ->get()
+            ->result_array();
 
         echo json_encode([
             'status' => 'success',
-            'data' => $cabangs
+            'data'   => $cabangs
         ]);
     }
+
 
     public function klik_whatsapp()
     {
