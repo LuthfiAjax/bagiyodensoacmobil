@@ -20,15 +20,19 @@ class Cms_view extends CI_Controller
         $data['title'] = 'Dashboard';
         $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row_array();
 
-        $data['totalpost'] = $this->db->get('tb_articles')->num_rows();
-        $data['totalmessage'] = $this->db->get('tb_klikmessage')->num_rows();
+        $data['totalpost']       = $this->db->get('tb_articles')->num_rows();
         $data['totalpengunjung'] = $this->db->get('tb_view')->num_rows();
-        $data['totalklikwa'] = $this->db->get('tb_klik_whatsapp')->num_rows();
 
-        $data['whatsapp'] = $this->db->order_by('time', 'ASC')->get('tb_klik_whatsapp')->result_array();
+        // count berdasarkan type
+        $data['totalklikwa'] = $this->db->where('tipe', 'Klik WA')->get('tb_klik_whatsapp')->num_rows();
+        $data['totalbooking'] = $this->db->where('tipe', 'Booking')->get('tb_klik_whatsapp')->num_rows();
+
+        $data['totalcabang'] = $this->db->get('tb_cabang')->num_rows();
+        $data['totalpromo'] = $this->db->where('is_active', 1)->get('tb_promo')->num_rows();
+        $data['totalslider'] = $this->db->get('tb_slider')->num_rows();
 
         $this->load->view('cms/templates/header', $data);
-        $this->load->view('cms/dashboard');
+        $this->load->view('cms/dashboard', $data);
         $this->load->view('cms/templates/footer');
     }
 
