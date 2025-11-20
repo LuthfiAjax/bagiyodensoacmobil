@@ -190,8 +190,6 @@
     </div>
 </div>
 
-
-
 <!-- ===================== LAYANAN: Perbaikan AC Mobil ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
@@ -241,8 +239,6 @@
     </div>
 </div>
 
-
-
 <!-- ===================== LAYANAN: Pemasangan AC Baru ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
@@ -285,8 +281,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- ===================== LAYANAN: Penjualan Spare Part ===================== -->
 <div class="container-xxl service-section">
@@ -338,8 +332,6 @@
     </div>
 </div>
 
-
-
 <!-- ===================== LAYANAN: Penggantian Air Coolant ===================== -->
 <div class="container-xxl service-section">
     <div class="container">
@@ -384,53 +376,47 @@
 </div>
 <!-- Layanan End -->
 
-
 <!-- ===================== Saran Periode Service Berkala ===================== -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-12">
-                <h2 class="fs-1 mb-4 text-center"><span>Saran Periode Service Berkala</h2>
+                <h2 class="fs-1 mb-4 text-center"><span>Saran Periode Service Berkala</span></h2>
+
                 <div class="steps-timeline" id="milestone">
+
                     <div class="step">
                         <div class="step-milestone"></div>
-                        <span class="step-title">
-                            6 Bulan <br>
-                        </span>
+                        <span class="step-title">Setiap 6 Bulan</span>
                         <p class="step-description">
-                            Fresh Service
+                            Perawatan AC Mobil
                         </p>
                     </div>
 
                     <div class="step">
                         <div class="step-milestone"></div>
-                        <span class="step-title">
-                            12 Bulan <br>
-                        </span>
+                        <span class="step-title">Setiap 12 Bulan</span>
                         <p class="step-description">
-                            Light Service
+                            Penggantian Air Coolant
                         </p>
                     </div>
 
                     <div class="step">
                         <div class="step-milestone"></div>
-                        <span class="step-title">
-                            18 Bulan <br>
-                        </span>
+                        <span class="step-title">Setiap 18 Bulan</span>
                         <p class="step-description">
-                            Fresh Service
+                            Perawatan AC Mobil (Ulang)
                         </p>
                     </div>
 
                     <div class="step">
                         <div class="step-milestone"></div>
-                        <span class="step-title">
-                            24 Bulan <br>
-                        </span>
+                        <span class="step-title">Setiap 24 Bulan</span>
                         <p class="step-description">
-                            Heavy Service
+                            Pengecekan & Penggantian Spare Part
                         </p>
                     </div>
+
                 </div>
             </div>
         </div>
