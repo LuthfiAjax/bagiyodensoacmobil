@@ -1,0 +1,88 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$route['default_controller'] = 'hero';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+// Hero
+$route['tentang'] = 'Hero/tentang';
+$route['layanan'] = 'Hero/layanan';
+$route['kontak'] = 'Hero/kontak';
+$route['cabang'] = 'Hero/cabang';
+$route['cabang/(:any)'] = 'Hero/cabang_detail/$1';
+$route['artikel'] = 'Hero/artikel';
+$route['artikel/(:num)'] = 'Hero/artikel';
+$route['artikel/(:any)'] = 'Hero/artikel_details/$1';
+
+// Login
+$route['bagiyo-admin'] = 'Login';
+// $route['bagiyo-admin/registration'] = 'Login/registration';
+$route['bagiyo-admin/logout'] = 'Login/logout';
+
+// cms
+$route['cms/dashboard'] = 'Cms_view/dashboard';
+
+$route['cms/menages-news-events'] = 'Cms_view/menages_news_events';
+$route['cms/create-news-events'] = 'Cms_view/create_news_events';
+$route['cms/update-post/(:num)'] = 'Cms_view/update_news_events/$1';
+
+$route['cms/menages-slider'] = 'Cms_view/menages_slider';
+$route['cms/create-slider'] = 'Cms_view/create_slider';
+$route['cms/update-slider/(:num)'] = 'Cms_view/update_slider/$1';
+
+$route['cms/menages-promo'] = 'Cms_view/menages_promo';
+$route['cms/create-promo'] = 'Cms_view/create_promo';
+$route['cms/update-promo/(:num)'] = 'Cms_view/update_promo/$1';
+
+$route['cms/menages-cabang'] = 'Cms_view/menages_cabang';
+$route['cms/create-cabang'] = 'Cms_view/create_cabang';
+$route['cms/update-cabang/(:num)'] = 'Cms_view/update_cabang/$1';
+
+$route['cms/whatsapp'] = 'Cms_view/whatsapp';
+// $route['cms/subscribe'] = 'Cms_view/subscribe';
+// $route['cms/company-profile'] = 'Cms_view/company_profile';
+// $route['cms/download-compro'] = 'Cms_view/download_compro';
+
+// save
+$route['cms/save-news-event'] = 'Cms_save/save_news_event';
+$route['cms/save-company'] = 'Cms_save/save_company';
+
+// delete
+$route['cms/delete/post/(:num)'] = 'Cms_delete/delete_post/$1';
+$route['cms/delete/company/(:num)'] = 'Cms_delete/delete_company/$1';
+$route['cms/delete/subs/(:num)'] = 'Cms_delete/delete_subs/$1';
+
+// update
+$route['update/publish'] = 'Cms_update/publish';
+$route['update/pending/(:num)'] = 'Cms_update/pending/$1';
+$route['cms/update/post'] = 'Cms_update/update_post';
+
+// API
+$route['post-data-viewer'] = 'Api/viewer';
+$route['view/get-data'] = 'Api/get_data';
+$route['post/message_kotak'] = 'Api/save_kontak';
+$route['post/data-messageklik'] = 'Api/messageklik';
+$route['upload/images/body'] = 'Api/uploadImages';
+$route['get-search-article'] = 'Api/get_search_article';
+$route['post-subscribe'] = 'Api/post_subscribe';
+$route['send-katalog'] = 'Api/catalog';
+$route['post-klik-whatsapp'] = 'Api/klik_whatsapp';
+$route['get-cabang'] = 'Api/get_cabang';
+
+$route['cms/api/post/slider'] = 'Api/save_slider';
+$route['cms/api/delete/slider/(:num)'] = 'Api/delete_slider/$1';
+$route['cms/api/update/slider/(:num)'] = 'Api/update_slider/$1';
+
+$route['cms/api/post/cabang'] = 'Api/save_cabang';
+$route['cms/api/delete/cabang/(:num)'] = 'Api/delete_cabang/$1';
+$route['cms/api/update/cabang/(:num)'] = 'Api/update_cabang/$1';
+
+$route['cms/api/post/promo'] = 'Api/save_promo';
+$route['cms/api/delete/promo/(:num)'] = 'Api/delete_promo/$1';
+$route['cms/api/update/promo/(:num)'] = 'Api/update_promo/$1';
+
+$route['cek/promo/(:num)'] = 'Api/cek_promo/$1';
+
+// sitemap
+$route['sitemap\.xml'] = 'Hero/sitemap';

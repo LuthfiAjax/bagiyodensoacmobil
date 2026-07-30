@@ -1,0 +1,39 @@
+/* ---------------------------------------------
+   Local Fonts Registration
+---------------------------------------------- */
+
+/* Ubuntu Regular */
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Ubuntu Bold */
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Bold.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Libertinus Sans Regular */
+@font-face {
+  font-family: 'Libertinus Sans';
+  src: url('/assets/fonts/Libertinus_Sans/LibertinusSans-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Libertinus Sans Bold */
+@font-face {
+  font-family: 'Libertinus Sans';
+  src: url('/assets/fonts/Libertinus_Sans/LibertinusSans-Bold.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
